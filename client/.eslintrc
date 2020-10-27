@@ -1,0 +1,7 @@
+{
+  "extends": ["naver", "prettier", "plugin:react/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  }
+}
