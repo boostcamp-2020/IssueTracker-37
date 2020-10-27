@@ -1,0 +1,7 @@
+{
+  "extends": ["naver", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  }
+}
