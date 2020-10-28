@@ -33,6 +33,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "eslint-config-naver": "^2.1.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.0"
