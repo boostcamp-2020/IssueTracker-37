@@ -1,18 +1,15 @@
-import express from "express";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
-import apiRouter from "./api/index";
+import express from 'express';
+import sequelize from './sequelize/index';
 
-require("dotenv").config();
+import initMiddlewares from './middlewares/init';
 
 const app: express.Application = express();
+const { PORT } = process.env;
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(apiRouter);
-
-app.listen(process.env.PORT, () => {
-  console.log(`${process.env.PORT} 에서 실행중.`);
-});
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    initMiddlewares(app);
+    app.listen(PORT);
+  })
+  .catch((error: any) => console.log(error));
