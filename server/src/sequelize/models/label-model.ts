@@ -4,6 +4,7 @@ module.exports = (sequelize: any) => {
   sequelize.define('label', {
     title: {
       type: DataTypes.STRING(30),
+      unique: true,
       allowNull: false,
     },
     description: {

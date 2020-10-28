@@ -1,4 +1,4 @@
-import config from './config';
+import config from './config/config';
 import applyExtraSetup from './extra-setup';
 
 const Sequelize = require('sequelize');
