@@ -1,11 +1,11 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
+import express from "express";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import apiRouter from "./api/index";
 
 require("dotenv").config();
 
-const app = express();
-const apiRouter = require("./api/index");
+const app: express.Application = express();
 
 app.use(logger("dev"));
 app.use(express.json());

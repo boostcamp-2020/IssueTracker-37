@@ -1,6 +1,7 @@
 {
   "extends": ["naver", "prettier"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "prettier/prettier": ["error"]
   }
