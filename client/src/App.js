@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Index from "./pages/index";
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Index from './pages/index';
 
 const App = () => {
   return (
