@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 const SignInWrapper = styled.div`
@@ -50,15 +50,25 @@ const initialInputs = {
 }
 
 const SignInPage = () => {
+
+  const [inputs, setInputs] = useState(initialInputs);
+  const {email, password} = inputs;
+
+  const onChangeInput = useCallback((e) => {
+    const {name, value} = e.target;
+    setInputs({...inputs, [name]: value});
+  }, [email, password]); 
+
   
+
   return (
     <SignInWrapper>
         <AppTitle>이슈 트래커</AppTitle>
         <Form>
             <Label>아이디</Label>
-            <StyledInput />
+            <StyledInput name="email" type="text" value={email} required onChange={onChangeInput}/>
             <Label>비밀번호</Label>
-            <StyledInput />
+            <StyledInput name="password" type="password" value={password} required onChange={onChangeInput}/>
             <AuthWrapper>
                 <AuthButton>로그인</AuthButton>
                 <AuthButton>회원가입</AuthButton>
