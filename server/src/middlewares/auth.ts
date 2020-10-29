@@ -20,4 +20,21 @@ const loginAuth = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default loginAuth;
+const apiAuth = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    passport.authenticate(
+      'jwt',
+      { session: false },
+      (error, user, { message } = '') => {
+        if (error || !user) res.status(400).json({ state: 'fail', message });
+
+        req.body.user_no = user.no;
+        next();
+      },
+    )(req, res, next);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { loginAuth, apiAuth };
