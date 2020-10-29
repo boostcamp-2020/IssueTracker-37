@@ -28,25 +28,25 @@ const Label = styled.label`
 
 const SignupPage = () => {
     const initialInputs = {
-        email:'',
-        password:'',
-        name:''
+        email: '',
+        password: '',
+        name: ''
     }
-    const [Email, setEmail ] = useState('');
+    const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
     const [Name, setName] = useState('');
 
-    
+
     const onSubmitHandler = (event) => {
         event.preventDefault();
         const payload = {
-            email : Email,
+            email: Email,
             password: Password,
             name: event.target.name.value
         }
         // await request.post('api/user/signup', payload);
     };
-    
+
     const onEmailHandler = (event) => {
         setEmail(event.target.value);
     };
@@ -60,36 +60,39 @@ const SignupPage = () => {
 
 
     return (
-            <Form onSubmit={onSubmitHandler}>
-                <Div>회원가입</Div>
-                <Label>이메일</Label>
-                <Input
-                    type="email"
-                    placeholder="이메일"
-                    name="email"
-                    value={Email}
-                    onChange={ onEmailHandler }
-                    required
-                />
-                <Label>비밀번호</Label>
-                <Input
-                    type="password"
-                    placeholder="비밀번호"
-                    name="password"
-                    value={Password}
-                    onChange ={onPasswordHandler}
-                    required
-                />
-                <Label>이름</Label>
-                <Input
-                    type="text"
-                    placeholder="이름"
-                    name="name"
-                    value={Name}
-                    onChange={onNameHandler}
-                    required
-                />
-                <Input type="submit" value="회원가입" />
+        <Form onSubmit={onSubmitHandler}>
+            <Div>회원가입</Div>
+            <Label for="email">이메일</Label>
+            <Input
+                id="email"
+                type="email"
+                placeholder="이메일"
+                name="email"
+                value={Email}
+                onChange={onEmailHandler}
+                required
+            />
+            <Label for="password">비밀번호</Label>
+            <Input
+                id="password"
+                type="password"
+                placeholder="비밀번호"
+                name="password"
+                value={Password}
+                onChange={onPasswordHandler}
+                required
+            />
+            <Label for="name">이름</Label>
+            <Input
+                id="name"
+                type="text"
+                placeholder="이름"
+                name="name"
+                value={Name}
+                onChange={onNameHandler}
+                required
+            />
+            <Input type="submit" value="회원가입" />
         </Form>);
 };
 
