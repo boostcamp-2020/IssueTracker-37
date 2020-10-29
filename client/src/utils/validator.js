@@ -3,8 +3,12 @@ const regex = {
   password: /^[a-zA-Z0-9]{6,12}$/,
 };
 
+const isEmail = (testEmail) => {
+  return regex.password.test(testEmail);
+};
+
 const isPassword = (testPassword) => {
   return regex.password.test(testPassword);
 };
 
-export default isPassword;
+export default { isPassword, isEmail };

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { ispassword, isEmail } from '../utils/validator';
 
 const SignInWrapper = styled.div`
   display: flex;
@@ -60,8 +61,15 @@ const SignInPage = () => {
     [email, password],
   );
 
+  const onSummitSignIn = useCallback(() => {
+    if (!isEmail(email) || !ispassword(password)) {
+      alert('message');
+    }
+    // TODO api 연결.
+  });
+
   return (
-    <SignInWrapper>
+    <SignInWrapper onSummit={onSummitSignIn}>
       <AppTitle>이슈 트래커</AppTitle>
       <Form>
         <Label>아이디</Label>
