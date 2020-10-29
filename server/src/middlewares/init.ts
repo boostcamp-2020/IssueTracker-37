@@ -11,7 +11,7 @@ const initMiddlewares = (app: express.Application) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
-  app.use(apiRouter);
+  app.use('/api', apiRouter);
 };
 
 export default initMiddlewares;
