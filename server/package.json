@@ -17,12 +17,14 @@
     "*.ts": "eslint --fix"
   },
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/morgan": "^1.9.1",
     "@types/passport": "^1.0.4",
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
+    "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
