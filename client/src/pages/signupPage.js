@@ -27,15 +27,12 @@ const Label = styled.label`
 
 
 const SignupPage = () => {
-    const initialInputs = {
+    const InitialInputs = {
         email: '',
         password: '',
         name: ''
     }
-    const [Email, setEmail] = useState('');
-    const [Password, setPassword] = useState('');
-    const [Name, setName] = useState('');
-
+    const [inputs, setInputs] = useState(InitialInputs)
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -47,17 +44,10 @@ const SignupPage = () => {
         // await request.post('api/user/signup', payload);
     };
 
-    const onEmailHandler = (event) => {
-        setEmail(event.target.value);
-    };
-    const onPasswordHandler = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const onNameHandler = (event) => {
-        setName(event.target.value);
-    };
-
+    const onChangeHandler = (event) => {
+        const { name, value } = event.target;
+        setInputs({ ...inputs, [name]: value });
+    }
 
     return (
         <Form onSubmit={onSubmitHandler}>
@@ -68,8 +58,8 @@ const SignupPage = () => {
                 type="email"
                 placeholder="이메일"
                 name="email"
-                value={Email}
-                onChange={onEmailHandler}
+                value={inputs.email}
+                onChange={onChangeHandler}
                 required
             />
             <Label for="password">비밀번호</Label>
@@ -78,8 +68,8 @@ const SignupPage = () => {
                 type="password"
                 placeholder="비밀번호"
                 name="password"
-                value={Password}
-                onChange={onPasswordHandler}
+                value={inputs.password}
+                onChange={onChangeHandler}
                 required
             />
             <Label for="name">이름</Label>
@@ -88,8 +78,8 @@ const SignupPage = () => {
                 type="text"
                 placeholder="이름"
                 name="name"
-                value={Name}
-                onChange={onNameHandler}
+                value={inputs.name}
+                onChange={onChangeHandler}
                 required
             />
             <Input type="submit" value="회원가입" />
