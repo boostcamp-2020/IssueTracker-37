@@ -8,6 +8,6 @@ router.get('/', (req: Request, res: Response) => {
   return res.json({ result: 'true' });
 });
 
-router.use('/api/user', user);
+router.use('/user', user);
 
 export default router;
