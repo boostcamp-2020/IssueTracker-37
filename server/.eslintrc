@@ -3,6 +3,9 @@
   "plugins": ["prettier", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "prettier/prettier": ["error"]
+    "prettier/prettier": ["error", {
+      "endOfLine": "auto"
+    }],
+    "linebreak-style": ["error", "windows"]
   }
 }
