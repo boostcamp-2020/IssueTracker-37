@@ -4,11 +4,11 @@ const regex = {
 };
 
 const isEmail = (testEmail) => {
-  return regex.password.test(testEmail);
+  return regex.email.test(testEmail);
 };
 
 const isPassword = (testPassword) => {
   return regex.password.test(testPassword);
 };
 
-export default { isPassword, isEmail };
+export { isPassword, isEmail };

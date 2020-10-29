@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { ispassword, isEmail } from '../utils/validator';
+import { isPassword, isEmail } from '@util/validator';
 
 const SignInWrapper = styled.div`
   display: flex;
@@ -61,18 +61,20 @@ const SignInPage = () => {
     [email, password],
   );
 
-  const onSummitSignIn = useCallback(() => {
-    if (!isEmail(email) || !ispassword(password)) {
-      alert('message');
+  const onSummitSignIn = useCallback((e) => {
+    e.preventDefault();
+    if (!isEmail(email) || !isPassword(password)) {
+      return alert('message');
     }
     // TODO api 연결.
+    console.log(inputs);
   });
 
   return (
-    <SignInWrapper onSummit={onSummitSignIn}>
+    <SignInWrapper onSubmit={onSummitSignIn}>
       <AppTitle>이슈 트래커</AppTitle>
       <Form>
-        <Label>아이디</Label>
+        <Label htmlFor="email">아이디</Label>
         <StyledInput
           name="email"
           type="text"
@@ -80,7 +82,7 @@ const SignInPage = () => {
           required
           onChange={onChangeInput}
         />
-        <Label>비밀번호</Label>
+        <Label htmlFor="password">비밀번호</Label>
         <StyledInput
           name="password"
           type="password"
@@ -89,7 +91,7 @@ const SignInPage = () => {
           onChange={onChangeInput}
         />
         <AuthWrapper>
-          <AuthButton>로그인</AuthButton>
+          <AuthButton type="submit">로그인</AuthButton>
           <AuthButton>회원가입</AuthButton>
         </AuthWrapper>
       </Form>
