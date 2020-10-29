@@ -10,10 +10,10 @@ module.exports = function (api) {
     ],
     '@babel/preset-react',
   ];
-  const plugin = ['babel-plugin-styled-components'];
+  const plugins = ['babel-plugin-styled-components'];
 
   return {
     presets,
-    plugin,
+    plugins,
   };
 };
