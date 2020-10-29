@@ -4,5 +4,8 @@
   "semi": true,
   "useTabs": false,
   "tabWidth": 2,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "prettier/prettier": ["error", {
+    "endOfLine":"auto"
+  }],
 }
