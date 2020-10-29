@@ -1,4 +1,4 @@
-/*module.exports = function (api) {
+module.exports = function (api) {
   api.cache(true);
 
   const presets = [
@@ -10,10 +10,10 @@
     ],
     '@babel/preset-react',
   ];
-  const plugin = ['babel-plugin-styled-components'];
+  const plugins = ['babel-plugin-styled-components'];
 
   return {
     presets,
-    plugin,
+    plugins,
   };
-};*/
+};
