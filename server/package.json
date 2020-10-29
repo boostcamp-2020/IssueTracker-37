@@ -19,6 +19,7 @@
   "dependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/morgan": "^1.9.1",
+    "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
