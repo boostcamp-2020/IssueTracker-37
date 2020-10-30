@@ -26,7 +26,7 @@ module.exports = {
     contentBase: path.resolve('./build'),
     index: 'index.html',
     historyApiFallback: true,
-    port: 3000,
+    port: 8080,
   },
   devtool: 'inline-source-map',
   module: {
