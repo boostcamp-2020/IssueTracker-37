@@ -6,7 +6,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    app: ['babel-polyfill', './src/index.js'],
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(`${__dirname}/build`),
