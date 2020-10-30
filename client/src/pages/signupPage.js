@@ -1,4 +1,4 @@
-// import request from '@lib/axios';
+import request from '@lib/axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -33,7 +33,7 @@ const SignUpPage = () => {
 
 	const [inputs, setInputs] = useState(InitialInputs);
 
-	const onSubmitHandler = (event) => {
+	const onSubmitHandler = async (event) => {
 		event.preventDefault();
 		const payload = {
 			email: inputs.email,
@@ -41,7 +41,7 @@ const SignUpPage = () => {
 			name: inputs.name,
 		};
 
-		// await request.post('api/user/signup', payload);
+		await request.post('api/user/signup', payload);
 	};
 
 	const onChangeHandler = (event) => {
