@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const { models } = require('../sequelize');
+const { models } = require('../sequelize').default;
 
 const saltRounds: number = 10;
 
@@ -26,6 +26,7 @@ class UserService {
   createUser = async (payload: signupForm) => {
     try {
       payload.password = String(await getHash(payload.password));
+
       const insertUser = await models.user.create(payload);
 
       return insertUser;
