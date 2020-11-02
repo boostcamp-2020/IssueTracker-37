@@ -1,9 +1,12 @@
 import React from 'react';
+import Input from '../components/atoms/Input';
+import Button from '../components/atoms/Button';
 
 const Index = () => {
   return (
     <>
-      <div>Hello</div>
+      <Button>button</Button>
+      <Input placeholder="test" />
     </>
   );
 };
