@@ -5,6 +5,7 @@ const router = express.Router();
 
 // 이슈 전체목록 가져오기.
 router.get('/', issueController.getIssues);
+router.post('/:issue_id/milestone/:milestone_id', issueController.addMilestone);
 
 // router.post('/issue/:issue_id/milestone/:milestone_id', '');
 

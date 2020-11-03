@@ -18,6 +18,21 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedSelect });
     }
   }
+
+  async addMilestone(req, res) {
+    try {
+      await issueService.addMilestone(req.params);
+      res.status(200).send({
+        status: 'success',
+        message: succeedMessage.succeedInsert,
+      });
+    } catch (err) {
+      console.error(err);
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedInsert });
+    }
+  }
 }
 
 const issueController = new IssueController();
