@@ -27,6 +27,11 @@ class Issue extends Model {
       },
     );
   }
+  static async selectById(id) {
+    const findIssue = await this.findByPk(id);
+
+    return findIssue;
+  }
 }
 
 module.exports = Issue;
