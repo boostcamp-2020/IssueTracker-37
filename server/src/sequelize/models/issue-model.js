@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 const { DataTypes, Model } = require('sequelize');
 
 class Issue extends Model {
@@ -26,6 +27,12 @@ class Issue extends Model {
         sequelize,
       },
     );
+  }
+
+  static async insert(payload) {
+    const insertIssue = await this.create(payload);
+
+    return insertIssue;
   }
 }
 
