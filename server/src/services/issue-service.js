@@ -19,6 +19,11 @@ class IssueService {
     // await issueModel.updateIssueByMilestone(payload);
     await issueModel.updateIssueByMilestone(payload);
   }
+
+  async deleteIssueByLabel(payload){
+    await issueModel.deleteIssueByLabel(payload);
+  }
+
 }
 
 const issueService = new IssueService();

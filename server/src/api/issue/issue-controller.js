@@ -25,7 +25,9 @@ class IssueController {
         issue_id: req.params.issue_id, 
         milestone_id: req.params.milestone_id
       };
+      
       await issueService.updateIssueByMilestone(payload);
+      
       res.status(200).send({
         status: 'success',
         message: succeedMessage.succeedInsert,
@@ -35,6 +37,30 @@ class IssueController {
       res
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedInsert });
+    }
+  }
+
+  async deleteIssueByLabel(req, res){
+    try{
+      console.log(req.body)
+      return;
+      const payload = {
+        content: req.body.content,
+        issue_id: req.params.issue_id, 
+        label_id: req.params.label_id,
+      };
+      
+      await issueService.deleteIssueByLabel(payload);
+      
+      res.status(200).send({
+        status: 'success',
+        message: succeedMessage.succeedDelete,
+      });
+    }catch(err){
+      console.error(err);
+      res
+      .status(400)
+      .send({ state: 'fail', message: errorMessage.failedDelete });
     }
   }
 }

@@ -61,6 +61,18 @@ class Issue extends Model {
     });
 
   }
+
+  static async deleteIssueByLabel(payload){
+    
+    const issue = await this.findOne({
+      where: {
+        id: payload.issue_id
+      }
+    });
+
+    await issue.removeLabels(payload.label_id);
+  }
+
 }
 
 module.exports = Issue;
