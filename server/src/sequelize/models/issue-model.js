@@ -36,15 +36,26 @@ class Issue extends Model {
       ],
     });
 
+    if (!findIssue) throw new Error();
     return findIssue;
   }
 
-  static async addLabel(payload) {
+  static async addIssueToLabel(payload) {
     const findIssue = await this.findByPk(payload.issueId);
 
     const result = await findIssue.addLabel(payload.labelId);
 
     return result;
+  }
+
+  static async removeAssignee(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const isDelete = await findIssue.removeUser(payload.assigneeId);
+
+    if (!isDelete) throw new Error();
+
+    return;
   }
 }
 

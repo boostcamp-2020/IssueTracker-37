@@ -8,10 +8,14 @@ class IssueService {
     return issue;
   }
 
-  async addLabel(payload) {
-    const issueToLabel = await issueModel.addLabel(payload);
+  async createIssueToLabel(payload) {
+    const issueToLabel = await issueModel.addIssueToLabels(payload);
 
     return issueToLabel;
+  }
+
+  async deleteAssignee(payload) {
+    await issueModel.removeAssignee(payload);
   }
 }
 

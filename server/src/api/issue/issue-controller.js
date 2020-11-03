@@ -26,7 +26,7 @@ class IssueController {
         labelId: req.params.label_id,
       };
 
-      const issueToLabel = await issueService.addLabel(payload);
+      const issueToLabel = await issueService.createIssueToLabel(payload);
 
       res.status(200).send({
         state: 'success',
@@ -37,6 +37,25 @@ class IssueController {
       res
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedInsert });
+    }
+  }
+
+  async deleteIssueToLabel(req, res) {
+    try {
+      const payload = {
+        issueId: req.params.issue_id,
+        assigneeId: req.params.assignee_id,
+      };
+      await issueService.deleteAssignee(payload);
+
+      res.status(200).send({
+        message: succeedMessage.succeedDelete,
+        data: null,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedDelete });
     }
   }
 }
