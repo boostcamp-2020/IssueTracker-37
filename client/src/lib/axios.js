@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { getToken } from '@util/token';
+import { getToken } from '@utils/token';
+
+// const { DEVELOPMENT_BASE_URL, PRODUCTION_BASE_URL } = process.env;
+// const baseURL =
+//   process.NODE_ENV === 'develop' ? DEVELOPMENT_BASE_URL : PRODUCTION_BASE_URL;
 
 const instance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: 'http://localhost:3000',
   headers: {
     authorization: getToken() || '',
   },

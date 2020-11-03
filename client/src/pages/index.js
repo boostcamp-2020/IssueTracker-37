@@ -5,6 +5,7 @@ import Button from '../components/atoms/Button';
 const Index = () => {
   return (
     <>
+      <Button buttonType="GREEN">button</Button>
       <Button>button</Button>
       <Input placeholder="test" />
     </>
