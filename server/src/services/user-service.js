@@ -1,18 +1,16 @@
-const userRepo = require('../repositories/user-repository');
-const encryptPassword = require('../utils/bcrypt');
+const { encryptPassword } = require('@utils/bcrypt');
+const userModel = require('@models/user-model');
 
 class UserService {
   async createUser(payload) {
-    try {
-      payload.password = encryptPassword(payload.password);
+    payload.password = encryptPassword(payload.password);
 
-      const insertUser = await userRepo.insert(payload);
+    const insertUser = await userModel.insert(payload);
 
-      return insertUser;
-    } catch (err) {
-      throw err;
-    }
+    return insertUser;
   }
 }
 
-module.exports = new UserService();
+const userService = new UserService();
+
+module.exports = userService;

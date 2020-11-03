@@ -20,7 +20,7 @@
     "@middlewares": "src/middlewares",
     "@sequelize": "src/sequelize",
     "@services": "src/services",
-    "@repositories": "src/repositories",
+    "@models": "src/sequelize/models",
     "@passport": "src/middlewares/passport"
   },
   "dependencies": {

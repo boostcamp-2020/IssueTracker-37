@@ -20,13 +20,10 @@ const modelDefiners = [
   require('./models/comment-model'),
 ];
 
-modelDefiners.forEach((modelDefiner) => modelDefiner(sequelize));
+modelDefiners.forEach((modelDefiner) => modelDefiner.initialize(sequelize));
 
 applyExtraSetup(sequelize);
 
-const models = sequelize.models;
-
 module.exports = {
   sequelize,
-  models,
 };

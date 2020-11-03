@@ -1,20 +1,20 @@
 const applyExtraSetup = (sequelize) => {
-  const { issue, user, milestone, label, comment } = sequelize.models;
+  const { Issue, User, Milestone, Label, Comment } = sequelize.models;
 
-  user.belongsToMany(issue, { through: 'assignees' });
-  issue.belongsToMany(user, { through: 'assignees' });
+  User.belongsToMany(Issue, { through: 'assignees' });
+  Issue.belongsToMany(User, { through: 'assignees' });
 
-  user.hasMany(comment, { foreignKey: 'user_id', sourceKey: 'id' });
-  comment.belongsTo(user, { foreignKey: 'user_id', targetKey: 'id' });
+  User.hasMany(Comment, { foreignKey: 'user_id', sourceKey: 'id' });
+  Comment.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' });
 
-  issue.hasMany(comment, { foreignKey: 'issue_id', sourceKey: 'id' });
-  comment.belongsTo(issue, { foreignKey: 'issue_id', targetKey: 'id' });
+  Issue.hasMany(Comment, { foreignKey: 'issue_id', sourceKey: 'id' });
+  Comment.belongsTo(Issue, { foreignKey: 'issue_id', targetKey: 'id' });
 
-  milestone.hasMany(issue, { foreignKey: 'milestone_id', sourceKey: 'id' });
-  issue.belongsTo(milestone, { foreignKey: 'milestone_id', targetKey: 'id' });
+  Milestone.hasMany(Issue, { foreignKey: 'milestone_id', sourceKey: 'id' });
+  Issue.belongsTo(Milestone, { foreignKey: 'milestone_id', targetKey: 'id' });
 
-  issue.belongsToMany(label, { through: 'issue_to_label' });
-  label.belongsToMany(issue, { through: 'issue_to_label' });
+  Issue.belongsToMany(Label, { through: 'issue_to_label' });
+  Label.belongsToMany(Issue, { through: 'issue_to_label' });
 };
 
 module.exports = applyExtraSetup;

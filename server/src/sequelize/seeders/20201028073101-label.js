@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('labels', [
+    await queryInterface.bulkInsert('label', [
       {
         title: 'bug',
         description: "Something isn't working",
@@ -71,7 +71,7 @@ module.exports = {
     const Op = Sequelize.Op;
 
     await queryInterface.bulkDelete(
-      'labels',
+      'label',
       {
         title: {
           [Op.in]: [
