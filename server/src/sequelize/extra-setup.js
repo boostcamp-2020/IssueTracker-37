@@ -13,8 +13,16 @@ const applyExtraSetup = (sequelize) => {
   Milestone.hasMany(Issue, { foreignKey: 'milestone_id', sourceKey: 'id' });
   Issue.belongsTo(Milestone, { foreignKey: 'milestone_id', targetKey: 'id' });
 
-  Issue.belongsToMany(Label, { through: 'issue_to_label' });
-  Label.belongsToMany(Issue, { through: 'issue_to_label' });
+  Issue.belongsToMany(Label, {
+    through: 'issue_to_label',
+    foreignKey: 'issue_id',
+    sourceKey: 'id',
+  });
+  Label.belongsToMany(Issue, {
+    through: 'issue_to_label',
+    foreignKey: 'label_id',
+    sourceKey: 'id',
+  });
 };
 
 module.exports = applyExtraSetup;

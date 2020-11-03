@@ -27,10 +27,24 @@ class Issue extends Model {
       },
     );
   }
-  static async selectById(id) {
-    const findIssue = await this.findByPk(id);
+  static async selectById(id, Label) {
+    const findIssue = await this.findByPk(id, {
+      include: [
+        {
+          model: Label,
+        },
+      ],
+    });
 
     return findIssue;
+  }
+
+  static async addLabel(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const result = await findIssue.addLabel(payload.labelId);
+
+    return result;
   }
 }
 
