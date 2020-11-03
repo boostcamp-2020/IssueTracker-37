@@ -19,9 +19,13 @@ class IssueController {
     }
   }
 
-  async addMilestone(req, res) {
+  async updateIssueByMilestone(req, res) {
     try {
-      await issueService.addMilestone(req.params);
+      const payload = {
+        issue_id: req.params.issue_id, 
+        milestone_id: req.params.milestone_id
+      };
+      await issueService.updateIssueByMilestone(payload);
       res.status(200).send({
         status: 'success',
         message: succeedMessage.succeedInsert,

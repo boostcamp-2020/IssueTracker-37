@@ -52,6 +52,15 @@ class Issue extends Model {
 
     return issues;
   }
+
+  static async updateIssueByMilestone(payload){
+
+    await this.update({
+      milestone_id: payload.milestone_id}, {
+      where: {id: payload.issue_id}
+    });
+
+  }
 }
 
 module.exports = Issue;
