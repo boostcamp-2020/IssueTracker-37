@@ -38,6 +38,22 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedUpdate });
     }
   }
+
+  async delete(req, res) {
+    try {
+      const result = await issueService.deleteIssue(req.params.issue_id);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedDelete,
+        data: result,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedDelete });
+    }
+  }
 }
 
 const issueController = new IssueController();

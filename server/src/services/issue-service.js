@@ -16,6 +16,12 @@ class IssueService {
 
     return updateIssue;
   }
+
+  async deleteIssue(payload) {
+    const result = await issueModel.deleteById(payload);
+
+    return result;
+  }
 }
 
 const issueService = new IssueService();

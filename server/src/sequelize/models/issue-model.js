@@ -34,6 +34,13 @@ class Issue extends Model {
 
     return insertIssue;
   }
+
+  static async deleteById(id) {
+    const result = await this.destroy({ where: { id: id } });
+
+    if (result) return result;
+    else throw new Error();
+  }
 }
 
 module.exports = Issue;
