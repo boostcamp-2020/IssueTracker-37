@@ -9,4 +9,9 @@ router.delete(
   issueController.deleteCommentByIssue,
 );
 
+router.delete(
+  '/:issue_id/milestone/:milestone_id',
+  issueController.deleteMilestoneByIssue,
+);
+
 module.exports = router;
