@@ -1,25 +1,4 @@
-interface errorMsg {
-  invalidUser: string;
-  invalidPassword: string;
-  invalidToken: string;
-  failedInsert: string;
-  failedUpdate: string;
-  duplicatedUser: string;
-  failedDelete: string;
-  failedSelect: string;
-  failedRegister: string;
-}
-
-interface succeedMsg {
-  succedLogin: string;
-  succeedInsert: string;
-  succeedUpdate: string;
-  succeedDelete: string;
-  succeedSelect: string;
-  registerdUser: string;
-}
-
-const errorMessage: errorMsg = {
+const errorMessage = {
   invalidUser: `존재하지 않는 사용자 입니다.`,
   invalidPassword: `올바르지 않은 비밀번호 입니다.`,
   invalidToken: `유효하지 않은 토큰입니다.`,
@@ -31,7 +10,7 @@ const errorMessage: errorMsg = {
   duplicatedUser: `이미 존재하는 아이디 입니다.`,
 };
 
-const succeedMessage: succeedMsg = {
+const succeedMessage = {
   succedLogin: `로그인이 정상적으로 완료되었습니다.`,
   succeedInsert: `데이터 추가가 정상적으로 완료되었습니다.`,
   succeedUpdate: `데이터 업데이트가 정상적으로 완료되었습니다.`,
@@ -40,4 +19,7 @@ const succeedMessage: succeedMsg = {
   registerdUser: `사용자가 정상적으로 등록되었습니다.`,
 };
 
-export { errorMessage, succeedMessage };
+module.exports = {
+  errorMessage,
+  succeedMessage,
+};

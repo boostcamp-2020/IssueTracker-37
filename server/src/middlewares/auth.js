@@ -1,10 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
-import passport from 'passport';
-import jwt from 'jsonwebtoken';
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-const { JWT_SECRET_KEY }: any = process.env;
+const { JWT_SECRET_KEY } = process.env;
 
-const loginAuth = async (req: Request, res: Response, next: NextFunction) => {
+const loginAuth = async (req, res, next) => {
   try {
     passport.authenticate('local', (error, user, { message } = '') => {
       if (error || !user)
@@ -20,7 +19,7 @@ const loginAuth = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const apiAuth = async (req: Request, res: Response, next: NextFunction) => {
+const apiAuth = async (req, res, next) => {
   try {
     passport.authenticate(
       'jwt',
@@ -37,4 +36,7 @@ const apiAuth = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { loginAuth, apiAuth };
+module.exports = {
+  loginAuth,
+  apiAuth,
+};

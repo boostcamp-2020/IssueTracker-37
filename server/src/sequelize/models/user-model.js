@@ -1,6 +1,6 @@
-import { DataTypes } from 'sequelize';
+const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize: any) => {
+module.exports = (sequelize) => {
   sequelize.define('user', {
     email: {
       type: DataTypes.STRING(30),

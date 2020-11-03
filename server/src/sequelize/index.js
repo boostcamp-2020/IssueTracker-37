@@ -1,9 +1,9 @@
-import { Sequelize } from 'sequelize';
-import config from './config/config';
-import applyExtraSetup from './extra-setup';
+const { Sequelize } = require('sequelize');
+const config = require('./config/config');
+const applyExtraSetup = require('./extra-setup');
 
-const env: string = process.env.NODE_ENV || 'development';
-const option: object = config[env];
+const env = process.env.NODE_ENV || 'development';
+const option = config[env];
 
 const sequelize = new Sequelize({
   ...option,
@@ -24,4 +24,9 @@ modelDefiners.forEach((modelDefiner) => modelDefiner(sequelize));
 
 applyExtraSetup(sequelize);
 
-export default sequelize;
+const models = sequelize.models;
+
+module.exports = {
+  sequelize,
+  models,
+};

@@ -1,9 +1,9 @@
 require('dotenv').config('../../.env');
 
 const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
-const MYSQL: string = 'mysql';
+const MYSQL = 'mysql';
 
-const config: any = {
+const config = {
   development: {
     username: MYSQL_USER,
     password: MYSQL_PASSWORD,
@@ -20,4 +20,4 @@ const config: any = {
   },
 };
 
-export default config;
+module.exports = config;

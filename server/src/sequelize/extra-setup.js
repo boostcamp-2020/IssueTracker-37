@@ -1,4 +1,4 @@
-const applyExtraSetup = (sequelize: any) => {
+const applyExtraSetup = (sequelize) => {
   const { issue, user, milestone, label, comment } = sequelize.models;
 
   user.belongsToMany(issue, { through: 'assignees' });
@@ -17,4 +17,4 @@ const applyExtraSetup = (sequelize: any) => {
   label.belongsToMany(issue, { through: 'issue_to_label' });
 };
 
-export default applyExtraSetup;
+module.exports = applyExtraSetup;

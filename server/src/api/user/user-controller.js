@@ -1,10 +1,8 @@
-import { Request, Response } from 'express';
-
-import userService from '@services/user-service';
-import { errorMessage, succeedMessage } from '@utils/server-message';
+const userService = require('@services/user-service');
+const { errorMessage, succeedMessage } = require('@utils/server-message');
 
 class UserController {
-  signup = (req: Request, res: Response) => {
+  signup(req, res) {
     try {
       const insert = userService.createUser(req.body);
 
@@ -18,7 +16,9 @@ class UserController {
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedRegister });
     }
-  };
+  }
 }
 
-export default new UserController();
+const userController = new UserController();
+
+module.exports = userController;
