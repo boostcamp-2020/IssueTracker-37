@@ -6,6 +6,16 @@ class IssueService {
 
     return insertIssue;
   }
+
+  async updateIssue(payload) {
+    const { id } = payload;
+
+    delete payload.id;
+
+    const updateIssue = await issueModel.update(payload, { where: { id } });
+
+    return updateIssue;
+  }
 }
 
 const issueService = new IssueService();

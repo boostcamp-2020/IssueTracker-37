@@ -21,6 +21,23 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedInsert });
     }
   }
+
+  async update(req, res) {
+    try {
+      req.body.id = req.params.issue_id;
+      const update = await issueService.updateIssue(req.body);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedUpdate,
+        data: update,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedUpdate });
+    }
+  }
 }
 
 const issueController = new IssueController();
