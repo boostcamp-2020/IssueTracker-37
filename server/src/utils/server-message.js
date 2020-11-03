@@ -7,6 +7,7 @@ const errorMessage = {
   failedDelete: `데이터 삭제에 실패하였습니다.`,
   failedSelect: `데이터를 정상적으로 가져오는데 실패하였습니다.`,
   failedRegister: `회원가입에 실패했습니다.`,
+  failedIssueToken: `토큰 발행에 실패했습니다.`,
   duplicatedUser: `이미 존재하는 아이디 입니다.`,
 };
 
