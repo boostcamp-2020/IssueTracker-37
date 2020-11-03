@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { isPassword, isEmail } from '@util/validator';
+import { isPassword, isEmail } from '@utils/validator';
 
 const SignInWrapper = styled.div`
   display: flex;
