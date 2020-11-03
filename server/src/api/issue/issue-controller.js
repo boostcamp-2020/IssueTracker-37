@@ -41,6 +41,23 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedDelete });
     }
   }
+
+  async insertAssigneeByIssue(req, res) {
+    try {
+      const payload = req.params;
+      const isInserted = await issueService.insertAssigneeByIssue(payload);
+
+      if (isInserted) {
+        res
+          .status(200)
+          .send({ state: 'success', message: succeedMessage.succeedInsert });
+      }
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedInsert });
+    }
+  }
 }
 
 const issueController = new IssueController();

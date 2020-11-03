@@ -14,4 +14,9 @@ router.delete(
   issueController.deleteMilestoneByIssue,
 );
 
+router.post(
+  '/:issue_id/assignee/:assignee_id',
+  issueController.insertAssigneeByIssue,
+);
+
 module.exports = router;

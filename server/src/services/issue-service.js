@@ -13,6 +13,12 @@ class IssueService {
 
     return isDeleted;
   }
+
+  async insertAssigneeByIssue(payload) {
+    const isInserted = await issueModel.insertAssigneeByIssue(payload);
+
+    return isInserted;
+  }
 }
 
 const issueService = new IssueService();

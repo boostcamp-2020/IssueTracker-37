@@ -34,6 +34,14 @@ class Issue extends Model {
     if (!result) throw new Error();
     return result;
   }
+
+  static async insertAssigneeByIssue(payload) {
+    const result = await this.findByPk(payload.issue_id);
+
+    await result.addUser(payload.assginee_id);
+
+    return result;
+  }
 }
 
 module.exports = Issue;
