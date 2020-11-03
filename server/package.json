@@ -16,6 +16,14 @@
   "lint-staged": {
     "*.ts": "eslint --fix"
   },
+  "_moduleAliases": {
+    "@utils": "dist/src/utils",
+    "@api": "dist/src/api",
+    "@middlewares": "dist/src/middlewares",
+    "@sequelize": "dist/src/sequelize",
+    "@services": "dist/src/services",
+    "@repositories": "dist/src/repositories"
+  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
@@ -24,6 +32,7 @@
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
     "morgan": "~1.9.1",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",

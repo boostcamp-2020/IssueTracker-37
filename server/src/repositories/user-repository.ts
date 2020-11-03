@@ -1,4 +1,4 @@
-const { models } = require('../sequelize').default;
+const { models } = require('@sequelize').default;
 
 class UserRepository {
   insert = async (userDTO: any) => {

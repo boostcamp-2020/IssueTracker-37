@@ -1,7 +1,8 @@
 import express from 'express';
-import sequelize from './sequelize/index';
+import 'module-alias/register';
 
-import initMiddlewares from './middlewares/init';
+import sequelize from '@sequelize/index';
+import initMiddlewares from '@middlewares/init';
 
 const app: express.Application = express();
 const { PORT } = process.env;

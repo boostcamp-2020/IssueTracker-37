@@ -2,10 +2,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
-const { errorMessage } = require('../utils/server-message');
-const { isComparedPassword } = require('../utils/bcrypt');
+const { errorMessage } = require('@utils/server-message');
+const { isComparedPassword } = require('@utils/bcrypt');
 
-const { models } = require('../sequelize').default;
+const { models } = require('@sequelize').default;
 
 const passportConfig = { usernameField: 'email', passwordField: 'password' };
 

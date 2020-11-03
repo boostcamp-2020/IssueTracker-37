@@ -6,6 +6,27 @@
     "rootDir": "./src",
     "moduleResolution": "node",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@middlewares/*": [
+        "src/middlewares/*"
+      ],
+      "@sequelize/*": [
+        "src/sequelize/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@repositories/*": [
+        "src/repositories/*"
+      ],
+    }
   }
 }

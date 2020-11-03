@@ -1,5 +1,5 @@
-import userRepo from '../repositories/user-repository';
-import { encryptPassword } from '../utils/bcrypt';
+import userRepo from '@repositories/user-repository';
+import { encryptPassword } from '@utils/bcrypt';
 
 interface signupForm {
   email: string;
