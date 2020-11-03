@@ -1,4 +1,4 @@
-const { LocalStrategy } = require('passport-local').Strategy;
+const { Strategy: LocalStrategy } = require('passport-local');
 
 const { errorMessage } = require('@utils/server-message');
 const { models } = require('@sequelize/index');

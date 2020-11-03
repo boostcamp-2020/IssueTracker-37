@@ -1,4 +1,4 @@
-const { JWTStrategy, ExtractJwt } = require('passport-jwt').Strategy;
+const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
 const { errorMessage } = require('@utils/server-message');
 const { models } = require('@sequelize/index');
 
