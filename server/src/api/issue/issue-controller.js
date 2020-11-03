@@ -42,8 +42,6 @@ class IssueController {
 
   async deleteIssueByLabel(req, res){
     try{
-      console.log(req.body)
-      return;
       const payload = {
         content: req.body.content,
         issue_id: req.params.issue_id, 
@@ -54,6 +52,7 @@ class IssueController {
       
       res.status(200).send({
         status: 'success',
+        
         message: succeedMessage.succeedDelete,
       });
     }catch(err){
