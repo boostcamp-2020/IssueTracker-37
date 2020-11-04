@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import { StyledSpan } from './style';
 
@@ -11,6 +12,7 @@ const Span = (props) => {
     hoverColor,
     afterContent,
     color,
+    className,
   } = props;
 
   return (
@@ -20,6 +22,7 @@ const Span = (props) => {
       hoverColor={hoverColor}
       afterContent={afterContent}
       color={color}
+      className={cn(className)}
     >
       {children}
     </StyledSpan>
@@ -37,6 +40,7 @@ Span.propTypes = {
   hoverColor: PropTypes.string,
   afterContent: PropTypes.string,
   color: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Span;
