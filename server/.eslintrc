@@ -6,6 +6,7 @@
     "prettier/prettier": ["error", {
       "endOfLine": "auto"
     }],
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": ["error", "windows"],
+    "class-methods-use-this": "off"
   }
 }
