@@ -1,6 +1,6 @@
-const milestoneModel = require('@models/milestone-model');
 const labelModel = require('@models/label-model');
 const commentModel = require('@models/comment-model');
+const issueModel = require('@models/issue-model');
 
 class IssueService {
   async deleteCommentByIssue(payload) {
@@ -39,6 +39,7 @@ class IssueService {
 
   async getIssues() {
     const issues = await issueModel.getIssues();
+
     return issues;
   }
 
@@ -61,9 +62,26 @@ class IssueService {
   }
 
   async createIssue(payload) {
-    const insertIssue = await issueModel.insert(payload);
+    const { issue, assignees, labels } = payload;
 
-    return insertIssue;
+    const issueResult = await issueModel.insert(issue);
+
+    const issueId = issueResult.id;
+
+    await assignees.forEach(async (assignee) => {
+      assignee.issue_id = issueId;
+
+      await issueModel.insertAssigneeByIssue(assignee);
+    });
+
+    await labels.forEach(async (label) => {
+      label.issueId = issueId;
+      label.labelId = label.label_id;
+
+      await issueModel.addIssueToLabel(label);
+    });
+
+    return issueResult;
   }
 
   async updateIssue(payload) {
