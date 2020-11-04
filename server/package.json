@@ -38,6 +38,7 @@
     "passport-github": "^1.1.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "request-promise": "^4.2.6",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
   },
