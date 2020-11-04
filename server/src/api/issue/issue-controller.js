@@ -94,7 +94,7 @@ class IssueController {
     }
   }
 
-  async deleteIssueToLabel(req, res) {
+  async deleteAssignee(req, res) {
     try {
       const payload = {
         issueId: req.params.issue_id,
