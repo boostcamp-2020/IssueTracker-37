@@ -1,4 +1,3 @@
-/* eslint-disable object-shorthand */
 const { DataTypes, Model } = require('sequelize');
 const labelModel = require('@models/label-model');
 const userModel = require('@models/user-model');
@@ -103,8 +102,6 @@ class Issue extends Model {
     const isDelete = await findIssue.removeUser(payload.assigneeId);
 
     if (!isDelete) throw new Error();
-
-    return;
   }
 
   static async deleteMilestoneByIssue(payload) {
@@ -130,7 +127,7 @@ class Issue extends Model {
   }
 
   static async deleteById(id) {
-    const result = await this.destroy({ where: { id: id } });
+    const result = await this.destroy({ where: { id } });
 
     if (result) return result;
     else throw new Error();
