@@ -27,6 +27,7 @@ class Issue extends Model {
       },
     );
   }
+  
   static async selectById(id, Label) {
     const findIssue = await this.findByPk(id, {
       include: [
@@ -56,6 +57,21 @@ class Issue extends Model {
     if (!isDelete) throw new Error();
 
     return;
+  }
+
+  static async deleteMilestoneByIssue(payload) {
+    const result = await this.destroy({ where: payload });
+
+    if (!result) throw new Error();
+    return result;
+  }
+
+  static async insertAssigneeByIssue(payload) {
+    const result = await this.findByPk(payload.issue_id);
+
+    await result.addUser(payload.assginee_id);
+
+    return result;
   }
 }
 
