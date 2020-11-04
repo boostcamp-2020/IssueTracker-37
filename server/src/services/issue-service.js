@@ -29,7 +29,7 @@ class IssueService {
   }
 
   async createIssueToLabel(payload) {
-    const issueToLabel = await issueModel.addIssueToLabels(payload);
+    const issueToLabel = await issueModel.inserIssueToLabel(payload);
 
     return issueToLabel;
   }
