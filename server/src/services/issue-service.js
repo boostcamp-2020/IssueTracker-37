@@ -1,6 +1,7 @@
-const milestoneModel = require('@models/milestone-model');
+// const milestoneModel = require('@models/milestone-model');
 const labelModel = require('@models/label-model');
 const commentModel = require('@models/comment-model');
+const issueModel = require('@models/issue-model');
 
 class IssueService {
   async deleteCommentByIssue(payload) {
@@ -39,6 +40,7 @@ class IssueService {
 
   async getIssues() {
     const issues = await issueModel.getIssues();
+
     return issues;
   }
 
