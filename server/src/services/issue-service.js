@@ -76,6 +76,13 @@ class IssueService {
 
     return result;
   }
+
+  async createComment(payload) {
+    await issueModel.selectById(payload.issue_id);
+    const comment = await commentModel.createComment(payload);
+    return comment;
+  }
+
 }
 
 const issueService = new IssueService();
