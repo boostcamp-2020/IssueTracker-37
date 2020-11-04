@@ -1,4 +1,8 @@
 const { DataTypes, Model } = require('sequelize');
+const labelModel = require('@models/label-model');
+const userModel = require('@models/user-model');
+const commentModel = require('@models/comment-model');
+const milestoneModel = require('@models/milestone-model');
 
 class Issue extends Model {
   static initialize(sequelize) {
@@ -26,6 +30,94 @@ class Issue extends Model {
         sequelize,
       },
     );
+  }
+
+  static async getIssues() {
+    const issues = await this.findAll({
+      include: [
+        {
+          model: commentModel,
+        },
+        {
+          model: userModel,
+          attributes: ['id', 'name'],
+        },
+        {
+          model: labelModel,
+        },
+        {
+          model: milestoneModel,
+        },
+      ],
+    });
+
+    return issues;
+  }
+  
+  static async selectById(id, Label) {
+    const findIssue = await this.findByPk(id, {
+      include: [
+        {
+          model: Label,
+        },
+      ],
+    });
+
+    if (!findIssue) throw new Error();
+    return findIssue;
+  }
+
+  static async updateIssueByMilestone(payload){
+
+    await this.update({
+      milestone_id: payload.milestone_id}, {
+      where: {id: payload.issue_id}
+    });
+  }
+
+  static async deleteIssueByLabel(payload){
+    
+    const issue = await this.findOne({
+      where: {
+        id: payload.issue_id
+      }
+    });
+
+    await issue.removeLabels(payload.label_id);
+  }
+
+  static async addIssueToLabel(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const result = await findIssue.addLabel(payload.labelId);
+
+    return result;
+  }
+
+  static async removeAssignee(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const isDelete = await findIssue.removeUser(payload.assigneeId);
+
+    if (!isDelete) throw new Error();
+
+    return;
+  }
+
+  static async deleteMilestoneByIssue(payload) {
+    const result = await this.destroy({ where: payload });
+
+    if (!result) throw new Error();
+    
+    return result;
+  }
+
+  static async insertAssigneeByIssue(payload) {
+    const result = await this.findByPk(payload.issue_id);
+
+    await result.addUser(payload.assginee_id);
+
+    return result;
   }
 }
 

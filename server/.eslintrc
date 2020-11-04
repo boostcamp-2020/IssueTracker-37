@@ -1,0 +1,12 @@
+{
+  "extends": ["naver", "prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "prettier/prettier": ["error", {
+      "endOfLine": "auto"
+    }],
+    "linebreak-style": ["error", "windows"],
+    "class-methods-use-this": "off"
+  }
+}
