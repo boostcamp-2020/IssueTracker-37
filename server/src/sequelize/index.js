@@ -24,6 +24,9 @@ modelDefiners.forEach((modelDefiner) => modelDefiner.initialize(sequelize));
 
 applyExtraSetup(sequelize);
 
+const models = sequelize.models;
+
 module.exports = {
   sequelize,
+  models,
 };

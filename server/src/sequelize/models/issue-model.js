@@ -27,6 +27,37 @@ class Issue extends Model {
       },
     );
   }
+  
+  static async selectById(id, Label) {
+    const findIssue = await this.findByPk(id, {
+      include: [
+        {
+          model: Label,
+        },
+      ],
+    });
+
+    if (!findIssue) throw new Error();
+    return findIssue;
+  }
+
+  static async addIssueToLabel(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const result = await findIssue.addLabel(payload.labelId);
+
+    return result;
+  }
+
+  static async removeAssignee(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const isDelete = await findIssue.removeUser(payload.assigneeId);
+
+    if (!isDelete) throw new Error();
+
+    return;
+  }
 
   static async deleteMilestoneByIssue(payload) {
     const result = await this.destroy({ where: payload });

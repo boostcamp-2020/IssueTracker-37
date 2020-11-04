@@ -4,9 +4,9 @@ const { errorMessage, succeedMessage } = require('@utils/server-message');
 const CLIENT_OAUTH_CALLBACK_URL = 'http://localhost:8080/github_callback';
 
 class UserController {
-  signup(req, res) {
+  async signup(req, res) {
     try {
-      const insert = userService.createUser(req.body);
+      const insert = await userService.createUser(req.body);
 
       res.status(200).send({
         state: 'success',

@@ -1,5 +1,6 @@
-const commentModel = require('@models/comment-model');
 const issueModel = require('@models/issue-model');
+const labelModel = require('@models/label-model');
+const commentModel = require('@models/comment-model');
 
 class IssueService {
   async deleteCommentByIssue(payload) {
@@ -18,6 +19,22 @@ class IssueService {
     const isInserted = await issueModel.insertAssigneeByIssue(payload);
 
     return isInserted;
+  }
+  
+  async findOneWithLabel(id) {
+    const issue = await issueModel.selectById(id, labelModel);
+
+    return issue;
+  }
+
+  async createIssueToLabel(payload) {
+    const issueToLabel = await issueModel.addIssueToLabels(payload);
+
+    return issueToLabel;
+  }
+
+  async deleteAssignee(payload) {
+    await issueModel.removeAssignee(payload);
   }
 }
 
