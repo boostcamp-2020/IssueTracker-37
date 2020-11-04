@@ -222,6 +222,22 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedDelete });
     }
   }
+
+  async updateComment(req, res) {
+    try {
+      const updatedComment = await issueService.editComment(req.body);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedUpdate,
+        data: updatedComment,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedUpdate });
+    }
+  }
 }
 
 const issueController = new IssueController();
