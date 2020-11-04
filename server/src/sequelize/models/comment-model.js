@@ -25,6 +25,20 @@ class Comment extends Model {
     if (!result) throw new Error();
     return result;
   }
+
+  static async selectById(id) {
+    const comment = await this.findByPk(id);
+
+    if (!commnet) throw new Error();
+    return comment
+  }
+
+  static async update(payload) {
+    const result = this.update(payload, { where: payload.id })
+
+    if (!result) throw new Error();
+    return result;
+  }
 }
 
 module.exports = Comment;
