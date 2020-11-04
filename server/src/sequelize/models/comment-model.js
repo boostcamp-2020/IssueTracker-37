@@ -11,7 +11,7 @@ class Comment extends Model {
       },
       {
         modelName: 'Comment',
-        tableName: 'commnet',
+        tableName: 'comment',
         charset: 'utf8',
         collate: 'utf8_general_ci',
         sequelize,
@@ -29,12 +29,12 @@ class Comment extends Model {
   static async selectById(id) {
     const comment = await this.findByPk(id);
 
-    if (!commnet) throw new Error();
+    if (!comment) throw new Error();
     return comment
   }
 
-  static async update(payload) {
-    const result = this.update(payload, { where: payload.id })
+  static async updateComment(payload) {
+    const result = this.update(payload, { where: { id: payload.id } })
 
     if (!result) throw new Error();
     return result;
