@@ -27,6 +27,21 @@ class Issue extends Model {
       },
     );
   }
+
+  static async deleteMilestoneByIssue(payload) {
+    const result = await this.destroy({ where: payload });
+
+    if (!result) throw new Error();
+    return result;
+  }
+
+  static async insertAssigneeByIssue(payload) {
+    const result = await this.findByPk(payload.issue_id);
+
+    await result.addUser(payload.assginee_id);
+
+    return result;
+  }
 }
 
 module.exports = Issue;

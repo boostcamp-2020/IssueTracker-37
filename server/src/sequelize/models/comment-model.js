@@ -18,6 +18,13 @@ class Comment extends Model {
       },
     );
   }
+
+  static async deleteCommentByIssue(payload) {
+    const result = await this.destroy({ where: payload });
+
+    if (!result) throw new Error();
+    return result;
+  }
 }
 
 module.exports = Comment;
