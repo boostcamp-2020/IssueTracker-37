@@ -35,4 +35,6 @@ router.put('/:issue_id', issueController.update);
 
 router.delete('/:issue_id', issueController.delete);
 
+router.put('/:issue_id/comment/:comment_id', issueController.updateComment);
+
 module.exports = router;
