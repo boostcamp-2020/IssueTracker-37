@@ -1,6 +1,7 @@
 const milestoneModel = require('@models/milestone-model');
 const labelModel = require('@models/label-model');
 const commentModel = require('@models/comment-model');
+const issueModel = require('@models/issue-model');
 
 class IssueService {
   async deleteCommentByIssue(payload) {
@@ -43,17 +44,11 @@ class IssueService {
   }
 
   async updateIssueByMilestone(payload) {
-    // FIX:
-    // const updatedIssue = await issueModel.selectById(payload.issue_id);
-    // if(!updatedIssue){
-    //   throw new Error('수정할려는 이슈없음');
-    // }
-    // const addedMilestone = await milestoneModel.selectById(payload.milestone_id);
-    // if(!addedMilestone){
-    //   throw new Error('추가될려는 마일스톤 존재하지않음');
-    // }
-    // await issueModel.updateIssueByMilestone(payload);
+    
+    await issueModel.selectById(payload.issue_id);
+    await milestoneModel.selectById(payload.milestone_id);
     await issueModel.updateIssueByMilestone(payload);
+
   }
 
   async deleteIssueByLabel(payload) {
