@@ -31,6 +31,7 @@ class Issue extends Model {
       },
     );
   }
+
   static async getIssues() {
     const issues = await this.findAll({
       include: [
@@ -52,6 +53,19 @@ class Issue extends Model {
 
     return issues;
   }
+  
+  static async selectById(id, Label) {
+    const findIssue = await this.findByPk(id, {
+      include: [
+        {
+          model: Label,
+        },
+      ],
+    });
+
+    if (!findIssue) throw new Error();
+    return findIssue;
+  }
 
   static async updateIssueByMilestone(payload){
 
@@ -59,7 +73,6 @@ class Issue extends Model {
       milestone_id: payload.milestone_id}, {
       where: {id: payload.issue_id}
     });
-
   }
 
   static async deleteIssueByLabel(payload){
@@ -73,6 +86,39 @@ class Issue extends Model {
     await issue.removeLabels(payload.label_id);
   }
 
+  static async addIssueToLabel(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const result = await findIssue.addLabel(payload.labelId);
+
+    return result;
+  }
+
+  static async removeAssignee(payload) {
+    const findIssue = await this.findByPk(payload.issueId);
+
+    const isDelete = await findIssue.removeUser(payload.assigneeId);
+
+    if (!isDelete) throw new Error();
+
+    return;
+  }
+
+  static async deleteMilestoneByIssue(payload) {
+    const result = await this.destroy({ where: payload });
+
+    if (!result) throw new Error();
+    
+    return result;
+  }
+
+  static async insertAssigneeByIssue(payload) {
+    const result = await this.findByPk(payload.issue_id);
+
+    await result.addUser(payload.assginee_id);
+
+    return result;
+  }
 }
 
 module.exports = Issue;

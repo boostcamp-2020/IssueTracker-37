@@ -1,4 +1,4 @@
-const { GitHubStrategy } = require('passport-github').Strategy;
+const { Strategy: GitHubStrategy } = require('passport-github');
 
 const { models } = require('@sequelize/index');
 
