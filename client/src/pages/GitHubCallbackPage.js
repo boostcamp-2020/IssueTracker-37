@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const deleteCookie = (name) => {
-  var date = new Date();
-  document.cookie = name + '= ' + '; expires=' + date.toUTCString();
+  const date = new Date();
+
+  document.cookie = `${name} expires=${date.toUTCString()}`;
 };
 
 const GitHubCallbackPage = () => {
