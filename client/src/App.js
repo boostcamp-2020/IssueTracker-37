@@ -3,7 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 import Auth from '@hoc/Auth';
-import Index from './pages/index';
+// import Index from './pages/index';
+import Main from './pages/Main';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import GitHubCallbackPage from './pages/GitHubCallbackPage';
@@ -11,6 +12,9 @@ import GitHubCallbackPage from './pages/GitHubCallbackPage';
 const GolbalStyled = createGlobalStyle`
   * {
     box-sizing: border-box;
+    border: 0;
+    margin: 0;
+    padding: 0;
   }
   input {
     -webkit-appearance: none;
@@ -22,7 +26,8 @@ const App = () => {
     <BrowserRouter>
       <GolbalStyled />
       <Switch>
-        <Route path="/" exact component={Auth(Index, true)}></Route>
+        <Route path="/" exact component={Auth(Main, false)}></Route>
+        {/* <Route path="/" exact component={Auth(Index, false)}></Route> */}
         <Route path="/signin" exact component={Auth(SignInPage, false)}></Route>
         <Route path="/signup" exact component={Auth(SignUpPage, false)}></Route>
         <Route
