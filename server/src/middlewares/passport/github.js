@@ -14,7 +14,7 @@ const GitHubCallback = async (accessToken, refreshToken, profile, done) => {
   } = profile;
 
   try {
-    const result = await models.user.findOrCreate({
+    const result = await models.User.findOrCreate({
       where: { email, name },
     });
 
