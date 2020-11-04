@@ -81,6 +81,18 @@ class IssueService {
 
     return result;
   }
+
+  async editComment(payload) {
+    const comment = await commentModel.selectById(payload.id);
+
+    if (comment.id != payload.id || comment.user_id != payload.user_id || comment.issue_id != payload.issue_id || !payload.content) throw new Error();
+
+    const updatedComment = await commentModel.updateComment(payload);
+
+    if (!updatedComment) throw new Error();
+
+    return updatedComment;
+  }
 }
 
 const issueService = new IssueService();
