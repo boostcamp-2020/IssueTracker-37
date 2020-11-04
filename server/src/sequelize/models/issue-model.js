@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 const { DataTypes, Model } = require('sequelize');
 const labelModel = require('@models/label-model');
 const userModel = require('@models/user-model');
@@ -53,7 +54,7 @@ class Issue extends Model {
 
     return issues;
   }
-  
+
   static async selectById(id, Label) {
     const findIssue = await this.findByPk(id, {
       include: [
@@ -67,20 +68,22 @@ class Issue extends Model {
     return findIssue;
   }
 
-  static async updateIssueByMilestone(payload){
-
-    await this.update({
-      milestone_id: payload.milestone_id}, {
-      where: {id: payload.issue_id}
-    });
+  static async updateIssueByMilestone(payload) {
+    await this.update(
+      {
+        milestone_id: payload.milestone_id,
+      },
+      {
+        where: { id: payload.issue_id },
+      },
+    );
   }
 
-  static async deleteIssueByLabel(payload){
-    
+  static async deleteIssueByLabel(payload) {
     const issue = await this.findOne({
       where: {
-        id: payload.issue_id
-      }
+        id: payload.issue_id,
+      },
     });
 
     await issue.removeLabels(payload.label_id);
@@ -108,7 +111,7 @@ class Issue extends Model {
     const result = await this.destroy({ where: payload });
 
     if (!result) throw new Error();
-    
+
     return result;
   }
 
@@ -118,6 +121,19 @@ class Issue extends Model {
     await result.addUser(payload.assginee_id);
 
     return result;
+  }
+
+  static async insert(payload) {
+    const insertIssue = await this.create(payload);
+
+    return insertIssue;
+  }
+
+  static async deleteById(id) {
+    const result = await this.destroy({ where: { id: id } });
+
+    if (result) return result;
+    else throw new Error();
   }
 }
 

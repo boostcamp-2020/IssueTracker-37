@@ -14,8 +14,8 @@ class IssueController {
     } catch (err) {
       console.error(err);
     }
-  }   
-      
+  }
+
   async getOneById(req, res) {
     try {
       const id = req.params.issue_id;
@@ -36,12 +36,12 @@ class IssueController {
   async updateIssueByMilestone(req, res) {
     try {
       const payload = {
-        issue_id: req.params.issue_id, 
-        milestone_id: req.params.milestone_id
+        issue_id: req.params.issue_id,
+        milestone_id: req.params.milestone_id,
       };
-      
+
       await issueService.updateIssueByMilestone(payload);
-      
+
       res.status(200).send({
         status: 'success',
         message: succeedMessage.succeedInsert,
@@ -50,7 +50,7 @@ class IssueController {
       console.error(err);
     }
   }
-      
+
   async postIssueToLabel(req, res) {
     try {
       const payload = {
@@ -72,29 +72,28 @@ class IssueController {
     }
   }
 
-
-  async deleteIssueByLabel(req, res){
-    try{
+  async deleteIssueByLabel(req, res) {
+    try {
       const payload = {
         content: req.body.content,
-        issue_id: req.params.issue_id, 
+        issue_id: req.params.issue_id,
         label_id: req.params.label_id,
       };
-      
+
       await issueService.deleteIssueByLabel(payload);
-      
+
       res.status(200).send({
         status: 'success',
         message: succeedMessage.succeedDelete,
       });
-    }catch(err){
+    } catch (err) {
       console.error(err);
       res
-      .status(400)
-      .send({ state: 'fail', message: errorMessage.failedDelete });
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedDelete });
     }
   }
-    
+
   async deleteIssueToLabel(req, res) {
     try {
       const payload = {
@@ -168,6 +167,59 @@ class IssueController {
       res
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedInsert });
+    }
+  }
+
+  async create(req, res) {
+    try {
+      const insert = await issueService.createIssue(req.body);
+
+      // TODO: assignee 관계 생성 - 만약 있다면
+
+      // TODO: issueToLabel 관계 생성 - 만약 있다면
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedInsert,
+        data: insert,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedInsert });
+    }
+  }
+
+  async update(req, res) {
+    try {
+      req.body.id = req.params.issue_id;
+      const update = await issueService.updateIssue(req.body);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedUpdate,
+        data: update,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedUpdate });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const result = await issueService.deleteIssue(req.params.issue_id);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedDelete,
+        data: result,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedDelete });
     }
   }
 }

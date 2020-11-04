@@ -20,7 +20,7 @@ class IssueService {
 
     return isInserted;
   }
-  
+
   async findOneWithLabel(id) {
     const issue = await issueModel.selectById(id, labelModel);
 
@@ -36,14 +36,14 @@ class IssueService {
   async deleteAssignee(payload) {
     await issueModel.removeAssignee(payload);
   }
-  
+
   async getIssues() {
     const issues = await issueModel.getIssues();
     return issues;
   }
 
-  async updateIssueByMilestone(payload){
-    // FIX: 
+  async updateIssueByMilestone(payload) {
+    // FIX:
     // const updatedIssue = await issueModel.selectById(payload.issue_id);
     // if(!updatedIssue){
     //   throw new Error('수정할려는 이슈없음');
@@ -56,8 +56,30 @@ class IssueService {
     await issueModel.updateIssueByMilestone(payload);
   }
 
-  async deleteIssueByLabel(payload){
+  async deleteIssueByLabel(payload) {
     await issueModel.deleteIssueByLabel(payload);
+  }
+
+  async createIssue(payload) {
+    const insertIssue = await issueModel.insert(payload);
+
+    return insertIssue;
+  }
+
+  async updateIssue(payload) {
+    const { id } = payload;
+
+    delete payload.id;
+
+    const updateIssue = await issueModel.update(payload, { where: { id } });
+
+    return updateIssue;
+  }
+
+  async deleteIssue(payload) {
+    const result = await issueModel.deleteById(payload);
+
+    return result;
   }
 }
 
