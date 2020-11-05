@@ -3,6 +3,7 @@ const labelModel = require('@models/label-model');
 const userModel = require('@models/user-model');
 const commentModel = require('@models/comment-model');
 const milestoneModel = require('@models/milestone-model');
+const assigneeModel = require('@models/assignee-model');
 
 class Issue extends Model {
   static initialize(sequelize) {
@@ -37,10 +38,28 @@ class Issue extends Model {
       include: [
         {
           model: commentModel,
+          include: [
+            {
+              model: userModel,
+              attributes: {
+                exclude: ['password'],
+              },
+            },
+          ],
+        },
+        {
+          model: assigneeModel,
+          include: [
+            {
+              model: userModel,
+              attributes: {
+                exclude: ['password'],
+              },
+            },
+          ],
         },
         {
           model: userModel,
-          attributes: ['id', 'name'],
         },
         {
           model: labelModel,
