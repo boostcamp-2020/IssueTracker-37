@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import ImgTitle from '@molecules/ImgTitle';
+import ImgTitle from '@atoms/ImgTitle';
 import Button from '@atoms/Button';
 import { StyledHeader } from './style';
 
