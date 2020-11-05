@@ -17,4 +17,12 @@ export const StyledImgTitle = styled.div`
       margin-left: 10px;
     }
   }
+
+  &.issue {
+    & > span {
+      margin-left: 3px;
+      font-size: 14px;
+      color: gray;
+    }
+  }
 `;
