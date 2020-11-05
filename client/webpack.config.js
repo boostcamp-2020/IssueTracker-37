@@ -21,6 +21,7 @@ module.exports = {
       '@atoms': path.join(__dirname, 'src/components/atoms'),
       '@molecules': path.join(__dirname, 'src/components/molecules'),
       '@organisms': path.join(__dirname, 'src/components/organisms'),
+      '@hoc': path.join(__dirname, 'src/hoc'),
     },
   },
   mode,

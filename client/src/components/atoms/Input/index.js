@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import cn from 'classnames';
 import { StyledInput } from './style';
 
 const Input = (props) => {
-  const { type, value, name, placeholder, id, onChange } = props;
+  const { type, value, name, placeholder, id, onChange, className } = props;
 
   return (
     <StyledInput
@@ -14,6 +14,7 @@ const Input = (props) => {
       placeholder={placeholder}
       id={id}
       onChange={onChange}
+      className={cn(className)}
     />
   );
 };
@@ -21,7 +22,7 @@ const Input = (props) => {
 Input.defaultProps = {
   type: 'text',
   placeholder: '',
-  onChange: () => {},
+  onChange: () => { },
 };
 
 Input.propTypes = {
@@ -31,6 +32,7 @@ Input.propTypes = {
   value: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Input;
