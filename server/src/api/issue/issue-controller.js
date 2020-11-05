@@ -100,6 +100,7 @@ class IssueController {
         issueId: req.params.issue_id,
         assigneeId: req.params.assignee_id,
       };
+
       await issueService.deleteAssignee(payload);
 
       res.status(200).send({
@@ -172,18 +173,15 @@ class IssueController {
 
   async create(req, res) {
     try {
-      const insert = await issueService.createIssue(req.body);
-
-      // TODO: assignee 관계 생성 - 만약 있다면
-
-      // TODO: issueToLabel 관계 생성 - 만약 있다면
+      const issueResult = await issueService.createIssue(req.body);
 
       res.status(200).send({
         state: 'success',
         message: succeedMessage.succeedInsert,
-        data: insert,
+        data: issueResult,
       });
     } catch (error) {
+      console.log(error);
       res
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedInsert });
@@ -236,6 +234,27 @@ class IssueController {
       res
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedUpdate });
+    }
+  }
+  async createComment(req, res){
+    try{
+      const payload = {
+        content: req.body.content,
+        user_id: 1, // 임시 req.body.no 로 받아와야함.
+        issue_id: req.params.issue_id
+      }
+      const comment = await issueService.createComment(payload);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedInsert,
+        data: comment,
+      });
+    }catch(error){
+      console.error(error);
+      res
+      .status(400)
+      .send({ state: 'fail', message: errorMessage.failedInsert }); 
     }
   }
 }

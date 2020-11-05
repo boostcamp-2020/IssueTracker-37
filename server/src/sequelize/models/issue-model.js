@@ -55,13 +55,21 @@ class Issue extends Model {
   }
 
   static async selectById(id, Label) {
-    const findIssue = await this.findByPk(id, {
-      include: [
-        {
-          model: Label,
-        },
-      ],
-    });
+    let findIssue = null;
+    
+    if(Label){
+      findIssue = await this.findByPk(id, {
+        include: [
+          {
+            model: Label,
+          },
+        ],
+      });
+    }
+    if(!Label){
+      findIssue = await this.findByPk(id);
+    }
+
 
     if (!findIssue) throw new Error();
     return findIssue;
@@ -105,17 +113,24 @@ class Issue extends Model {
   }
 
   static async deleteMilestoneByIssue(payload) {
-    const result = await this.destroy({ where: payload });
+    const isIssued = await this.findOne({ where: payload });
 
-    if (!result) throw new Error();
+    if (!isIssued) throw new Error();
 
-    return result;
+    const [isDeleted] = await this.update(
+      { milestone_id: null },
+      { where: payload },
+    );
+
+    if (!isDeleted) throw new Error();
+
+    return isDeleted;
   }
 
   static async insertAssigneeByIssue(payload) {
     const result = await this.findByPk(payload.issue_id);
 
-    await result.addUser(payload.assginee_id);
+    await result.addUser(payload.assignee_id);
 
     return result;
   }

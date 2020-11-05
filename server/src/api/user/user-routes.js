@@ -1,7 +1,8 @@
 const express = require('express');
+const passport = require('@passport');
 
 const userController = require('@api/user/user-controller');
-const passport = require('@passport');
+const { loginAuth } = require('@middlewares/auth');
 
 const router = express.Router();
 
@@ -14,5 +15,7 @@ router.get(
   passport.authenticate('github', { session: false }),
   userController.gitHubCallback,
 );
+
+router.post('/signin', loginAuth);
 
 module.exports = router;

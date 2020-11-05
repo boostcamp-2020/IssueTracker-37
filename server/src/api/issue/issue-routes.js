@@ -11,6 +11,7 @@ router.put(
 );
 router.delete('/:issue_id/label/:label_id', issueController.deleteIssueByLabel);
 router.get('/:issue_id', issueController.getOneById);
+router.post('/:issue_id/comment/', issueController.createComment);
 router.post('/:issue_id/label/:label_id', issueController.postIssueToLabel);
 router.delete(
   '/:issue_id/assignee/:assignee_id',

@@ -1,14 +1,14 @@
 const { Strategy: LocalStrategy } = require('passport-local');
 
 const { errorMessage } = require('@utils/server-message');
-const { models } = require('@sequelize/index');
+const userModel = require('@models/user-model');
 const { isComparedPassword } = require('@utils/bcrypt');
 
 const passportConfig = { usernameField: 'email', passwordField: 'password' };
 
 const passportAuth = async (email, password, done) => {
   try {
-    const user = await models.user.findOne({ where: { email } });
+    const user = await userModel.findOne({ where: { email } });
 
     if (!user) return done(null, false, { message: errorMessage.invalidUser });
     if (isComparedPassword(password, user.password)) return done(null, user);

@@ -1,4 +1,4 @@
-const milestoneModel = require('@models/milestone-model');
+// const milestoneModel = require('@models/milestone-model');
 const labelModel = require('@models/label-model');
 const commentModel = require('@models/comment-model');
 const issueModel = require('@models/issue-model')
@@ -40,21 +40,16 @@ class IssueService {
 
   async getIssues() {
     const issues = await issueModel.getIssues();
+
     return issues;
   }
 
   async updateIssueByMilestone(payload) {
-    // FIX:
-    // const updatedIssue = await issueModel.selectById(payload.issue_id);
-    // if(!updatedIssue){
-    //   throw new Error('수정할려는 이슈없음');
-    // }
-    // const addedMilestone = await milestoneModel.selectById(payload.milestone_id);
-    // if(!addedMilestone){
-    //   throw new Error('추가될려는 마일스톤 존재하지않음');
-    // }
-    // await issueModel.updateIssueByMilestone(payload);
+    
+    await issueModel.selectById(payload.issue_id);
+    await milestoneModel.selectById(payload.milestone_id);
     await issueModel.updateIssueByMilestone(payload);
+
   }
 
   async deleteIssueByLabel(payload) {
@@ -62,9 +57,26 @@ class IssueService {
   }
 
   async createIssue(payload) {
-    const insertIssue = await issueModel.insert(payload);
+    const { issue, assignees, labels } = payload;
 
-    return insertIssue;
+    const issueResult = await issueModel.insert(issue);
+
+    const issueId = issueResult.id;
+
+    await assignees.forEach(async (assignee) => {
+      assignee.issue_id = issueId;
+
+      await issueModel.insertAssigneeByIssue(assignee);
+    });
+
+    await labels.forEach(async (label) => {
+      label.issueId = issueId;
+      label.labelId = label.label_id;
+
+      await issueModel.addIssueToLabel(label);
+    });
+
+    return issueResult;
   }
 
   async updateIssue(payload) {
@@ -82,7 +94,7 @@ class IssueService {
 
     return result;
   }
-
+  
   async editComment(payload) {
     const comment = await commentModel.selectById(payload.id);
 
@@ -93,6 +105,12 @@ class IssueService {
     if (!updatedComment) throw new Error();
 
     return updatedComment;
+  }
+
+  async createComment(payload) {
+    await issueModel.selectById(payload.issue_id);
+    const comment = await commentModel.createComment(payload);
+    return comment;
   }
 }
 
