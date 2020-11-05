@@ -1,7 +1,7 @@
-// const milestoneModel = require('@models/milestone-model');
+const milestoneModel = require('@models/milestone-model');
 const labelModel = require('@models/label-model');
 const commentModel = require('@models/comment-model');
-const issueModel = require('@models/issue-model')
+const issueModel = require('@models/issue-model');
 
 class IssueService {
   async deleteCommentByIssue(payload) {
@@ -45,11 +45,9 @@ class IssueService {
   }
 
   async updateIssueByMilestone(payload) {
-    
     await issueModel.selectById(payload.issue_id);
     await milestoneModel.selectById(payload.milestone_id);
     await issueModel.updateIssueByMilestone(payload);
-
   }
 
   async deleteIssueByLabel(payload) {
@@ -94,11 +92,17 @@ class IssueService {
 
     return result;
   }
-  
+
   async editComment(payload) {
     const comment = await commentModel.selectById(payload.id);
 
-    if (comment.id != payload.id || comment.user_id != payload.user_id || comment.issue_id != payload.issue_id || !payload.content) throw new Error();
+    if (
+      comment.id !== +payload.id ||
+      comment.user_id !== +payload.user_id ||
+      comment.issue_id !== +payload.issue_id ||
+      !payload.content
+    )
+      throw new Error();
 
     const updatedComment = await commentModel.updateComment(payload);
 
@@ -110,6 +114,7 @@ class IssueService {
   async createComment(payload) {
     await issueModel.selectById(payload.issue_id);
     const comment = await commentModel.createComment(payload);
+
     return comment;
   }
 }

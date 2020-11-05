@@ -34,12 +34,12 @@ class Milestone extends Model {
 
   static async selectById(id) {
     const milestone = this.findOne({
-      where: {id}
+      where: { id },
     });
-    if(!milestone) throw new Error();
+
+    if (!milestone) throw new Error();
     return milestone;
   }
-
 }
 
 module.exports = Milestone;

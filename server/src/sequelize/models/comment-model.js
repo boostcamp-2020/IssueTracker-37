@@ -30,21 +30,22 @@ class Comment extends Model {
     const comment = await this.findByPk(id);
 
     if (!comment) throw new Error();
-    return comment
+    return comment;
   }
 
   static async updateComment(payload) {
-    const result = this.update(payload, { where: { id: payload.id } })
+    const result = this.update(payload, { where: { id: payload.id } });
 
     if (!result) throw new Error();
     return result;
   }
-  static async createComment(payload){
+  static async createComment(payload) {
     const comment = await this.create({
       content: payload.content,
       issue_id: payload.issue_id,
-      user_id: payload.user_id
-    })
+      user_id: payload.user_id,
+    });
+
     return comment;
   }
 }

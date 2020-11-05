@@ -56,8 +56,8 @@ class Issue extends Model {
 
   static async selectById(id, Label) {
     let findIssue = null;
-    
-    if(Label){
+
+    if (Label) {
       findIssue = await this.findByPk(id, {
         include: [
           {
@@ -66,10 +66,9 @@ class Issue extends Model {
         ],
       });
     }
-    if(!Label){
+    if (!Label) {
       findIssue = await this.findByPk(id);
     }
-
 
     if (!findIssue) throw new Error();
     return findIssue;

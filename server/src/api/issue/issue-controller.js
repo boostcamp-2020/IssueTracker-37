@@ -236,13 +236,13 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedUpdate });
     }
   }
-  async createComment(req, res){
-    try{
+  async createComment(req, res) {
+    try {
       const payload = {
         content: req.body.content,
         user_id: 1, // 임시 req.body.no 로 받아와야함.
-        issue_id: req.params.issue_id
-      }
+        issue_id: req.params.issue_id,
+      };
       const comment = await issueService.createComment(payload);
 
       res.status(200).send({
@@ -250,11 +250,12 @@ class IssueController {
         message: succeedMessage.succeedInsert,
         data: comment,
       });
-    }catch(error){
+    } catch (error) {
       console.error(error);
+
       res
-      .status(400)
-      .send({ state: 'fail', message: errorMessage.failedInsert }); 
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedInsert });
     }
   }
 }
