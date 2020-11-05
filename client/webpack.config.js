@@ -22,6 +22,7 @@ module.exports = {
       '@molecules': path.join(__dirname, 'src/components/molecules'),
       '@organisms': path.join(__dirname, 'src/components/organisms'),
       '@hoc': path.join(__dirname, 'src/hoc'),
+      '@img': path.join(__dirname, '/public/img'),
     },
   },
   mode,
@@ -47,6 +48,17 @@ module.exports = {
             options: { minimize: true },
           },
         ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            publicPath: './build/',
+            name: '[name].[ext]?[hash]',
+            limit: 5000, // 5kb 미만 파일만 data url로 처리
+          },
+        },
       },
       {
         test: /\.css$/,
