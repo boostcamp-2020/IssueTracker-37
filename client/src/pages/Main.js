@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Header from '@organisms/Header';
+import NavBar from '@organisms/Navbar';
 import SearchBox from '@molecules/SearchBox';
 import IssueItem from '@molecules/IssueItem';
 
@@ -429,6 +431,8 @@ const main = () => {
   return (
     <>
       <Header />
+      <NavBar labelCount={1} milestoneCount={1}></NavBar>
+      {/* <Dropdown title={title} items={items}></Dropdown> */}
       <SearchBox afterContent="▼" placeholder="is:issue is:open">
         Filter
       </SearchBox>

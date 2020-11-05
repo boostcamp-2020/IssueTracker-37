@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 
 export const StyledSearchBox = styled.div`
-  border: 1px solid black;
+  position: relative;
+  border: 1px solid #e1e4e8;
   border-radius: 5px;
-  width: 40%;
   & > button.searchbox {
     border: none;
     border-radius: 0;
     border-left-top-radius: 5px;
     border-left-bottom-radius: 5px;
     border-right: 1px solid rgba(27, 31, 35, 0.15);
-  }
-
-  & > button.searchbox:hover {
-    background-color: #d1d5da80;
+    height: 100%;
   }
 
   & > input.searchbox {

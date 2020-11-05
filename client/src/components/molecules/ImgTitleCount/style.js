@@ -4,6 +4,7 @@ export const StyledImgTitleCount = styled.div`
   display: inline-flex;
   align-items: center;
   padding: 5px 16px;
+  cursor: pointer;
 
   &:hover {
     background-color: #f6f8fa;
