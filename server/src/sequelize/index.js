@@ -18,6 +18,7 @@ const modelDefiners = [
   require('./models/milestone-model'),
   require('./models/label-model'),
   require('./models/comment-model'),
+  require('./models/assignee-model'),
 ];
 
 modelDefiners.forEach((modelDefiner) => modelDefiner.initialize(sequelize));
