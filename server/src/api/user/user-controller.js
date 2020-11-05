@@ -1,7 +1,10 @@
+const jwt = require('jsonwebtoken');
 const userService = require('@services/user-service');
 const { errorMessage, succeedMessage } = require('@utils/server-message');
 
 const CLIENT_OAUTH_CALLBACK_URL = 'http://localhost:8080/github_callback';
+
+const { JWT_SECRET_KEY } = process.env;
 
 class UserController {
   async signup(req, res) {
@@ -22,10 +25,12 @@ class UserController {
 
   gitHubCallback(req, res) {
     try {
-      // TODO: 토큰 생성 함수 구현
-      res
-        .cookie('token', 'temp token string')
-        .redirect(CLIENT_OAUTH_CALLBACK_URL);
+      const { user } = req;
+
+      const payload = { no: user.id, email: user.email };
+      const generateJWTToken = jwt.sign(payload, JWT_SECRET_KEY);
+
+      res.cookie('token', generateJWTToken).redirect(CLIENT_OAUTH_CALLBACK_URL);
     } catch (error) {
       res
         .status(500)
