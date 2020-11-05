@@ -15,7 +15,7 @@ router.post('/:issue_id/comment/', issueController.createComment);
 router.post('/:issue_id/label/:label_id', issueController.postIssueToLabel);
 router.delete(
   '/:issue_id/assignee/:assignee_id',
-  issueController.deleteIssueToLabel,
+  issueController.deleteAssignee,
 );
 router.delete(
   '/:issue_id/comment/:comment_id',
@@ -35,5 +35,7 @@ router.post('/', issueController.create);
 router.put('/:issue_id', issueController.update);
 
 router.delete('/:issue_id', issueController.delete);
+
+router.put('/:issue_id/comment/:comment_id', issueController.updateComment);
 
 module.exports = router;

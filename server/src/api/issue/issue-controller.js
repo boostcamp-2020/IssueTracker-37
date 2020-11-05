@@ -94,7 +94,7 @@ class IssueController {
     }
   }
 
-  async deleteIssueToLabel(req, res) {
+  async deleteAssignee(req, res) {
     try {
       const payload = {
         issueId: req.params.issue_id,
@@ -221,6 +221,21 @@ class IssueController {
     }
   }
 
+  async updateComment(req, res) {
+    try {
+      const updatedComment = await issueService.editComment(req.body);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedUpdate,
+        data: updatedComment,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedUpdate });
+    }
+  }
   async createComment(req, res){
     try{
       const payload = {
@@ -242,7 +257,6 @@ class IssueController {
       .send({ state: 'fail', message: errorMessage.failedInsert }); 
     }
   }
-
 }
 
 const issueController = new IssueController();
