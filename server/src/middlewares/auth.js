@@ -9,7 +9,7 @@ const loginAuth = async (req, res, next) => {
       if (error || !user)
         return res.status(400).json({ state: 'fail', message });
 
-      const payload = { no: user.no, id: user.user_id };
+      const payload = { no: user.id, email: user.email };
       const generateJWTToken = jwt.sign(payload, JWT_SECRET_KEY);
 
       return res.json({ state: 'success', data: { JWT: generateJWTToken } });
@@ -26,8 +26,7 @@ const apiAuth = async (req, res, next) => {
       { session: false },
       (error, user, { message } = '') => {
         if (error || !user) res.status(400).json({ state: 'fail', message });
-
-        req.body.user_no = user.no;
+        req.body.user_no = user.id;
         next();
       },
     )(req, res, next);

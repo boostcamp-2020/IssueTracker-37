@@ -1,3 +1,4 @@
+// const milestoneModel = require('@models/milestone-model');
 const labelModel = require('@models/label-model');
 const commentModel = require('@models/comment-model');
 const issueModel = require('@models/issue-model');
