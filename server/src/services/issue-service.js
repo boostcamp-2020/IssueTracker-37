@@ -45,17 +45,11 @@ class IssueService {
   }
 
   async updateIssueByMilestone(payload) {
-    // FIX:
-    // const updatedIssue = await issueModel.selectById(payload.issue_id);
-    // if(!updatedIssue){
-    //   throw new Error('수정할려는 이슈없음');
-    // }
-    // const addedMilestone = await milestoneModel.selectById(payload.milestone_id);
-    // if(!addedMilestone){
-    //   throw new Error('추가될려는 마일스톤 존재하지않음');
-    // }
-    // await issueModel.updateIssueByMilestone(payload);
+    
+    await issueModel.selectById(payload.issue_id);
+    await milestoneModel.selectById(payload.milestone_id);
     await issueModel.updateIssueByMilestone(payload);
+
   }
 
   async deleteIssueByLabel(payload) {
@@ -100,6 +94,13 @@ class IssueService {
 
     return result;
   }
+
+  async createComment(payload) {
+    await issueModel.selectById(payload.issue_id);
+    const comment = await commentModel.createComment(payload);
+    return comment;
+  }
+
 }
 
 const issueService = new IssueService();

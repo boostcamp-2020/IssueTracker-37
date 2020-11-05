@@ -25,6 +25,16 @@ class Comment extends Model {
     if (!result) throw new Error();
     return result;
   }
+
+  static async createComment(payload){
+    const comment = await this.create({
+      content: payload.content,
+      issue_id: payload.issue_id,
+      user_id: payload.user_id
+    })
+    return comment;
+  }
+
 }
 
 module.exports = Comment;

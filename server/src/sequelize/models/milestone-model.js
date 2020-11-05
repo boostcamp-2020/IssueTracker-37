@@ -31,6 +31,15 @@ class Milestone extends Model {
       },
     );
   }
+
+  static async selectById(id) {
+    const milestone = this.findOne({
+      where: {id}
+    });
+    if(!milestone) throw new Error();
+    return milestone;
+  }
+
 }
 
 module.exports = Milestone;

@@ -55,13 +55,21 @@ class Issue extends Model {
   }
 
   static async selectById(id, Label) {
-    const findIssue = await this.findByPk(id, {
-      include: [
-        {
-          model: Label,
-        },
-      ],
-    });
+    let findIssue = null;
+    
+    if(Label){
+      findIssue = await this.findByPk(id, {
+        include: [
+          {
+            model: Label,
+          },
+        ],
+      });
+    }
+    if(!Label){
+      findIssue = await this.findByPk(id);
+    }
+
 
     if (!findIssue) throw new Error();
     return findIssue;
