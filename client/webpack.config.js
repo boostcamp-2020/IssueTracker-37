@@ -56,7 +56,7 @@ module.exports = {
           options: {
             publicPath: './build/',
             name: '[name].[ext]?[hash]',
-            limit: 5000, // 5kb 미만 파일만 data url로 처리
+            limit: 10000, // 5kb 미만 파일만 data url로 처리
           },
         },
       },
