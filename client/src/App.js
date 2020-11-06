@@ -4,10 +4,10 @@ import { createGlobalStyle } from 'styled-components';
 
 import Auth from '@hoc/Auth';
 // import Index from './pages/index';
-import Main from './pages/Main';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
-import GitHubCallbackPage from './pages/GitHubCallbackPage';
+import Signin from '@pages/Signin';
+import SignUpPage from '@pages/SignUpPage';
+import Main from '@pages/Main';
+import GitHubCallbackPage from '@pages/GitHubCallbackPage';
 
 const GolbalStyled = createGlobalStyle`
   * {
@@ -19,6 +19,12 @@ const GolbalStyled = createGlobalStyle`
   input {
     -webkit-appearance: none;
   }
+  
+  html, body, #root {
+    height: 100%;
+  }
+}
+
 `;
 
 const App = () => {
@@ -26,9 +32,9 @@ const App = () => {
     <BrowserRouter>
       <GolbalStyled />
       <Switch>
-        <Route path="/" exact component={Auth(Main, false)}></Route>
+        <Route path="/" exact component={Auth(Main, true)}></Route>
         {/* <Route path="/" exact component={Auth(Index, false)}></Route> */}
-        <Route path="/signin" exact component={Auth(SignInPage, false)}></Route>
+        <Route path="/signin" exact component={Auth(Signin, false)}></Route>
         <Route path="/signup" exact component={Auth(SignUpPage, false)}></Route>
         <Route
           path="/github_callback"
