@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import icons from '@img/svgs.js';
 
 const SVG = (props) => {
-  const { SVGName, color, size } = props;
+  const { SVGName, color, size = 'DEFAULT' } = props;
   const sizeSet = {
+    DEFAULT: '16px',
     SMALL: '20px',
     LARGE: '40px',
   };
