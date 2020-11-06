@@ -25,7 +25,10 @@ const apiAuth = async (req, res, next) => {
       'jwt',
       { session: false },
       (error, user, { message } = '') => {
-        if (error || !user) res.status(400).json({ state: 'fail', message });
+        if (error || !user) {
+          return res.status(400).json({ state: 'fail', message });
+        }
+
         req.body.user_no = user.id;
         next();
       },

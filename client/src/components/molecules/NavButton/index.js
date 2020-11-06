@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import labelImg from '@img/label.png';
-import milestoneImg from '@img/milestone.png';
+import milestoneImg from '@img/MilestoneImg.png';
 import cn from 'classnames';
 
 import { StyledNavButton } from './style';

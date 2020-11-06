@@ -12,6 +12,13 @@ import { StyledNavbar } from './style';
 const NavBar = (props) => {
   const { className, labelCount, milestoneCount } = props;
   const history = useHistory();
+  const options = [
+    'Open issues',
+    'Your issues',
+    'Everything assigned to you',
+    'Everything mentioning you',
+    'Closed issues',
+  ];
 
   return (
     <StyledNavbar className={cn(className)}>
@@ -19,6 +26,7 @@ const NavBar = (props) => {
         afterContent="▼"
         placeholder="is:issue is:open"
         className="searchBox"
+        options={options}
       >
         Filter
       </SearchBox>
@@ -38,6 +46,10 @@ const NavBar = (props) => {
   );
 };
 
+NavBar.defaultProps = {
+  milestoneCount: 0,
+  labelCount: 0,
+};
 NavBar.propTypes = {
   className: PropTypes.string,
   milestoneCount: PropTypes.number,

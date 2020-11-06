@@ -45,7 +45,11 @@ const IssueItem = (props) => {
             {issue.content}
           </Span>
           {issue.Labels.map((label) => (
-            <IssueLabel key={label.id} labelColor={label.color}>
+            <IssueLabel
+              key={label.id}
+              labelColor={label.color}
+              className="issueLabel"
+            >
               {label.title}
             </IssueLabel>
           ))}

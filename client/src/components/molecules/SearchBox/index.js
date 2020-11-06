@@ -17,7 +17,7 @@ const SearchBox = (props) => {
     id,
     afterContent,
     onChange,
-    // onClick,
+    options,
     children,
     className,
   } = props;
@@ -25,30 +25,22 @@ const SearchBox = (props) => {
   const searchbar = 'searchbox';
   const [isFilter, setIsFilter] = useState(false);
 
-  const onClick1 = () => {
+  const onClick = () => {
     setIsFilter(!isFilter);
   };
-
-  const items = [
-    'Open issues',
-    'Your issues',
-    'Everything assigned to you',
-    'Everything mentioning you',
-    'Closed issues',
-  ];
 
   const title = 'Filter issues';
 
   return (
     <StyledSearchBox className={cn(className)}>
       <Button
-        onClick={onClick1}
+        onClick={onClick}
         afterContent={afterContent}
         className={searchbar}
       >
         {children}
       </Button>
-      {isFilter ? <Dropdown title={title} items={items}></Dropdown> : ``}
+      {isFilter ? <Dropdown title={title} items={options}></Dropdown> : ``}
       <Input
         type={type}
         value={value}
@@ -73,8 +65,8 @@ SearchBox.propTypes = {
   afterContent: PropTypes.string,
   children: PropTypes.string,
   onChange: PropTypes.func,
-  onClick: PropTypes.func,
   className: PropTypes.string,
+  options: PropTypes.array,
 };
 
 export default SearchBox;
