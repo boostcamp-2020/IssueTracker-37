@@ -16,9 +16,10 @@ export const StyledImgTitleCount = styled.div`
 
   & > span.round {
     margin-left: 10px;
-    padding: 0 6px;
+    padding: 2px 8px;
     color: #24292e;
     background-color: #d1d5da80;
     border-radius: 50%;
+    font-size: 14px;
   }
 `;

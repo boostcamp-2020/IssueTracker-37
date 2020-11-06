@@ -31,7 +31,7 @@ export const StyledIssueItemContent = styled.div`
   flex-direction: column;
   justify-content: space-between;
   flex: 20 0 0;
-  margin-left: 10px;
+  padding-left: 10px;
 `;
 
 export const StyledIssueFooter = styled.div`
@@ -75,5 +75,9 @@ export const StyledIssueTitle = styled.div`
 
   & > span.issue-item-title:hover {
     color: #0366d6;
+  }
+
+  & span.issueLabel {
+    margin-right: 5px;
   }
 `;

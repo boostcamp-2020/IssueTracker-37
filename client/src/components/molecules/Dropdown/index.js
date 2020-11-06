@@ -20,7 +20,7 @@ const Dropdown = (props) => {
 };
 
 Dropdown.defaultProps = {
-  onClick: () => {},
+  items: [''],
 };
 
 Dropdown.propTypes = {

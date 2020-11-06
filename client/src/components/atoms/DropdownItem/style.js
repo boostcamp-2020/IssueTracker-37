@@ -8,4 +8,5 @@ export const StyledDropdownItem = styled.div`
   line-height: 33px;
   color: #606770;
   font-weight: 400;
+  background-color: white;
 `;
