@@ -30,7 +30,9 @@ class UserController {
       const payload = { no: user.id, email: user.email };
       const generateJWTToken = jwt.sign(payload, JWT_SECRET_KEY);
 
-      res.cookie('token', generateJWTToken).redirect(CLIENT_OAUTH_CALLBACK_URL);
+      res
+        .cookie('tempToken', generateJWTToken)
+        .redirect(CLIENT_OAUTH_CALLBACK_URL);
     } catch (error) {
       res
         .status(500)

@@ -10,10 +10,10 @@ const GitHubCallbackPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const token = document.cookie.match(/(?<=([^(csrtf)]token=))().*/)[0];
+    const token = document.cookie.match(/(?<=(tempToken=))()[^; ]*/)[0];
 
     setToken(token);
-    deleteCookie('token');
+    deleteCookie('tempToken');
 
     history.push('/');
   }, []);
