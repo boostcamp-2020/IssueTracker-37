@@ -1,6 +1,7 @@
 import request from '@lib/axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 const Form = styled.form`
   height: 350px;
@@ -24,12 +25,14 @@ const Label = styled.label`
   width: 100%;
 `;
 
+const InitialInputs = {
+  email: '',
+  password: '',
+  name: '',
+};
+
 const SignUpPage = () => {
-  const InitialInputs = {
-    email: '',
-    password: '',
-    name: '',
-  };
+  const history = useHistory();
 
   const [inputs, setInputs] = useState(InitialInputs);
 
@@ -41,7 +44,13 @@ const SignUpPage = () => {
       name: inputs.name,
     };
 
-    await request.post('api/user/signup', payload);
+    const data = await request.post({ uri: '/user/signup', data: payload });
+
+    if (data) history.push('/signin');
+    else {
+      alert('회원가입 실패');
+      history.push('/signup');
+    }
   };
 
   const onChangeHandler = (event) => {
