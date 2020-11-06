@@ -5,17 +5,19 @@ import { getToken } from '@utils/token';
 // const baseURL =
 //   process.NODE_ENV === 'develop' ? DEVELOPMENT_BASE_URL : PRODUCTION_BASE_URL;
 
-const instance = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: {
-    authorization: getToken() || '',
-  },
-});
+const instance = () => {
+  return axios.create({
+    baseURL: 'http://localhost:3000/api',
+    headers: {
+      authorization: getToken() || '',
+    },
+  });
+};
 
 const request = {
   post: async ({ uri = '', data = {} }) => {
     try {
-      const response = await instance.post(uri, data);
+      const response = await instance().post(uri, data);
 
       return response;
     } catch (err) {
@@ -27,7 +29,7 @@ const request = {
 
   get: async ({ uri = '' }) => {
     try {
-      const response = await instance.get(uri);
+      const response = await instance().get(uri);
 
       return response;
     } catch (err) {
@@ -39,7 +41,7 @@ const request = {
 
   delete: async ({ uri = '' }) => {
     try {
-      const response = await instance.delete(uri);
+      const response = await instance().delete(uri);
 
       return response;
     } catch (err) {
@@ -51,7 +53,7 @@ const request = {
 
   put: async (uri = '', data = {}) => {
     try {
-      const response = await instance.put(uri, data);
+      const response = await instance().put(uri, data);
 
       return response;
     } catch (err) {
