@@ -7,8 +7,8 @@ const Auth = (SpecificComponent, option = null, isAdmin) => {
     const history = useHistory();
 
     useEffect(() => {
-      // if (isToken() || !option) history.push('/');
-      // if (!isToken() || option) history.push('/signin');
+      if (isToken() && !option) history.push('/');
+      if (!isToken() && option) history.push('/signin');
     }, []);
 
     return <SpecificComponent></SpecificComponent>;
