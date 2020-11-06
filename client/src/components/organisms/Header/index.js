@@ -3,10 +3,15 @@ import { useHistory } from 'react-router-dom';
 
 import ImgTitle from '@atoms/ImgTitle';
 import Button from '@atoms/Button';
+import { removeToken } from '@utils/token';
 import { StyledHeader } from './style';
 
 const Header = () => {
   const history = useHistory();
+  const onClickLogout = () => {
+    removeToken();
+    history.push('/signin');
+  };
 
   return (
     <>
@@ -18,7 +23,7 @@ const Header = () => {
         >
           ISSUE
         </ImgTitle>
-        <Button onClick={() => history.push('/signin')}>로그아웃</Button>
+        <Button onClick={onClickLogout}>로그아웃</Button>
       </StyledHeader>
     </>
   );
