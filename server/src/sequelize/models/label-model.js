@@ -27,6 +27,12 @@ class Label extends Model {
       },
     );
   }
+
+  static async getLabels() {
+    const labels = await this.findAll();
+
+    return labels;
+  }
 }
 
 module.exports = Label;
