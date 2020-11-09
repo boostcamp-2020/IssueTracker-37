@@ -40,6 +40,20 @@ class Milestone extends Model {
     if (!milestone) throw new Error();
     return milestone;
   }
+
+
+
+  static async updateMilestoneById(payload){
+    console.log(payload.due_date);
+    const updatedMilestone = await this.update({
+      title: payload.title,
+      description: payload.description,
+      due_date: payload.due_date
+    },{
+      where: {id: payload.milestone_id},
+    });
+    return updatedMilestone;
+  }
 }
 
 module.exports = Milestone;
