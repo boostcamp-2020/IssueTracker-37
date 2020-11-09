@@ -41,6 +41,21 @@ class Milestone extends Model {
     return milestone;
   }
 
+  static async updateMilestoneById(payload) {
+    const updatedMilestone = await this.update(
+      {
+        title: payload.title,
+        description: payload.description,
+        due_date: payload.due_date,
+      },
+      {
+        where: { id: payload.milestone_id },
+      },
+    );
+
+    return updatedMilestone;
+  }
+  
   static async insert(payload) {
     const milestone = this.create(payload);
 

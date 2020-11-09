@@ -13,7 +13,7 @@ router.use('/user', userRouter);
 router.use(apiAuth);
 
 router.use('/issue', issueRouter);
-router.use('/label', labelRouter);
 router.use('/milestone', milestoneRouter);
+router.use('/label', labelRouter);
 
 module.exports = router;
