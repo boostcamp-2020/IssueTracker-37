@@ -10,6 +10,12 @@ const config = {
     database: MYSQL_DATABASE,
     host: MYSQL_HOST,
     dialect: MYSQL,
+    timezone: '+09:00',
+    pool: {
+      max: 15,
+      min: 5,
+      idle: 60000,
+    },
   },
   production: {
     username: MYSQL_USER,
@@ -17,6 +23,12 @@ const config = {
     database: MYSQL_DATABASE,
     host: MYSQL_HOST,
     dialect: MYSQL,
+    timezone: '+09:00',
+    pool: {
+      max: 15,
+      min: 5,
+      idle: 60000,
+    },
   },
 };
 
