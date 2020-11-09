@@ -53,6 +53,12 @@ class Milestone extends Model {
 
     return milestones
   }
+
+  static async deleteMilestoneById(id) {
+    const isDeleted = await this.destroy({ where: { id } });
+
+    return isDeleted;
+  }
 }
 
 module.exports = Milestone;

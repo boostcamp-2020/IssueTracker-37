@@ -11,6 +11,13 @@ class MilestoneService {
       throw new Error();
     }
   }
+
+  async deleteMilestoneById(id) {
+    const isDeleted = await milestoneModel.deleteMilestoneById(id);
+
+    if (!isDeleted) throw new Error();
+    return isDeleted;
+  }
 }
 
 const milestoneService = new MilestoneService();

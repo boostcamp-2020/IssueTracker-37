@@ -10,6 +10,16 @@ class LabelService {
       throw new Error();
     }
   }
+  
+  async getLabels() {
+    const labels = await labelModel.getLabels();
+    const data = {
+      count: labels.length,
+      labels,
+    };
+
+    return data;
+  }
 }
 
 const labelService = new LabelService();
