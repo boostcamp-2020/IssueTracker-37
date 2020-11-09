@@ -22,6 +22,9 @@ const buttonSet = {
       color: #ffffff;   
       border: 1px solid rgba(27, 31, 35, 0.15);
     `,
+  DISABLED: `
+    opacity: 0.5
+  `,
 };
 
 const sizeSet = {
@@ -39,4 +42,5 @@ export const StyledButton = styled.button`
   ${afterOption}
   ${({ buttonType = 'DEFAULT' }) => buttonSet[buttonType]};
   ${({ size = 'DEFAULT' }) => sizeSet[size]}
+  ${(props) => (props.isActived ? `opacity: 1` : `opacity: 0.3`)};
 `;
