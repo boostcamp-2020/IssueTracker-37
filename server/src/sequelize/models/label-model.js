@@ -28,6 +28,12 @@ class Label extends Model {
     );
   }
 
+  static async deleteById(id) {
+    const result = this.destroy({ where: { id } });
+
+    return result;
+  }
+  
   static async updateLabel(payload) {
     const result = await this.update(payload, {
       where: { id: payload.id },

@@ -41,6 +41,12 @@ class Milestone extends Model {
     return milestone;
   }
 
+  static async insert(payload) {
+    const milestone = this.create(payload);
+
+    return milestone;
+  }
+  
   static async getMilestones(issueModel) {
     const milestones = await this.findAll({
       include: [
