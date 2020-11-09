@@ -9,6 +9,16 @@ class UserService {
 
     return insertUser;
   }
+
+  async getUsers() {
+    try {
+      const users = await userModel.getUsers();
+
+      return users;
+    } catch (err) {
+      throw new Error();
+    }
+  }
 }
 
 const userService = new UserService();

@@ -7,6 +7,22 @@ const CLIENT_OAUTH_CALLBACK_URL = 'http://localhost:8080/github_callback';
 const { JWT_SECRET_KEY } = process.env;
 
 class UserController {
+  async getUsers(req, res) {
+    try {
+      const users = await userService.getUsers();
+
+      res.status(200).send({
+        status: 'success',
+        message: succeedMessage.succeedSelect,
+        data: { Users: users },
+      });
+    } catch (err) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedSelect });
+    }
+  }
+
   async signup(req, res) {
     try {
       const insert = await userService.createUser(req.body);

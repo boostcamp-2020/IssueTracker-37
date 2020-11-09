@@ -42,6 +42,14 @@ class User extends Model {
 
     return insertUser;
   }
+
+  static async getUsers() {
+    const users = await this.findAll({
+      attributes: ['id', 'name', 'profile'],
+    });
+
+    return users;
+  }
 }
 
 module.exports = User;
