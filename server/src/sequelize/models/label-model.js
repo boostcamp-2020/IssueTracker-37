@@ -33,6 +33,20 @@ class Label extends Model {
 
     return result;
   }
+  
+  static async updateLabel(payload) {
+    const result = await this.update(payload, {
+      where: { id: payload.id },
+    });
+
+    return result;
+  }
+
+  static async getLabels() {
+    const labels = await this.findAll();
+
+    return labels;
+  }
 }
 
 module.exports = Label;

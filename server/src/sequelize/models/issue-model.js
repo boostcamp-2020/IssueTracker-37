@@ -165,6 +165,14 @@ class Issue extends Model {
     if (result) return result;
     else throw new Error();
   }
+
+  static async updateIssue(payload) {
+    const result = await this.update(payload, {
+      where: { id: payload.id },
+    });
+
+    return result;
+  }
 }
 
 module.exports = Issue;

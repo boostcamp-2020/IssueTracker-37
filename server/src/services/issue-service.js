@@ -78,13 +78,13 @@ class IssueService {
   }
 
   async updateIssue(payload) {
-    const { id } = payload;
+    try {
+      const result = await issueModel.updateIssue(payload);
 
-    delete payload.id;
-
-    const updateIssue = await issueModel.update(payload, { where: { id } });
-
-    return updateIssue;
+      if (!result[0]) throw new Error();
+    } catch (err) {
+      throw new Error();
+    }
   }
 
   async deleteIssue(payload) {
@@ -94,21 +94,21 @@ class IssueService {
   }
 
   async editComment(payload) {
-    const comment = await commentModel.selectById(payload.id);
+    try {
+      const comment = await commentModel.selectById(payload.id);
 
-    if (
-      comment.id !== +payload.id ||
-      comment.user_id !== +payload.user_id ||
-      comment.issue_id !== +payload.issue_id ||
-      !payload.content
-    )
+      if (
+        comment.id !== +payload.id ||
+        comment.issue_id !== +payload.issue_id ||
+        !payload.content
+      )
+        throw new Error();
+      const result = await commentModel.updateComment(payload);
+
+      if (!result[0]) throw new Error();
+    } catch (err) {
       throw new Error();
-
-    const updatedComment = await commentModel.updateComment(payload);
-
-    if (!updatedComment) throw new Error();
-
-    return updatedComment;
+    }
   }
 
   async createComment(payload) {

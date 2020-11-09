@@ -36,7 +36,6 @@ class Comment extends Model {
   static async updateComment(payload) {
     const result = this.update(payload, { where: { id: payload.id } });
 
-    if (!result) throw new Error();
     return result;
   }
   static async createComment(payload) {
