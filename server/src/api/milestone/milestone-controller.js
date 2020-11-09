@@ -12,7 +12,7 @@ class MilestoneController {
         data: {
           count: milestones.length,
           Milestones: milestones,
-        }
+        },
       });
     } catch (err) {
       res
@@ -20,7 +20,6 @@ class MilestoneController {
         .send({ state: 'fail', message: errorMessage.failedSelect });
     }
   }
-
 }
 
 const milestoneController = new MilestoneController();

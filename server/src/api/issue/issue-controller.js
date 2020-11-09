@@ -229,7 +229,7 @@ class IssueController {
 
       res.status(200).send({
         state: 'success',
-        message: succeedMessage.succeedUpdate
+        message: succeedMessage.succeedUpdate,
       });
     } catch (error) {
       res

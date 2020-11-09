@@ -2,7 +2,6 @@ const labelService = require('@services/label-service');
 const { errorMessage, succeedMessage } = require('@utils/server-message');
 
 class LabelController {
-
   async updateLabel(req, res) {
     try {
       req.body.id = req.params.id;
