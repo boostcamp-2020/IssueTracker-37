@@ -27,6 +27,12 @@ class Label extends Model {
       },
     );
   }
+
+  static async deleteById(id) {
+    const result = this.destroy({ where: { id } });
+
+    return result;
+  }
 }
 
 module.exports = Label;
