@@ -1,6 +1,5 @@
 const { errorMessage, succeedMessage } = require('@utils/server-message');
 const milestoneService = require('@services/milestone-service');
-const { errorMessage, succeedMessage } = require('@utils/server-message');
 
 class MilestoneController {
   async updateMilestoneById(req, res) {
@@ -24,7 +23,7 @@ class MilestoneController {
         .send({ state: 'fail', message: errorMessage.failedUpdate });
     }
   }
-  
+
   async insertMilestone(req, res) {
     try {
       const insertResult = await milestoneService.insertMilestone(req.body);
@@ -33,14 +32,14 @@ class MilestoneController {
         state: 'success',
         message: succeedMessage.succeedInsert,
         data: insertResult,
-       });
+      });
     } catch (err) {
-       res
-       .status(400)
-       .send({ state: 'fail', message: errorMessage.failedSelect });
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedSelect });
     }
   }
-        
+
   async getMilestones(req, res) {
     try {
       const milestones = await milestoneService.getMilestones();
@@ -59,7 +58,7 @@ class MilestoneController {
         .send({ state: 'fail', message: errorMessage.failedSelect });
     }
   }
-    
+
   async deleteMilestoneById(req, res) {
     try {
       const { id } = req.params;
@@ -68,7 +67,7 @@ class MilestoneController {
 
       return res.status(200).json({
         state: 'success',
-        message: succeedMessage.succeedDelete;
+        message: succeedMessage.succeedDelete,
       });
     } catch (error) {
       res
