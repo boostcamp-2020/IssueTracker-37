@@ -40,6 +40,19 @@ class Milestone extends Model {
     if (!milestone) throw new Error();
     return milestone;
   }
+
+  static async getMilestones(issueModel) {
+    const milestones = await this.findAll({
+      include: [
+        {
+          model: issueModel,
+          attributes: ['id', 'state']
+        }
+      ],
+    });
+
+    return milestones
+  }
 }
 
 module.exports = Milestone;
