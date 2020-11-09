@@ -80,6 +80,7 @@ class IssueService {
   async updateIssue(payload) {
     try {
       const result = await issueModel.updateIssue(payload);
+
       if (!result[0]) throw new Error();
     } catch (err) {
       throw new Error();
@@ -104,12 +105,11 @@ class IssueService {
       throw new Error();
     try {
       const result = await commentModel.updateComment(payload);
-      if (!result[0]) throw new Error();
 
+      if (!result[0]) throw new Error();
     } catch (err) {
       throw new Error();
     }
-
   }
 
   async createComment(payload) {

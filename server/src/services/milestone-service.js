@@ -1,5 +1,5 @@
 const milestoneModel = require('@models/milestone-model');
-const issueModel = require('@models/issue-model')
+const issueModel = require('@models/issue-model');
 
 class MilestoneService {
   async getMilestones() {

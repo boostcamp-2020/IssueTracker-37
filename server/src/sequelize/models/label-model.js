@@ -28,11 +28,9 @@ class Label extends Model {
     );
   }
   static async updateLabel(payload) {
-    const result = await this.update(payload,
-      {
-        where: { id: payload.id },
-      },
-    );
+    const result = await this.update(payload, {
+      where: { id: payload.id },
+    });
 
     return result;
   }

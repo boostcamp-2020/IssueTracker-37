@@ -6,7 +6,6 @@ class LabelService {
       const result = await labelModel.updateLabel(payload);
 
       if (!result[0]) throw new Error();
-
     } catch (err) {
       throw new Error();
     }

@@ -168,8 +168,9 @@ class Issue extends Model {
 
   static async updateIssue(payload) {
     const result = await this.update(payload, {
-      where: { id: payload.id }
-    })
+      where: { id: payload.id },
+    });
+
     return result;
   }
 }
