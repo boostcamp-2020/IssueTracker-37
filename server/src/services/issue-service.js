@@ -78,13 +78,12 @@ class IssueService {
   }
 
   async updateIssue(payload) {
-    const { id } = payload;
-
-    delete payload.id;
-
-    const updateIssue = await issueModel.update(payload, { where: { id } });
-
-    return updateIssue;
+    try {
+      const result = await issueModel.updateIssue(payload);
+      if (!result[0]) throw new Error();
+    } catch (err) {
+      throw new Error();
+    }
   }
 
   async deleteIssue(payload) {
@@ -103,12 +102,14 @@ class IssueService {
       !payload.content
     )
       throw new Error();
+    try {
+      const result = await commentModel.updateComment(payload);
+      if (!result[0]) throw new Error();
 
-    const updatedComment = await commentModel.updateComment(payload);
+    } catch (err) {
+      throw new Error();
+    }
 
-    if (!updatedComment) throw new Error();
-
-    return updatedComment;
   }
 
   async createComment(payload) {

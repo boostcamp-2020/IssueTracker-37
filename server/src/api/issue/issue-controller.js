@@ -223,12 +223,13 @@ class IssueController {
 
   async updateComment(req, res) {
     try {
-      const updatedComment = await issueService.editComment(req.body);
+      req.body.issue_id = req.params.issue_id;
+      req.body.comment_id = req.params.comment_id;
+      await issueService.editComment(req.body);
 
       res.status(200).send({
         state: 'success',
-        message: succeedMessage.succeedUpdate,
-        data: updatedComment,
+        message: succeedMessage.succeedUpdate
       });
     } catch (error) {
       res
