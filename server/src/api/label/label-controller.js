@@ -61,7 +61,7 @@ class LabelController {
     try {
       const labels = await labelService.getLabels();
 
-      return res.status(200).json({
+      return res.status(200).send({
         state: 'success',
         message: succeedMessage.succeedSelect,
         data: labels,

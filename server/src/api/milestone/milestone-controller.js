@@ -47,10 +47,7 @@ class MilestoneController {
       res.status(200).send({
         status: 'success',
         message: succeedMessage.succeedSelect,
-        data: {
-          count: milestones.length,
-          Milestones: milestones,
-        },
+        data: milestones,
       });
     } catch (err) {
       res
