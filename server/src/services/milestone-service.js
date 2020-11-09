@@ -6,11 +6,10 @@ class MilestoneService {
     try {
       const milestones = await milestoneModel.getMilestones(issueModel);
 
+      return milestones;
     } catch (err) {
       throw new Error();
     }
-
-    return milestones
   }
 }
 
