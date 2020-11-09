@@ -41,6 +41,19 @@ class Milestone extends Model {
     return milestone;
   }
 
+  static async getMilestones(issueModel) {
+    const milestones = await this.findAll({
+      include: [
+        {
+          model: issueModel,
+          attributes: ['id', 'state']
+        }
+      ],
+    });
+
+    return milestones
+  }
+
   static async deleteMilestoneById(id) {
     const isDeleted = await this.destroy({ where: { id } });
 
