@@ -40,6 +40,12 @@ class Milestone extends Model {
     if (!milestone) throw new Error();
     return milestone;
   }
+
+  static async insert(payload) {
+    const milestone = this.create(payload);
+
+    return milestone;
+  }
 }
 
 module.exports = Milestone;
