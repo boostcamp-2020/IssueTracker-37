@@ -28,23 +28,23 @@ class Label extends Model {
     );
   }
 
-  static async getLabelByTitle(title){
+  static async getLabelByTitle(title) {
     const label = await this.findOne({
-      where: {title}
-    })
+      where: { title },
+    });
+
     return label;
   }
 
-  static async insertLabel(payload){
-   
-    const label =  await this.create({
+  static async insertLabel(payload) {
+    const label = await this.create({
       title: payload.title,
       description: payload.description,
-      color: payload.description
-    })
+      color: payload.description,
+    });
+
     return label;
   }
-
 }
 
 module.exports = Label;

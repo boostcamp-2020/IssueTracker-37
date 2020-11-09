@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use('/user', userRouter);
 
-//router.use(apiAuth);
+router.use(apiAuth);
 
 router.use('/issue', issueRouter);
 router.use('/milestone', milestoneRouter);
