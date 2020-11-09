@@ -223,8 +223,8 @@ class IssueController {
 
   async updateComment(req, res) {
     try {
+      req.body.id = req.params.comment_id;
       req.body.issue_id = req.params.issue_id;
-      req.body.comment_id = req.params.comment_id;
       await issueService.editComment(req.body);
 
       res.status(200).send({

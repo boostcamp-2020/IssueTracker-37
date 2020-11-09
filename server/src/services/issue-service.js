@@ -94,16 +94,16 @@ class IssueService {
   }
 
   async editComment(payload) {
-    const comment = await commentModel.selectById(payload.id);
-
-    if (
-      comment.id !== +payload.id ||
-      comment.user_id !== +payload.user_id ||
-      comment.issue_id !== +payload.issue_id ||
-      !payload.content
-    )
-      throw new Error();
     try {
+      const comment = await commentModel.selectById(payload.id);
+
+      if (
+        comment.id !== +payload.id ||
+        comment.user_id !== +payload.user_id ||
+        comment.issue_id !== +payload.issue_id ||
+        !payload.content
+      )
+        throw new Error();
       const result = await commentModel.updateComment(payload);
 
       if (!result[0]) throw new Error();
