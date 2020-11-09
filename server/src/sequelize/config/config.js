@@ -10,6 +10,11 @@ const config = {
     database: MYSQL_DATABASE,
     host: MYSQL_HOST,
     dialect: MYSQL,
+    dialectOptions: {
+      charset: 'utf8mb4',
+      dateStrings: true,
+      typeCast: true,
+    },
     timezone: '+09:00',
     pool: {
       max: 15,
@@ -23,6 +28,11 @@ const config = {
     database: MYSQL_DATABASE,
     host: MYSQL_HOST,
     dialect: MYSQL,
+    dialectOptions: {
+      charset: 'utf8mb4',
+      dateStrings: true,
+      typeCast: true,
+    },
     timezone: '+09:00',
     pool: {
       max: 15,
