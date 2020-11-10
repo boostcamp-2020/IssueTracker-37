@@ -8,6 +8,7 @@ import Signin from '@pages/Signin';
 import SignUpPage from '@pages/SignUpPage';
 import Main from '@pages/Main';
 import LabelPage from '@pages/Label';
+import MilestonePage from '@pages/Milestone';
 import GitHubCallbackPage from '@pages/GitHubCallbackPage';
 
 const GolbalStyled = createGlobalStyle`
@@ -38,6 +39,11 @@ const App = () => {
         <Route path="/signin" exact component={Auth(Signin, false)}></Route>
         <Route path="/signup" exact component={Auth(SignUpPage, false)}></Route>
         <Route path="/label" exact component={Auth(LabelPage, true)}></Route>
+        <Route
+          path="/milestone"
+          exact
+          component={Auth(MilestonePage, true)}
+        ></Route>
         <Route
           path="/github_callback"
           exact

@@ -17,7 +17,9 @@ const NavButton = (props) => {
       <ImgTitleCount
         SVGName={'LABEL'}
         count={labelCount}
-        className={location.pathname === '/label' ? 'label selected' : 'label'}
+        className={
+          location.pathname.includes('label') ? 'label selected' : 'label'
+        }
         onClick={() => history.push('/label')}
         displayCount={displayCount}
       >
@@ -27,7 +29,7 @@ const NavButton = (props) => {
         SVGName={'MILESTONE'}
         count={milestoneCount}
         className={
-          location.pathname === '/milestone'
+          location.pathname.includes('milestone')
             ? 'milestone selected'
             : 'milestone'
         }
