@@ -17,10 +17,8 @@ const DropdownButton = ({
   color,
   dropdownHeader,
   dropdownType,
-  src,
   onClick,
   items,
-  checkList,
 }) => {
   const [isOpened, setOpened] = useState(false);
   const openDropdown = () => {
@@ -58,7 +56,7 @@ const DropdownButton = ({
               return (
                 <_DropdownItem
                   key={item.id}
-                  src={src}
+                  src={item.profile}
                   title={dropdownItemTitle}
                   description={dropdownItemDescription}
                   color={item.color}
