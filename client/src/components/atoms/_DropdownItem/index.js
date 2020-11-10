@@ -12,20 +12,30 @@ import {
   StyledDropdownItemTitle,
 } from './style';
 
-const _DropdownItem = ({ children, onClick, className, dropdownType }) => {
+const _DropdownItem = ({
+  onClick,
+  dropdownType,
+  title,
+  src,
+  description,
+  color,
+}) => {
   return (
     <StyledDropdownItem onClick={onClick}>
-      <StyledDropdownItemImage>
-        {dropdownType === 'assignee' ? (
-          <Img src="https://avatars3.githubusercontent.com/u/52775389?s=60&v=4"></Img>
-        ) : (
-            ''
-          )}
+      <StyledDropdownItemImage color={color}>
+        {dropdownType === 'assignee' ? <Img src={src}></Img> : ''}
         {dropdownType === 'label' ? <Span className="label"></Span> : ''}
       </StyledDropdownItemImage>
       <StyledDropdownItemContent>
-        <StyledDropdownItemTitle>mileStion</StyledDropdownItemTitle>
-        <StyledDropdownItemDescription>due_data</StyledDropdownItemDescription>
+        <StyledDropdownItemTitle>{title}</StyledDropdownItemTitle>
+        <StyledDropdownItemDescription>
+          <Span spanType="SMALL" color="GRAY">
+            {dropdownType === 'label'
+              ? description || 'no label description'
+              : ''}
+            {dropdownType === 'milestone' ? description || 'no due date' : ''}
+          </Span>
+        </StyledDropdownItemDescription>
       </StyledDropdownItemContent>
     </StyledDropdownItem>
   );
@@ -36,10 +46,14 @@ _DropdownItem.defaultProps = {
 };
 
 _DropdownItem.propTypes = {
+  src: PropTypes.string,
   children: PropTypes.string,
-  onClick: PropTypes.func,
   className: PropTypes.string,
   dropdownType: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  color: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default _DropdownItem;

@@ -17,12 +17,14 @@ const DropdownButton = ({
   color,
   dropdownHeader,
   dropdownType,
+  src,
+  onClick,
+  items,
 }) => {
   const [isOpened, setOpened] = useState(false);
   const openDropdown = () => {
     setOpened((pre) => !pre);
   };
-  const test = [1, 2, 3, 4];
 
   return (
     <StyledDropdownButton>
@@ -42,9 +44,28 @@ const DropdownButton = ({
             {dropdownHeader}
           </Span>
           <ul>
-            {test.map((v, i) => (
-              <_DropdownItem key={i}></_DropdownItem>
-            ))}
+            {items.map((item) => {
+              const dropdownItemTitle =
+                dropdownType === 'assignee' ? item.name : item.title;
+              let dropdownItemDescription = '';
+
+              if (dropdownType === 'label')
+                dropdownItemDescription = item.description;
+              if (dropdownType === 'milestone')
+                dropdownItemDescription = item.due_date;
+
+              return (
+                <_DropdownItem
+                  key={item.id}
+                  src={src}
+                  title={dropdownItemTitle}
+                  description={dropdownItemDescription}
+                  color={item.color}
+                  onClick={onClick}
+                  dropdownType={dropdownType}
+                ></_DropdownItem>
+              );
+            })}
           </ul>
         </StyledDropdownMenu>
       )}
@@ -60,6 +81,9 @@ DropdownButton.propTypes = {
   color: PropTypes.string,
   dropdownHeader: PropTypes.string,
   dropdownType: PropTypes.string,
+  src: PropTypes.string,
+  onClick: PropTypes.func,
+  items: PropTypes.array,
 };
 
 export default DropdownButton;

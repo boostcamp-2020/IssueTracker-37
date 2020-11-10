@@ -9,10 +9,15 @@ export const StyledDropdownItem = styled.div`
 `;
 
 export const StyledDropdownItemImage = styled.div`
-  & > span.label,
-  & > img {
+  & > span.label {
     display: block;
-    background-color: red;
+    width: 14px;
+    height: 14px;
+    background-color: ${(props) => props.color};
+    margin-right: 10px;
+  }
+
+  & > img {
     width: 14px;
     height: 14px;
     margin-right: 10px;
