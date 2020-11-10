@@ -7,6 +7,7 @@ export const StyledProgressBar = styled.div`
   border: 1px solid #28a745;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+  border-radius: ${(prop) => (prop.percent === 100 ? '6px' : '')};
 `;
 
 export const StyledProgressBarWrapper = styled.div`
