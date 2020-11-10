@@ -51,7 +51,7 @@ const request = {
     }
   },
 
-  put: async (uri = '', data = {}) => {
+  put: async ({ uri = '', data = {} }) => {
     try {
       const response = await instance().put(uri, data);
 

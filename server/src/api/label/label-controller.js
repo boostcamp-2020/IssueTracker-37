@@ -45,7 +45,6 @@ class LabelController {
     try {
       req.body.id = req.params.id;
       await labelService.updateLabel(req.body);
-
       return res.status(200).send({
         state: 'success',
         message: succeedMessage.succeedUpdate,

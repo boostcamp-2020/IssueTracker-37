@@ -1,30 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import Img from '@atoms/Img';
+import SVG from '@atoms/SVG';
 import Span from '@atoms/Span';
 
 import { StyledImgTitleCount } from './style';
 
 const ImgTitleCount = (props) => {
-  const { src, alt, children, count, className, onClick } = props;
+  const {
+    children,
+    count,
+    className,
+    onClick,
+    SVGName,
+    color,
+    displayCount,
+  } = props;
   const spanType = 'LARGE';
 
   return (
     <StyledImgTitleCount className={cn(className)} onClick={onClick}>
-      <Img src={src} alt={alt}></Img>
+      <SVG SVGName={SVGName} color={color}></SVG>
       <Span spanType={spanType} color="GRAY">
         {children}
       </Span>
-      <Span spanType={spanType} className="round">
-        {String(count)}
-      </Span>
+      {displayCount === 'imgTitleCount' && (
+        <Span spanType={spanType} className="round">
+          {String(count)}
+        </Span>
+      )}
     </StyledImgTitleCount>
   );
 };
 
 ImgTitleCount.defaultProps = {
-  onClick: () => {},
+  onClick: () => { },
+  type: 'imgTitleCount',
 };
 
 ImgTitleCount.propTypes = {
@@ -35,6 +46,9 @@ ImgTitleCount.propTypes = {
   count: PropTypes.number,
   className: PropTypes.string,
   onClick: PropTypes.func,
+  color: PropTypes.string,
+  SVGName: PropTypes.string,
+  displayCount: PropTypes.string,
 };
 
 export default ImgTitleCount;

@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 import { StyledLabel } from './style';
 
 const Label = (props) => {
-  const { htmlfor, children } = props;
+  const { htmlFor, children } = props;
 
-  return <StyledLabel htmlfor={htmlfor}> {children} </StyledLabel>;
+  return <StyledLabel htmlFor={htmlFor}> {children} </StyledLabel>;
 };
 
 Label.defaultProps = {
-  htmlfor: '',
+  htmlFor: '',
 };
 
 Label.propTypes = {
-  htmlfor: PropTypes.string,
-  children: PropTypes.string,
+  htmlFor: PropTypes.string,
+  children: PropTypes.any,
 };
 
 export default Label;

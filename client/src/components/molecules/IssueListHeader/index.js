@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import Dropdown from '@molecules/Dropdown';
 import CheckBox from '@atoms/CheckBox';
 import Img from '@atoms/Img';
-import Button from '@atoms/Button';
+
+import DropDownButton from '@molecules/DropDownButton';
+
 import openedIssue from '@img/OpenedIssueImg.png';
 
 import { StyledIssueListHeader } from './style';
@@ -33,89 +34,50 @@ const IssueListHeader = (props) => {
       <div className="container">
         <div className="empty"></div>
         <div className="dropDownButtonContainer">
-          <div className="dropDownButton">
-            <Button
-              className="headerBtn"
-              onClick={() => onClick('Author')}
-              afterContent="▼"
-            >
-              Author
-            </Button>
-            {isState.Author && (
-              <Dropdown
-                className="dropdown"
-                title="Filter by author"
-                items={users}
-              ></Dropdown>
-            )}
-          </div>
+          <DropDownButton
+            className="dropDownBtn"
+            onClick={() => onClick('Author')}
+            buttonName="Author"
+            title="Filter by author"
+            items={users}
+            isState={isState.Author}
+          ></DropDownButton>
 
-          <div className="dropDownButton">
-            <Button
-              className="headerBtn"
-              onClick={() => onClick('Label')}
-              afterContent="▼"
-            >
-              Label
-            </Button>
-            {isState.Label && (
-              <Dropdown
-                className="dropdown"
-                title="Filter by label"
-                items={labels}
-              ></Dropdown>
-            )}
-          </div>
+          <DropDownButton
+            className="dropDownBtn"
+            onClick={() => onClick('Label')}
+            buttonName="Label"
+            title="Filter by label"
+            items={labels}
+            isState={isState.Label}
+          ></DropDownButton>
 
-          <div className="dropDownButton">
-            <Button
-              className="headerBtn"
-              onClick={() => onClick('Milestone')}
-              afterContent="▼"
-            >
-              Milestone
-            </Button>
-            {isState.Milestone && (
-              <Dropdown
-                className="dropdown"
-                title="Filter by milestone"
-                items={milestones}
-              ></Dropdown>
-            )}
-          </div>
-          <div className="dropDownButton">
-            <Button
-              className="headerBtn"
-              onClick={() => onClick('Assignee')}
-              afterContent="▼"
-            >
-              Assignee
-            </Button>
-            {isState.Assignee && (
-              <Dropdown
-                className="dropdown"
-                title="Filter by who’s assigned"
-                items={users}
-              ></Dropdown>
-            )}
-          </div>
+          <DropDownButton
+            className="dropDownBtn"
+            onClick={() => onClick('Milestone')}
+            buttonName="Milestone"
+            title="Filter by milestone"
+            items={milestones}
+            isState={isState.Milestone}
+          ></DropDownButton>
 
-          <div className="dropDownButton">
-            <Button
-              className="headerBtn"
-              onClick={() => onClick('Sort')}
-              afterContent="▼"
-            >
-              Sort
-            </Button>
-            {isState.Sort && (
-              <Dropdown
-                className="dropdown"
-                title="Sort by"
-                items={sortOptions}
-              ></Dropdown>
-            )}
-          </div>
+          <DropDownButton
+            className="dropDownBtn"
+            onClick={() => onClick('Assignee')}
+            buttonName="Assignee"
+            title="Filter by who’s assigned"
+            items={users}
+            isState={isState.Assignee}
+          ></DropDownButton>
+
+          <DropDownButton
+            className="dropDownBtn"
+            onClick={() => onClick('Sort')}
+            buttonName="Sort"
+            title="Sort by"
+            items={sortOptions}
+            isState={isState.Sort}
+          ></DropDownButton>
         </div>
       </div>
     </StyledIssueListHeader>

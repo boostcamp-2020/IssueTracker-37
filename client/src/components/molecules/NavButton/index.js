@@ -1,34 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
-import labelImg from '@img/label.png';
-import milestoneImg from '@img/MilestoneImg.png';
 import cn from 'classnames';
 
 import { StyledNavButton } from './style';
 import ImgTitleCount from '../ImgTitleCount';
 
 const NavButton = (props) => {
-  const { labelCount, milestoneCount, className } = props;
+  const { labelCount, milestoneCount, className, displayCount } = props;
   const history = useHistory();
+  const location = useLocation();
 
   return (
     <StyledNavButton className={cn(className)}>
       <ImgTitleCount
-        src={labelImg}
-        alt="라벨 아이콘"
+        SVGName={'LABEL'}
         count={labelCount}
-        className="label"
+        className={
+          location.pathname.includes('label') ? 'label selected' : 'label'
+        }
         onClick={() => history.push('/label')}
+        displayCount={displayCount}
       >
         Labels
       </ImgTitleCount>
       <ImgTitleCount
-        src={milestoneImg}
-        alt="마일스톤 아이콘"
+        SVGName={'MILESTONE'}
         count={milestoneCount}
+        className={
+          location.pathname.includes('milestone')
+            ? 'milestone selected'
+            : 'milestone'
+        }
         onClick={() => history.push('/milestone')}
+        displayCount={displayCount}
       >
         Milestones
       </ImgTitleCount>
@@ -36,12 +42,13 @@ const NavButton = (props) => {
   );
 };
 
-ImgTitleCount.defaultProps = {};
+NavButton.defaultProps = {};
 
-ImgTitleCount.propTypes = {
+NavButton.propTypes = {
   labelCount: PropTypes.number,
   milestoneCount: PropTypes.number,
   className: PropTypes.string,
+  displayCount: PropTypes.string,
 };
 
 export default NavButton;

@@ -26,7 +26,10 @@ const SVG = (props) => {
   );
 };
 
-SVG.defaultProps = {};
+SVG.defaultProps = {
+  color: 'black',
+  size: 'DEFAULT',
+};
 
 SVG.propTypes = {
   color: PropTypes.string,

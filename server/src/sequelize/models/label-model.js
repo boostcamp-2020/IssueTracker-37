@@ -37,21 +37,17 @@ class Label extends Model {
   }
 
   static async insertLabel(payload) {
-    const label = await this.create({
-      title: payload.title,
-      description: payload.description,
-      color: payload.description,
-    });
+    const label = await this.create(payload);
 
     return label;
   }
-  
+
   static async deleteById(id) {
     const result = this.destroy({ where: { id } });
 
     return result;
   }
-  
+
   static async updateLabel(payload) {
     const result = await this.update(payload, {
       where: { id: payload.id },
@@ -61,7 +57,9 @@ class Label extends Model {
   }
 
   static async getLabels() {
-    const labels = await this.findAll();
+    const labels = await this.findAll({
+      order: [['id', 'DESC']],
+    });
 
     return labels;
   }

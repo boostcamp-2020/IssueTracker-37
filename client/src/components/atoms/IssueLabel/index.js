@@ -2,15 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
+import { getFontColor } from '@utils/color';
 import { StyledIssueLabel } from './style';
-
-const getFontColor = (labelColor) => {
-  const standardColor = '#888888';
-  const [white, black] = ['#ffffff', '#000000'];
-
-  if (standardColor > labelColor) return white;
-  if (standardColor < labelColor) return black;
-};
 
 const IssueLabel = (props) => {
   const { children, labelColor, className } = props;

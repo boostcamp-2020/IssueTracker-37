@@ -9,16 +9,8 @@ import Button from '@atoms/Button';
 
 import { StyledNavbar } from './style';
 
-const NavBar = (props) => {
-  const { className, labelCount, milestoneCount } = props;
+const NavBar = ({ className, labelCount, milestoneCount, options }) => {
   const history = useHistory();
-  const options = [
-    'Open issues',
-    'Your issues',
-    'Everything assigned to you',
-    'Everything mentioning you',
-    'Closed issues',
-  ];
 
   return (
     <StyledNavbar className={cn(className)}>
@@ -49,11 +41,19 @@ const NavBar = (props) => {
 NavBar.defaultProps = {
   milestoneCount: 0,
   labelCount: 0,
+  options: [
+    'Open issues',
+    'Your issues',
+    'Everything assigned to you',
+    'Everything mentioning you',
+    'Closed issues',
+  ],
 };
 NavBar.propTypes = {
   className: PropTypes.string,
   milestoneCount: PropTypes.number,
   labelCount: PropTypes.number,
+  options: PropTypes.array,
 };
 
 export default NavBar;

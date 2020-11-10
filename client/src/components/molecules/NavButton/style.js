@@ -7,4 +7,19 @@ export const StyledNavButton = styled.div`
   .label {
     border-right: 1px solid #e1e4e8;
   }
+  .selected {
+    background-color: #0366d6;
+  }
+
+  .selected:hover {
+    background-color: #0366d6;
+  }
+
+  .selected path {
+    fill: white;
+  }
+
+  .selected > span {
+    color: white;
+  }
 `;
