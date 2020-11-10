@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import request from '@lib/axios';
 
-const useFetch = (uri) => {
+const useFetch = (uri, option) => {
   const [initialData, setData] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,10 @@ const useFetch = (uri) => {
         data: { data },
       } = await request.get({ uri });
 
-      setData(data);
+      if (option) {
+        setData(data.map((v) => ({ ...v, [option.name]: option.value })));
+      }
+      if (!option) setData(data);
     })();
   }, []);
 
