@@ -17,6 +17,7 @@ const LabelItem = (props) => {
     isForm,
     onClose,
     onSubmit,
+    isDuplicate,
   } = props;
 
   return (
@@ -44,6 +45,7 @@ const LabelItem = (props) => {
             submitName="Save changes"
             onSubmit={onSubmit}
             formType="edit"
+            isDuplicate={isDuplicate}
           ></LabelForm>
         )}
     </>
@@ -63,6 +65,7 @@ LabelItem.propTypes = {
   onClose: PropTypes.func,
   isForm: PropTypes.number,
   onSubmit: PropTypes.func,
+  isDuplicate: PropTypes.func,
 };
 
 export default LabelItem;

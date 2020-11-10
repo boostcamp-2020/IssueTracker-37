@@ -26,6 +26,7 @@ const LabelForm = (props) => {
     submitName,
     onSubmit,
     formType,
+    isDuplicate,
   } = props;
 
   const InitialState = {
@@ -37,6 +38,17 @@ const LabelForm = (props) => {
   const [labelForm, setLabelForm] = useState(InitialState);
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'title') {
+      let btnState = 'disabled';
+
+      if (value.length > 0) {
+        if (label.title === value || !isDuplicate(value)) {
+          btnState = 'enabled';
+        }
+      }
+      console.log(btnState);
+    }
 
     setLabelForm({ ...labelForm, [name]: value });
   };
@@ -54,7 +66,7 @@ const LabelForm = (props) => {
     <StyledLabelForm className={cn(className)}>
       <StyledItemLabel>
         <IssueLabel className="label" labelColor={labelForm.color}>
-          {labelForm.title}
+          {labelForm.title.length > 0 ? labelForm.title : 'Label preview'}
         </IssueLabel>
         {onDelete && (
           <Span className="deleteButton" onClick={onDelete}>
@@ -71,6 +83,7 @@ const LabelForm = (props) => {
             name="title"
             value={labelForm.title}
             onChange={onChangeHandler}
+            placeholder="Label name"
           />
         </div>
         <div className="label-description-form">
@@ -81,6 +94,7 @@ const LabelForm = (props) => {
             name="description"
             value={labelForm.description}
             onChange={onChangeHandler}
+            placeholder="Description (optional)"
           />
         </div>
         <div className="label-color-form">
@@ -107,7 +121,7 @@ const LabelForm = (props) => {
         </div>
         <div className="item-buttons">
           <Button onClick={onCloseForm}>Cancel</Button>
-          <Button buttonType="GREEN" onClick={onClick}>
+          <Button type="submit" buttonType="GREEN" onClick={onClick}>
             {submitName}
           </Button>
         </div>
@@ -118,9 +132,9 @@ const LabelForm = (props) => {
 
 LabelForm.defaultProps = {
   onEdit: () => { },
-  onDelete: () => { },
   label: {
-    title: 'sample',
+    title: '',
+    description: '',
     color: getRandomColor(),
   },
   onSubmit: () => { },
@@ -134,6 +148,7 @@ LabelForm.propTypes = {
   submitName: PropTypes.string,
   onSubmit: PropTypes.func,
   formType: PropTypes.string,
+  isDuplicate: PropTypes.func,
 };
 
 export default LabelForm;

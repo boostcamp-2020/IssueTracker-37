@@ -16,6 +16,7 @@ const LabelContent = (props) => {
     onOpenForm,
     onCloseForm,
     onSubmit,
+    isDuplicate,
   } = props;
 
   const onDelete = async (id) => {
@@ -43,6 +44,7 @@ const LabelContent = (props) => {
             onEdit={() => onOpenForm(label.id)}
             onClose={onCloseForm}
             onSubmit={onSubmit}
+            isDuplicate={isDuplicate}
           ></LabelItem>
         ))}
     </StyledLabelContent>
@@ -60,6 +62,7 @@ LabelContent.propTypes = {
   onOpenForm: PropTypes.func,
   onCloseForm: PropTypes.func,
   onSubmit: PropTypes.func,
+  isDuplicate: PropTypes.func,
 };
 
 export default LabelContent;
