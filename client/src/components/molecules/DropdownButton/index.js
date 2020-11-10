@@ -20,6 +20,7 @@ const DropdownButton = ({
   src,
   onClick,
   items,
+  checkList,
 }) => {
   const [isOpened, setOpened] = useState(false);
   const openDropdown = () => {
@@ -27,7 +28,7 @@ const DropdownButton = ({
   };
 
   return (
-    <StyledDropdownButton>
+    <StyledDropdownButton onBlur={() => setOpened(false)} tabIndex={-1}>
       <StyledDropdownHeader onClick={openDropdown}>
         <Span spanType="LARGE" color="GRAY">
           {title}
@@ -72,7 +73,6 @@ const DropdownButton = ({
     </StyledDropdownButton>
   );
 };
-
 
 DropdownButton.defaultProps = {};
 
