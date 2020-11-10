@@ -7,7 +7,7 @@ export const StyledLabelForm = styled.form`
 export const StyledRandomButton = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #5319e7;
+  ${(props) => `background-color: ${props.color};`}
   border: solid 1px black;
   border-radius: 6px;
   height: 30px;
@@ -86,5 +86,5 @@ export const StyledFormContainer = styled.div`
   .item-buttons > button {
     margin-left: 5px;
     height: 35px;
-  }
+  }a
 `;
