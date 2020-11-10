@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Header from '@organisms/Header';
 
+import useFetch from '@hoc/useFetch';
+import Header from '@organisms/Header';
 import IssueForm from '@components/IssueForm';
 import IssueOption from '@components/IssueOption';
 import { StyledWrapper, StyledLeftContent, StyledRightContent } from './style';
@@ -16,7 +17,19 @@ const CreateIssue = () => {
   const [IssueContents, setIssueContents] = useState(initialInputs);
   const [visible, setVisible] = useState(false);
   const [isActived, setIsActived] = useState(false);
+
+  const [assigneeCheckList, setAssigneeCheckList] = useState([]);
+  const [labelCheckList, setLabelCheckList] = useState([]);
+
+  const [assignees, setAssignees] = useFetch('/user');
+  const [milestones, setMilestones] = useFetch('/milestone');
+  const [labels, setLabels] = useFetch('/label');
+
   const { title, content } = IssueContents;
+
+  useEffect(() => {
+    // console.log(assigneeCheckList);
+  }, assigneeCheckList);
 
   const imageRef = useRef(null);
 
@@ -80,34 +93,9 @@ const CreateIssue = () => {
       dropdownType: 'assignee',
       dropdownHeader: 'Assign up to 10 people to this issue',
       src: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
-      onClick: () => { },
-      items: [
-        {
-          id: 1,
-          name: 'sumniy',
-          profile: null,
-        },
-        {
-          id: 2,
-          name: 'test',
-          profile: null,
-        },
-        {
-          id: 3,
-          name: 'Kimakjun',
-          profile: null,
-        },
-        {
-          id: 4,
-          name: '김학준',
-          profile: null,
-        },
-        {
-          id: 5,
-          name: 'hoo00nn',
-          profile: null,
-        },
-      ],
+      onClick: (id) => { },
+      checkList: assigneeCheckList,
+      items: assignees,
     },
 
     label: {
@@ -116,24 +104,8 @@ const CreateIssue = () => {
       title: 'label',
       dropdownHeader: 'Apply labels to this issue',
       dropdownType: 'label',
-      items: [
-        {
-          id: 1,
-          title: 'test33',
-          description: '',
-          color: '#8339c7',
-          createdAt: '2020-11-09 03:22:44',
-          updatedAt: '2020-11-10 13:18:09',
-        },
-        {
-          id: 11,
-          title: 'qewr',
-          description: 'qwer',
-          color: '#6b5a34',
-          createdAt: '2020-11-10 13:47:37',
-          updatedAt: '2020-11-10 14:26:09',
-        },
-      ],
+      checkList: labelCheckList,
+      items: labels,
       onClick: () => { },
     },
 
@@ -143,38 +115,8 @@ const CreateIssue = () => {
       title: 'milestone',
       dropdownHeader: 'Set milestone',
       dropdownType: 'milestone',
-      items: [
-        {
-          id: 1,
-          title: 'sad',
-          description: '',
-          due_date: '',
-          state: true,
-          createdAt: '2020-11-05 00:00:00',
-          updatedAt: '2020-11-09 15:02:19',
-          Issues: [],
-        },
-        {
-          id: 2,
-          title: '마일스톤 insert 테스트',
-          description: '내용',
-          due_date: '2020-11-12 09:00:00',
-          state: true,
-          createdAt: '2020-11-09 14:59:17',
-          updatedAt: '2020-11-09 14:59:17',
-          Issues: [],
-        },
-        {
-          id: 3,
-          title: '마일스톤 insert 테스트',
-          description: '내용',
-          due_date: '2020-11-12 09:00:00',
-          state: true,
-          createdAt: '2020-11-09 14:59:19',
-          updatedAt: '2020-11-09 14:59:19',
-          Issues: [],
-        },
-      ],
+      checkList: [],
+      items: milestones,
       onClick: () => { },
     },
   };
