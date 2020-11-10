@@ -29,15 +29,9 @@ const LabelPage = () => {
           data: payload,
         });
 
-        const index = labels.findIndex((label) => label.id === id);
-        const temp = [...labels];
-
-        temp[index] = {
-          id,
-          ...payload,
-        };
-
-        setLabels(temp);
+        setLabels(
+          labels.map((label) => (label.id === id ? { id, ...payload } : label)),
+        );
         setIsForm(-1);
       } catch (err) {
         alert('업데이트 실패');
