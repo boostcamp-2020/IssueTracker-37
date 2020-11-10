@@ -13,7 +13,7 @@ const TextArea = (props) => {
       placeholder={placeholder}
       textAreaType={textAreaType}
       onChange={onChange}
-    />
+    ></StyledTextArea>
   );
 };
 

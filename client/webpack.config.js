@@ -23,6 +23,7 @@ module.exports = {
       '@organisms': path.join(__dirname, 'src/components/organisms'),
       '@hoc': path.join(__dirname, 'src/hoc'),
       '@img': path.join(__dirname, '/public/img'),
+      '@components': path.join(__dirname, 'src/components'),
     },
   },
   mode,

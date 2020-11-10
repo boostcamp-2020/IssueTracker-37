@@ -1,38 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 
-import Button from '@atoms/Button';
-import Dropdown from '@molecules/Dropdown';
-import { StyledDropdownButton } from './style';
+import Span from '@atoms/Span';
+import SVG from '@atoms/SVG';
+import _DropdownItem from '@atoms/_DropdownItem';
 
-const DropdownButton = (props) => {
-  const { className, buttonName, title, items, onClick, isState } = props;
+import {
+  StyledDropdownButton,
+  StyledDropdownMenu,
+  StyledDropdownHeader,
+} from './style';
+
+const DropdownButton = ({
+  title,
+  SVGName,
+  color,
+  dropdownHeader,
+  dropdownType,
+  src,
+  onClick,
+  items,
+}) => {
+  const [isOpened, setOpened] = useState(false);
+  const openDropdown = () => {
+    setOpened((pre) => !pre);
+  };
 
   return (
-    <StyledDropdownButton className={cn(className)}>
-      <Button className="toggleBtn" onClick={onClick} afterContent="▼">
-        {buttonName}
-      </Button>
-      {isState && (
-        <Dropdown className="dropdown" title={title} items={items}></Dropdown>
+    <StyledDropdownButton>
+      <StyledDropdownHeader onClick={openDropdown}>
+        <Span spanType="LARGE" color="GRAY">
+          {title}
+        </Span>
+        <SVG SVGName={SVGName} color={color}></SVG>
+      </StyledDropdownHeader>
+      {isOpened && (
+        <StyledDropdownMenu>
+          <Span
+            spanType="SMALL"
+            fontWeight="600"
+            className="dropdown-menu-header"
+          >
+            {dropdownHeader}
+          </Span>
+          <ul>
+            {items.map((item) => {
+              const dropdownItemTitle =
+                dropdownType === 'assignee' ? item.name : item.title;
+              let dropdownItemDescription = '';
+
+              if (dropdownType === 'label')
+                dropdownItemDescription = item.description;
+              if (dropdownType === 'milestone')
+                dropdownItemDescription = item.due_date;
+
+              return (
+                <_DropdownItem
+                  key={item.id}
+                  src={src}
+                  title={dropdownItemTitle}
+                  description={dropdownItemDescription}
+                  color={item.color}
+                  onClick={onClick}
+                  dropdownType={dropdownType}
+                ></_DropdownItem>
+              );
+            })}
+          </ul>
+        </StyledDropdownMenu>
       )}
     </StyledDropdownButton>
   );
 };
 
-DropdownButton.defaultProps = {
-  items: [''],
-  isState: false,
-};
+
+DropdownButton.defaultProps = {};
 
 DropdownButton.propTypes = {
-  className: PropTypes.string,
   title: PropTypes.string,
-  items: PropTypes.array,
-  buttonName: PropTypes.string,
+  SVGName: PropTypes.string,
+  color: PropTypes.string,
+  dropdownHeader: PropTypes.string,
+  dropdownType: PropTypes.string,
+  src: PropTypes.string,
   onClick: PropTypes.func,
-  isState: PropTypes.bool,
+  items: PropTypes.array,
 };
 
 export default DropdownButton;

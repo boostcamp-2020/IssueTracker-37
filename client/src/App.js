@@ -10,6 +10,7 @@ import Main from '@pages/Main';
 import LabelPage from '@pages/Label';
 import MilestonePage from '@pages/Milestone';
 import GitHubCallbackPage from '@pages/GitHubCallbackPage';
+import CreateIssue from '@pages/CreateIssue';
 
 const GolbalStyled = createGlobalStyle`
   * {
@@ -44,6 +45,7 @@ const App = () => {
           exact
           component={Auth(MilestonePage, true)}
         ></Route>
+        <Route path="/issue" exact component={Auth(CreateIssue, true)}></Route>
         <Route
           path="/github_callback"
           exact
