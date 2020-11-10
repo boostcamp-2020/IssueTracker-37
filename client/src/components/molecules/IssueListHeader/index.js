@@ -5,7 +5,7 @@ import cn from 'classnames';
 import CheckBox from '@atoms/CheckBox';
 import Img from '@atoms/Img';
 
-import DropDownButton from '@molecules/DropDownButton';
+import DropDownButton from '@molecules/DropdownButton';
 
 import openedIssue from '@img/OpenedIssueImg.png';
 
