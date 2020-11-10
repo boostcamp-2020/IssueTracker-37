@@ -8,6 +8,7 @@ import Button from '@atoms/Button';
 import Span from '@atoms/Span';
 import Input from '@atoms/Input';
 import SVG from '@atoms/SVG';
+import { getRandomColor, getFontColor } from '@utils/color';
 
 import {
   StyledLabelForm,
@@ -15,21 +16,6 @@ import {
   StyledItemLabel,
   StyledFormContainer,
 } from './style';
-
-const getRandomColor = () => {
-  const colorCode = `#${Math.round(Math.random() * 255)
-      .toString(16)
-      .padStart(2, '0') +
-    Math.round(Math.random() * 255)
-      .toString(16)
-      .padStart(2, '0') +
-    Math.round(Math.random() * 255)
-      .toString(16)
-      .padStart(2, '0')
-    }`;
-
-  return colorCode;
-};
 
 const LabelForm = (props) => {
   const {
@@ -100,8 +86,15 @@ const LabelForm = (props) => {
         <div className="label-color-form">
           <Label htmlFor="color">Color</Label>
           <div className="label-color-input">
-            <StyledRandomButton onClick={onClickNewColor}>
-              <SVG SVGName="NEW_COLOR" color="white" size="SMALL"></SVG>
+            <StyledRandomButton
+              color={labelForm.color}
+              onClick={onClickNewColor}
+            >
+              <SVG
+                SVGName="NEW_COLOR"
+                color={getFontColor(labelForm.color)}
+                size="SMALL"
+              ></SVG>
             </StyledRandomButton>
             <Input
               id="color"
