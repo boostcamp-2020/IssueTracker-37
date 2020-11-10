@@ -1,22 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Span from '@atoms/Span';
-import SVG from '@atoms/SVG';
+import DropdownButton from '@molecules/DropdownButton';
 
 import {
   StyledIssueOption,
-  StyledIssueOptionTop,
+  // StyledIssueOptionTop,
   StyledIssueOptionBottom,
 } from './style';
 
-const IssueOption = () => {
+const IssueOption = ({ SVGName, color, title, dropdownHeader }) => {
   return (
     <>
       <StyledIssueOption>
-        <StyledIssueOptionTop>
-          <Span>Assignees</Span>
-          <SVG SVGName="SETTING" color="gray"></SVG>
-        </StyledIssueOptionTop>
+        <DropdownButton
+          SVGName={SVGName}
+          color={color}
+          title={title}
+          dropdownHeader={dropdownHeader}
+        ></DropdownButton>
         <StyledIssueOptionBottom>
           <Span color="GRAY" spanType="SMALL">
             No one-assign yourself
@@ -25,6 +28,15 @@ const IssueOption = () => {
       </StyledIssueOption>
     </>
   );
+};
+
+IssueOption.defaultProps = {};
+
+IssueOption.propTypes = {
+  SVGName: PropTypes.string,
+  color: PropTypes.string,
+  title: PropTypes.string,
+  dropdownHeader: PropTypes.string,
 };
 
 export default IssueOption;
