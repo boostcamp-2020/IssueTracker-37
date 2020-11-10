@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import icons from '@img/svgs.js';
 
 const SVG = (props) => {
-  const { SVGName, color, size = 'DEFAULT' } = props;
+  const { SVGName, color, size = 'DEFAULT', className } = props;
   const sizeSet = {
     DEFAULT: '16px',
     SMALL: '20px',
@@ -18,6 +19,7 @@ const SVG = (props) => {
       role="img"
       width={sizeSet[size]}
       height={sizeSet[size]}
+      className={cn(className)}
     >
       <path fillRule="evenodd" fill={color} d={icons[SVGName]}></path>
     </svg>
@@ -31,6 +33,7 @@ SVG.propTypes = {
   SVGType: PropTypes.string,
   SVGName: PropTypes.string,
   size: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default SVG;

@@ -12,7 +12,7 @@ const imgSet = {
     border-radius: 50%;
   `,
 
-  AVATAR_LARGE: `
+  AVARTAR_LARGE: `
     width: 40px;
     height: 40px;
     border-radius: 50%;

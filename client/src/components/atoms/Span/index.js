@@ -13,6 +13,7 @@ const Span = (props) => {
     afterContent,
     color,
     className,
+    fontWeight,
   } = props;
 
   return (
@@ -22,6 +23,7 @@ const Span = (props) => {
       hoverColor={hoverColor}
       afterContent={afterContent}
       color={color}
+      fontWeight={fontWeight}
       className={cn(className)}
     >
       {children}
@@ -41,6 +43,7 @@ Span.propTypes = {
   afterContent: PropTypes.string,
   color: PropTypes.string,
   className: PropTypes.string,
+  fontWeight: PropTypes.string,
 };
 
 export default Span;

@@ -5,7 +5,14 @@ import cn from 'classnames';
 import { StyledButton } from './style';
 
 const Button = (props) => {
-  const { afterContent, children, onClick, buttonType, className } = props;
+  const {
+    afterContent,
+    children,
+    onClick,
+    buttonType,
+    className,
+    isActived,
+  } = props;
 
   return (
     <StyledButton
@@ -13,6 +20,8 @@ const Button = (props) => {
       afterContent={afterContent}
       onClick={onClick}
       className={cn(className)}
+      isActived={isActived}
+      disabled={isActived ? false : 'disabled'}
     >
       {children}
     </StyledButton>
@@ -21,6 +30,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   onClick: () => { },
+  isActived: true,
 };
 
 Button.propTypes = {
@@ -30,6 +40,7 @@ Button.propTypes = {
   type: PropTypes.string,
   buttonType: PropTypes.string,
   className: PropTypes.string,
+  isActived: PropTypes.bool,
 };
 
 export default Button;

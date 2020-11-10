@@ -35,6 +35,7 @@ const spanSet = {
 
 export const StyledSpan = styled.span`
   color: ${(props) => props.color || 'black'};
+  font-weight: ${(props) => props.fontWeight || '400'};
   ${afterOption}
   ${hoverOption}
   ${({ spanType = 'DEFAULT' }) => spanSet[spanType]};

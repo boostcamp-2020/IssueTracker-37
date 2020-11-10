@@ -14,7 +14,7 @@ class UserController {
       res.status(200).send({
         status: 'success',
         message: succeedMessage.succeedSelect,
-        data: { Users: users },
+        data: users,
       });
     } catch (err) {
       res
