@@ -24,6 +24,10 @@ export const StyledDropdownItemImage = styled.div`
   }
 `;
 
+export const StyledCheckMarkWrapper = styled.div`
+  width: 20px;
+`;
+
 export const StyledDropdownItemContent = styled.div``;
 
 export const StyledDropdownItemTitle = styled.div``;

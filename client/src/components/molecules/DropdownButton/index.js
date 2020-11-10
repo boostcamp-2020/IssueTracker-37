@@ -62,8 +62,9 @@ const DropdownButton = ({
                   title={dropdownItemTitle}
                   description={dropdownItemDescription}
                   color={item.color}
-                  onClick={onClick}
+                  onClick={() => onClick(item.id)}
                   dropdownType={dropdownType}
+                  isChecked={item.isChecked}
                 ></_DropdownItem>
               );
             })}

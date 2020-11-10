@@ -29,6 +29,7 @@ const IssueOption = ({ IssueOptionProps }) => {
     }
 
     if (IssueOptionProps.title === 'milestone') {
+      setDefalutCotent('No milestone');
       setRenderComponent(
         <MilestoneContent
           checkList={IssueOptionProps.items}
