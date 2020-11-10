@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import useFetch from '@hoc/useFetch';
 import Header from '@organisms/Header';
@@ -18,7 +19,7 @@ const CreateIssue = () => {
     name: 'sumniy',
     profile: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
   };
-
+  const history = useHistory();
   const [IssueContents, setIssueContents] = useState(initialInputs);
   const [visible, setVisible] = useState(false);
   const [isActived, setIsActived] = useState(false);
@@ -92,7 +93,23 @@ const CreateIssue = () => {
 
     buttonProps: {
       isActived,
+      onClickCancel: () => {
+        history.push('/');
+      },
+      onClickSubmit: () => {
+        if (title.legth === 0) return;
+        const payload = {
+          title,
+          content,
+          assignees: assigneeCheckList.map((assignee) => assignee.id),
+          labels: labelCheckList.map((label) => label.id),
+          milestones: milestoneCheckList.map((milestone) => milestone.id),
+        };
+
+        console.log(payload);
+      },
     },
+    user,
   };
 
   const IssueOptionProps = {

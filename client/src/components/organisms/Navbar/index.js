@@ -30,7 +30,7 @@ const NavBar = ({ className, labelCount, milestoneCount, options }) => {
       <Button
         buttonType="GREEN"
         className="newIssueBtn"
-        onClick={() => history.push('/createIssue')}
+        onClick={() => history.push('/issue')}
       >
         New issue
       </Button>
