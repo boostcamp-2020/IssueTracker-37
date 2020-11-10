@@ -13,6 +13,11 @@ const initialInputs = {
 
 const CreateIssue = () => {
   // 유저정보 받아오기. => hook 을 사용하면 좋을듯.
+  const user = {
+    id: 1,
+    name: 'sumniy',
+    profile: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
+  };
 
   const [IssueContents, setIssueContents] = useState(initialInputs);
   const [visible, setVisible] = useState(false);
@@ -49,11 +54,6 @@ const CreateIssue = () => {
 
     formData.append('image', e.target.files[0]);
   };
-
-  useEffect(() => {
-    console.log(assigneeCheckList);
-    console.log(labelCheckList);
-  }, [assigneeCheckList, labelCheckList]);
 
   useEffect(() => {
     setVisible(true);
@@ -102,9 +102,18 @@ const CreateIssue = () => {
       title: 'Assignees',
       dropdownType: 'assignee',
       dropdownHeader: 'Assign up to 10 people to this issue',
-      src: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
       checkList: assigneeCheckList,
       items: assignees,
+      onClickSpan: () => {
+        setAssigneeCheckList([user]);
+        setAssignees(
+          assignees.map((assignee) =>
+            user.id === assignee.id
+              ? { ...assignee, isChecked: true }
+              : assignee,
+          ),
+        );
+      },
       onClick: (id) => {
         const [selectedItem] = assignees.filter((item) => id === item.id);
 
@@ -226,6 +235,7 @@ const CreateIssue = () => {
         <StyledRightContent>
           <IssueOption
             IssueOptionProps={IssueOptionProps.assignee}
+            checkList={assigneeCheckList}
           ></IssueOption>
           <IssueOption IssueOptionProps={IssueOptionProps.label}></IssueOption>
           <IssueOption

@@ -17,27 +17,39 @@ const IssueOption = ({ IssueOptionProps }) => {
     if (IssueOptionProps.title === 'Assignees') {
       setDefalutCotent('No one-assign yourself');
       setRenderComponent(
-        <AssigneeContent checkList={IssueOptionProps.items}></AssigneeContent>,
+        <AssigneeContent
+          checkList={IssueOptionProps.checkList}
+        ></AssigneeContent>,
       );
     }
 
     if (IssueOptionProps.title === 'label') {
       setDefalutCotent('None yet');
       setRenderComponent(
-        <LabelContent checkList={IssueOptionProps.items}></LabelContent>,
+        <LabelContent checkList={IssueOptionProps.checkList}></LabelContent>,
       );
     }
 
     if (IssueOptionProps.title === 'milestone') {
-      setDefalutCotent('No milestone');
+      if (IssueOptionProps.checkList.length === 0) {
+        setDefalutCotent('No milestone');
+        return;
+      }
+
+      const InitialIssuesLength = IssueOptionProps.checkList[0].Issues.length;
+      const ClosedIssuesLength = IssueOptionProps.checkList[0].Issues.filter(
+        (issue) => issue.state === false,
+      ).length;
+      const percent = Number((ClosedIssuesLength / InitialIssuesLength) * 100);
+
       setRenderComponent(
         <MilestoneContent
-          checkList={IssueOptionProps.items}
-          percent="30"
+          checkList={IssueOptionProps.checkList}
+          percent={percent}
         ></MilestoneContent>,
       );
     }
-  }, []);
+  }, [IssueOptionProps.checkList]);
 
   return (
     <>
@@ -45,7 +57,11 @@ const IssueOption = ({ IssueOptionProps }) => {
         <DropdownButton {...IssueOptionProps}></DropdownButton>
         <StyledIssueOptionBottom>
           {IssueOptionProps.checkList.length === 0 ? (
-            <Span color="GRAY" spanType="SMALL">
+            <Span
+              color="GRAY"
+              spanType="SMALL"
+              onClick={IssueOptionProps.onClickSpan}
+            >
               {defaultContent}
             </Span>
           ) : (
