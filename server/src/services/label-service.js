@@ -14,7 +14,7 @@ class LabelService {
 
     return label;
   }
-  
+
   async deleteById(id) {
     try {
       const result = await labelModel.deleteById(id);
@@ -27,7 +27,7 @@ class LabelService {
       throw error;
     }
   }
-  
+
   async updateLabel(payload) {
     try {
       const [result] = await labelModel.updateLabel(payload);
@@ -37,15 +37,11 @@ class LabelService {
       throw new Error();
     }
   }
-  
+
   async getLabels() {
     const labels = await labelModel.getLabels();
-    const data = {
-      count: labels.length,
-      labels,
-    };
 
-    return data;
+    return labels;
   }
 }
 
