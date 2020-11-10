@@ -72,6 +72,13 @@ const CreateIssue = () => {
     },
   };
 
+  // const IssueOption = {
+  //   svgProps: {
+  //     SVGName: '',
+  //     color: '',
+  //   },
+  // };
+
   return (
     <>
       <Header></Header>
@@ -83,9 +90,24 @@ const CreateIssue = () => {
           ></IssueForm>
         </StyledLeftContent>
         <StyledRightContent>
-          <IssueOption></IssueOption>
-          <IssueOption></IssueOption>
-          <IssueOption></IssueOption>
+          <IssueOption
+            title="assginees"
+            SVGName="SETTING"
+            color="gray"
+            dropdownHeader="Assign up to 10 people to this issue"
+          ></IssueOption>
+          <IssueOption
+            title="labels"
+            SVGName="SETTING"
+            color="gray"
+            dropdownHeader="Apply labels to this issue"
+          ></IssueOption>
+          <IssueOption
+            title="milestine"
+            SVGName="SETTING"
+            color="gray"
+            dropdownHeader="Set milestone"
+          ></IssueOption>
         </StyledRightContent>
       </StyledWrapper>
     </>
