@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import icons from '@img/svgs.js';
 
 const SVG = (props) => {
-  const { SVGName, color, size = 'DEFAULT' } = props;
+  const { SVGName, color, size } = props;
   const sizeSet = {
     DEFAULT: '16px',
     SMALL: '20px',
@@ -24,7 +24,10 @@ const SVG = (props) => {
   );
 };
 
-SVG.defaultProps = {};
+SVG.defaultProps = {
+  color: 'black',
+  size: 'DEFAULT',
+};
 
 SVG.propTypes = {
   color: PropTypes.string,
