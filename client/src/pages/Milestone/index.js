@@ -1,27 +1,78 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import request from '@lib/axios';
 import Header from '@organisms/Header';
 import SimpleNavbar from '@organisms/SimpleNavbar';
+import MilestoneContent from '@organisms/MilestoneContent';
 import Template from './Template';
 
 const MilstonePage = () => {
-  // useEffect(() => {
-  //   (async () => {
-  //     const {
-  //       data: { data },
-  //     } = await request.get({
-  //       uri: `/milestone`,
-  //     });
+  const [milestones, setMilestones] = useState([]);
+  const [isState, setIsState] = useState(true);
+  const history = useHistory();
+  const onDelete = async (id) => {
+    if (confirm('정말 삭제하시겠습니까?')) {
+      await request.delete({ uri: `/milestone/${id}` });
+      setMilestones([...milestones.filter((milestone) => milestone.id !== id)]);
+    }
+  };
 
-  //     setMilestones(data);
-  //   })();
-  // }, []);
+  const onChangeState = (state) => {
+    if (state !== isState) setIsState(state);
+  };
+
+  const updateMilestoneState = async (payload) => {
+    try {
+      const id = payload.id;
+
+      payload.state = !payload.state;
+      delete payload.id;
+      await request.put({
+        uri: `/milestone/${id}`,
+        data: payload,
+      });
+
+      payload.id = id;
+      setMilestones(
+        milestones.map((milestone) =>
+          milestone.id === id ? payload : milestone,
+        ),
+      );
+    } catch (err) {
+      alert('Milestone 업데이트 실패');
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const {
+        data: { data },
+      } = await request.get({
+        uri: `/milestone`,
+      });
+
+      setMilestones(data);
+    })();
+  }, []);
 
   return (
     <Template
       Header={<Header></Header>}
-      Navbar={<SimpleNavbar buttonName="New milestone"></SimpleNavbar>}
-    // MilstoneContent={<MilstoneContent></MilstoneContent>}
+      Navbar={
+        <SimpleNavbar
+          buttonName="New milestone"
+          onClick={() => history.push('/milestone/create')}
+        ></SimpleNavbar>
+      }
+      MilestoneContent={
+        <MilestoneContent
+          milestones={milestones}
+          onDelete={onDelete}
+          isState={isState}
+          onChangeState={onChangeState}
+          updateMilestoneState={updateMilestoneState}
+        ></MilestoneContent>
+      }
     ></Template>
   );
 };

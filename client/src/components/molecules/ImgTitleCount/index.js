@@ -15,13 +15,13 @@ const ImgTitleCount = (props) => {
     SVGName,
     color,
     displayCount,
+    spanType,
   } = props;
-  const spanType = 'LARGE';
 
   return (
     <StyledImgTitleCount className={cn(className)} onClick={onClick}>
-      <SVG SVGName={SVGName} color={color}></SVG>
-      <Span spanType={spanType} color="GRAY">
+      <SVG SVGName={SVGName} color={color} />
+      <Span spanType={spanType} color={color}>
         {children}
       </Span>
       {displayCount === 'imgTitleCount' && (
@@ -36,6 +36,9 @@ const ImgTitleCount = (props) => {
 ImgTitleCount.defaultProps = {
   onClick: () => { },
   type: 'imgTitleCount',
+  spanType: 'LARGE',
+  count: 0,
+  color: 'gray',
 };
 
 ImgTitleCount.propTypes = {
@@ -49,6 +52,7 @@ ImgTitleCount.propTypes = {
   color: PropTypes.string,
   SVGName: PropTypes.string,
   displayCount: PropTypes.string,
+  spanType: PropTypes.string,
 };
 
 export default ImgTitleCount;

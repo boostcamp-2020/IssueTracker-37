@@ -42,37 +42,30 @@ class Milestone extends Model {
   }
 
   static async updateMilestoneById(payload) {
-    const updatedMilestone = await this.update(
-      {
-        title: payload.title,
-        description: payload.description,
-        due_date: payload.due_date,
-      },
-      {
-        where: { id: payload.milestone_id },
-      },
-    );
+    const updatedMilestone = await this.update(payload, {
+      where: { id: payload.id },
+    });
 
     return updatedMilestone;
   }
-  
+
   static async insert(payload) {
     const milestone = this.create(payload);
 
     return milestone;
   }
-  
+
   static async getMilestones(issueModel) {
     const milestones = await this.findAll({
       include: [
         {
           model: issueModel,
-          attributes: ['id', 'state']
-        }
+          attributes: ['id', 'state'],
+        },
       ],
     });
 
-    return milestones
+    return milestones;
   }
 
   static async deleteMilestoneById(id) {

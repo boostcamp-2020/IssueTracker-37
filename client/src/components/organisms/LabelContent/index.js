@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import Span from '@atoms/Span';
 import LabelItem from '@molecules/LabelItem';
-import request from '@lib/axios';
 import { StyledLabelContent, StyledLabelListHeader } from './style';
 
 const LabelContent = (props) => {
   const {
     labels,
     className,
-    setLabels,
     isForm,
     onOpenForm,
     onCloseForm,
     onSubmit,
+    onDelete,
     isDuplicate,
   } = props;
-
-  const onDelete = async (id) => {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      await request.delete({ uri: `/label/${id}` });
-      setLabels([...labels.filter((label) => label.id !== id)]);
-    }
-  };
 
   const labelHeader = `${labels.length} Labels`;
 
@@ -63,6 +55,7 @@ LabelContent.propTypes = {
   onCloseForm: PropTypes.func,
   onSubmit: PropTypes.func,
   isDuplicate: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default LabelContent;

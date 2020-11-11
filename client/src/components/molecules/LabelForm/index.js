@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import cn from 'classnames';
@@ -35,21 +35,21 @@ const LabelForm = (props) => {
     color: label.color,
   };
 
+  const [isActived, setIsActived] = useState(formType === 'edit');
   const [labelForm, setLabelForm] = useState(InitialState);
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
 
     if (name === 'title') {
-      let btnState = 'disabled';
+      let actived = false;
 
       if (value.length > 0) {
         if (label.title === value || !isDuplicate(value)) {
-          btnState = 'enabled';
+          actived = true;
         }
       }
-      console.log(btnState);
+      setIsActived(actived);
     }
-
     setLabelForm({ ...labelForm, [name]: value });
   };
 
@@ -61,6 +61,12 @@ const LabelForm = (props) => {
     e.preventDefault();
     onSubmit(formType, { id: label.id, ...labelForm });
   };
+
+  useEffect(() => {
+    if (label.title.length > 0) {
+      setIsActived(true);
+    }
+  }, []);
 
   return (
     <StyledLabelForm className={cn(className)}>
@@ -121,7 +127,12 @@ const LabelForm = (props) => {
         </div>
         <div className="item-buttons">
           <Button onClick={onCloseForm}>Cancel</Button>
-          <Button type="submit" buttonType="GREEN" onClick={onClick}>
+          <Button
+            isActived={isActived}
+            type="submit"
+            buttonType="GREEN"
+            onClick={onClick}
+          >
             {submitName}
           </Button>
         </div>

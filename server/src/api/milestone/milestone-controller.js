@@ -4,14 +4,8 @@ const milestoneService = require('@services/milestone-service');
 class MilestoneController {
   async updateMilestoneById(req, res) {
     try {
-      const payload = {
-        milestone_id: req.params.id,
-        title: req.body.title,
-        description: req.body.description,
-        due_date: req.body.due_date,
-      };
-
-      await milestoneService.updateMilestoneById(payload);
+      req.body.id = req.params.id;
+      await milestoneService.updateMilestoneById(req.body);
 
       res.status(200).send({
         status: 'success',
