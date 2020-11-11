@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import request from '@lib/axios';
 
 const useFetch = (uri, option) => {
-  const [initialData, setData] = useState([]);
+  const [initialData, setData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       const {
         data: { data },
@@ -13,11 +15,12 @@ const useFetch = (uri, option) => {
       if (option) {
         setData(data.map((v) => ({ ...v, [option.name]: option.value })));
       }
+      setLoading(false);
       if (!option) setData(data);
     })();
   }, []);
 
-  return [initialData, setData];
+  return [initialData, setData, loading];
 };
 
 export default useFetch;
