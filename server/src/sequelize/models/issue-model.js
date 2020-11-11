@@ -5,6 +5,7 @@ const commentModel = require('@models/comment-model');
 const milestoneModel = require('@models/milestone-model');
 const assigneeModel = require('@models/assignee-model');
 
+
 class Issue extends Model {
   static initialize(sequelize) {
     super.init(
@@ -73,19 +74,27 @@ class Issue extends Model {
     return issues;
   }
 
-  static async selectById(id, Label) {
+  static async selectById(id) {
     let findIssue = null;
 
-    if (Label) {
       findIssue = await this.findByPk(id, {
         include: [
           {
-            model: Label,
+            model: labelModel,
           },
+          {
+            model: milestoneModel,
+          },
+          {
+            model: userModel,
+          },
+          {
+            model: commentModel,
+          }
         ],
       });
-    }
-    if (!Label) {
+      
+    if (!labelModel) {
       findIssue = await this.findByPk(id);
     }
 
