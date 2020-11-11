@@ -52,7 +52,7 @@ const MilestoneItem = (props) => {
   } = props;
   const history = useHistory();
   const issueState = getRate(milestone);
-  const changeButton = isState ? 'Close' : 'Open';
+  const changeButton = isState ? 'Close' : 'Reopen';
 
   return (
     <StyledMilestoneItem className={cn(className)}>
