@@ -87,15 +87,15 @@ const MilestoneItem = (props) => {
         </div>
         <div className="buttons">
           <Span
-            color="blue"
+            color="#2e7adc"
             onClick={() => history.push(`/milestone/edit/${milestone.id}`)}
           >
             Edit
           </Span>
-          <Span color="blue" onClick={() => updateMilestoneState(milestone)}>
+          <Span color="#2e7adc" onClick={() => updateMilestoneState(milestone)}>
             {changeButton}
           </Span>
-          <Span color="red" onClick={() => onDelete(milestone.id)}>
+          <Span color="#d2424d" onClick={() => onDelete(milestone.id)}>
             Delete
           </Span>
         </div>
