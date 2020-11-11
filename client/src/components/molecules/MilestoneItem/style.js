@@ -40,6 +40,7 @@ export const StyledMilestoneItem = styled.div`
   }
 
   & .description {
+    min-height: 22px;
   }
 `;
 
