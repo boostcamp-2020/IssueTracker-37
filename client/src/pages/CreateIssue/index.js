@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Header from '@organisms/Header';
+import { useHistory } from 'react-router-dom';
 
+import useFetch from '@hoc/useFetch';
+import Header from '@organisms/Header';
 import IssueForm from '@components/IssueForm';
 import IssueOption from '@components/IssueOption';
 import { StyledWrapper, StyledLeftContent, StyledRightContent } from './style';
@@ -12,12 +14,34 @@ const initialInputs = {
 
 const CreateIssue = () => {
   // 유저정보 받아오기. => hook 을 사용하면 좋을듯.
-
+  const user = {
+    id: 1,
+    name: 'sumniy',
+    profile: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
+  };
+  const history = useHistory();
   const [IssueContents, setIssueContents] = useState(initialInputs);
   const [visible, setVisible] = useState(false);
   const [isActived, setIsActived] = useState(false);
-  const { title, content } = IssueContents;
 
+  const [assigneeCheckList, setAssigneeCheckList] = useState([]);
+  const [labelCheckList, setLabelCheckList] = useState([]);
+  const [milestoneCheckList, setMilestoneCheckList] = useState([]);
+
+  const [assignees, setAssignees] = useFetch('/user', {
+    name: 'isChecked',
+    value: false,
+  });
+  const [milestones, setMilestones] = useFetch('/milestone', {
+    name: 'isChecked',
+    value: false,
+  });
+  const [labels, setLabels] = useFetch('/label', {
+    name: 'isChecked',
+    value: false,
+  });
+
+  const { title, content } = IssueContents;
   const imageRef = useRef(null);
 
   const onChangeIssueContent = (e) => {
@@ -69,7 +93,23 @@ const CreateIssue = () => {
 
     buttonProps: {
       isActived,
+      onClickCancel: () => {
+        history.push('/');
+      },
+      onClickSubmit: () => {
+        if (title.legth === 0) return;
+        const payload = {
+          title,
+          content,
+          assignees: assigneeCheckList.map((assignee) => assignee.id),
+          labels: labelCheckList.map((label) => label.id),
+          milestones: milestoneCheckList.map((milestone) => milestone.id),
+        };
+
+        console.log(payload);
+      },
     },
+    user,
   };
 
   const IssueOptionProps = {
@@ -79,35 +119,47 @@ const CreateIssue = () => {
       title: 'Assignees',
       dropdownType: 'assignee',
       dropdownHeader: 'Assign up to 10 people to this issue',
-      src: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
-      onClick: () => { },
-      items: [
-        {
-          id: 1,
-          name: 'sumniy',
-          profile: null,
-        },
-        {
-          id: 2,
-          name: 'test',
-          profile: null,
-        },
-        {
-          id: 3,
-          name: 'Kimakjun',
-          profile: null,
-        },
-        {
-          id: 4,
-          name: '김학준',
-          profile: null,
-        },
-        {
-          id: 5,
-          name: 'hoo00nn',
-          profile: null,
-        },
-      ],
+      checkList: assigneeCheckList,
+      items: assignees,
+      onClickSpan: () => {
+        setAssigneeCheckList([user]);
+        setAssignees(
+          assignees.map((assignee) =>
+            user.id === assignee.id
+              ? { ...assignee, isChecked: true }
+              : assignee,
+          ),
+        );
+      },
+      onClick: (id) => {
+        const [selectedItem] = assignees.filter((item) => id === item.id);
+
+        if (selectedItem.isChecked) {
+          setAssignees(
+            assignees.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: false }
+                : item,
+            ),
+          );
+
+          setAssigneeCheckList(
+            assigneeCheckList.filter((item) => item.id !== id),
+          );
+        }
+
+        if (!selectedItem.isChecked) {
+          selectedItem.isChecked = true;
+
+          setAssignees(
+            assignees.map((item) =>
+              selectedItem.id === item.id ? { ...item, isChecked: true } : item,
+            ),
+          );
+
+          setAssigneeCheckList([...assigneeCheckList, selectedItem]);
+        }
+      },
     },
 
     label: {
@@ -116,25 +168,35 @@ const CreateIssue = () => {
       title: 'label',
       dropdownHeader: 'Apply labels to this issue',
       dropdownType: 'label',
-      items: [
-        {
-          id: 1,
-          title: 'test33',
-          description: '',
-          color: '#8339c7',
-          createdAt: '2020-11-09 03:22:44',
-          updatedAt: '2020-11-10 13:18:09',
-        },
-        {
-          id: 11,
-          title: 'qewr',
-          description: 'qwer',
-          color: '#6b5a34',
-          createdAt: '2020-11-10 13:47:37',
-          updatedAt: '2020-11-10 14:26:09',
-        },
-      ],
-      onClick: () => { },
+      checkList: labelCheckList,
+      items: labels,
+      onClick: (id) => {
+        const [selectedItem] = labels.filter((item) => id === item.id);
+
+        if (selectedItem.isChecked) {
+          setLabels(
+            labels.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: false }
+                : item,
+            ),
+          );
+
+          setLabelCheckList(labelCheckList.filter((item) => item.id !== id));
+        }
+
+        if (!selectedItem.isChecked) {
+          selectedItem.isChecked = true;
+
+          setLabels(
+            labels.map((item) =>
+              selectedItem.id === item.id ? { ...item, isChecked: true } : item,
+            ),
+          );
+
+          setLabelCheckList([...labelCheckList, selectedItem]);
+        }
+      },
     },
 
     milstone: {
@@ -143,39 +205,37 @@ const CreateIssue = () => {
       title: 'milestone',
       dropdownHeader: 'Set milestone',
       dropdownType: 'milestone',
-      items: [
-        {
-          id: 1,
-          title: 'sad',
-          description: '',
-          due_date: '',
-          state: true,
-          createdAt: '2020-11-05 00:00:00',
-          updatedAt: '2020-11-09 15:02:19',
-          Issues: [],
-        },
-        {
-          id: 2,
-          title: '마일스톤 insert 테스트',
-          description: '내용',
-          due_date: '2020-11-12 09:00:00',
-          state: true,
-          createdAt: '2020-11-09 14:59:17',
-          updatedAt: '2020-11-09 14:59:17',
-          Issues: [],
-        },
-        {
-          id: 3,
-          title: '마일스톤 insert 테스트',
-          description: '내용',
-          due_date: '2020-11-12 09:00:00',
-          state: true,
-          createdAt: '2020-11-09 14:59:19',
-          updatedAt: '2020-11-09 14:59:19',
-          Issues: [],
-        },
-      ],
-      onClick: () => { },
+      checkList: milestoneCheckList,
+      items: milestones,
+      onClick: (id) => {
+        const [selectedItem] = milestones.filter((item) => id === item.id);
+
+        if (selectedItem.isChecked) {
+          setMilestones(
+            milestones.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: false }
+                : item,
+            ),
+          );
+
+          setMilestoneCheckList([]);
+        }
+
+        if (!selectedItem.isChecked) {
+          selectedItem.isChecked = true;
+
+          setMilestones(
+            milestones.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: true }
+                : { ...item, isChecked: false },
+            ),
+          );
+
+          setMilestoneCheckList([selectedItem]);
+        }
+      },
     },
   };
 
@@ -192,6 +252,7 @@ const CreateIssue = () => {
         <StyledRightContent>
           <IssueOption
             IssueOptionProps={IssueOptionProps.assignee}
+            checkList={assigneeCheckList}
           ></IssueOption>
           <IssueOption IssueOptionProps={IssueOptionProps.label}></IssueOption>
           <IssueOption

@@ -24,7 +24,7 @@ export const StyledDropdownButton = styled.div`
 export const StyledDropdownHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  
+  margin-bottom: 10px;
   &:hover {
     & > span {
       color: #0366d6;

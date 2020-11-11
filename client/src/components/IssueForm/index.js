@@ -18,10 +18,7 @@ import {
 const IssueForm = ({ IssueFormProps, visible }) => {
   return (
     <StyledIssueForm>
-      <Img
-        imgType="AVARTAR_LARGE"
-        src="https://avatars3.githubusercontent.com/u/52775389?s=80&v=4"
-      ></Img>
+      <Img imgType="AVARTAR_LARGE" src={IssueFormProps.user.profile}></Img>
       <Input {...IssueFormProps.inputProps} />
       <StyledIssueFormContent>
         <StyledTextAreaWrapper>
@@ -45,10 +42,13 @@ const IssueForm = ({ IssueFormProps, visible }) => {
         />
       </StyledIssueFormContent>
       <StyledIssueFormFooter>
-        <Span color="GRAY">Cancle</Span>
+        <Span color="GRAY" onClick={IssueFormProps.buttonProps.onClickCancel}>
+          Cancle
+        </Span>
         <Button
           isActived={IssueFormProps.buttonProps.isActived}
           buttonType="GREEN"
+          onClick={IssueFormProps.buttonProps.onClickSubmit}
         >
           Submit New Issue
         </Button>

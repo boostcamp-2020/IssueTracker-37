@@ -17,7 +17,6 @@ const DropdownButton = ({
   color,
   dropdownHeader,
   dropdownType,
-  src,
   onClick,
   items,
 }) => {
@@ -27,7 +26,7 @@ const DropdownButton = ({
   };
 
   return (
-    <StyledDropdownButton>
+    <StyledDropdownButton onBlur={() => setOpened(false)} tabIndex={-1}>
       <StyledDropdownHeader onClick={openDropdown}>
         <Span spanType="LARGE" color="GRAY">
           {title}
@@ -57,12 +56,13 @@ const DropdownButton = ({
               return (
                 <_DropdownItem
                   key={item.id}
-                  src={src}
+                  src={item.profile}
                   title={dropdownItemTitle}
                   description={dropdownItemDescription}
                   color={item.color}
-                  onClick={onClick}
+                  onClick={() => onClick(item.id)}
                   dropdownType={dropdownType}
+                  isChecked={item.isChecked}
                 ></_DropdownItem>
               );
             })}
@@ -72,7 +72,6 @@ const DropdownButton = ({
     </StyledDropdownButton>
   );
 };
-
 
 DropdownButton.defaultProps = {};
 

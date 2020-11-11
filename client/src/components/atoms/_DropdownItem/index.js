@@ -10,6 +10,7 @@ import {
   StyledDropdownItemContent,
   StyledDropdownItemDescription,
   StyledDropdownItemTitle,
+  StyledCheckMarkWrapper,
 } from './style';
 
 const _DropdownItem = ({
@@ -19,9 +20,13 @@ const _DropdownItem = ({
   src,
   description,
   color,
+  isChecked,
 }) => {
   return (
     <StyledDropdownItem onClick={onClick}>
+      <StyledCheckMarkWrapper>
+        {isChecked && <Span>✔</Span>}
+      </StyledCheckMarkWrapper>
       <StyledDropdownItemImage color={color}>
         {dropdownType === 'assignee' ? <Img src={src}></Img> : ''}
         {dropdownType === 'label' ? <Span className="label"></Span> : ''}
@@ -54,6 +59,7 @@ _DropdownItem.propTypes = {
   description: PropTypes.string,
   color: PropTypes.string,
   onClick: PropTypes.func,
+  isChecked: PropTypes.bool,
 };
 
 export default _DropdownItem;
