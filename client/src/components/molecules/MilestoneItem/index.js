@@ -25,6 +25,7 @@ const monthNames = [
 const getDueDate = (dueDate) => {
   const date = new Date(dueDate);
 
+  if (!dueDate) return 'No due date';
   return `Due by ${monthNames[date.getMonth()]
     } ${date.getDate()}, ${date.getFullYear()}`;
 };
