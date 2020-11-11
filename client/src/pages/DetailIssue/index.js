@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
 import Header from '@organisms/Header';
+import DetailIssueHeader from '@organisms/DetailIssueHeader';
+import { StyledDetailIssueWrapper } from './style';
 
-const index = () => {
+const DetailIssue = () => {
   useEffect(() => {});
+
   return (
     <>
       <Header></Header>
+      <StyledDetailIssueWrapper>
+        <DetailIssueHeader></DetailIssueHeader>
+      </StyledDetailIssueWrapper>
     </>
   );
 };
 
-export default index;
+export default DetailIssue;
