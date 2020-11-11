@@ -27,7 +27,12 @@ const LabelPage = () => {
       setIsForm(0);
     }
   };
-
+  const onDelete = async (id) => {
+    if (confirm('정말 삭제하시겠습니까?')) {
+      await request.delete({ uri: `/label/${id}` });
+      setLabels([...labels.filter((label) => label.id !== id)]);
+    }
+  };
   const onSubmit = async (type, payload) => {
     if (type === 'edit') {
       try {
@@ -112,6 +117,7 @@ const LabelPage = () => {
           onCloseForm={onCloseForm}
           onSubmit={onSubmit}
           isDuplicate={isDuplicate}
+          onDelete={onDelete}
         ></LabelContent>
       }
     ></Template>
