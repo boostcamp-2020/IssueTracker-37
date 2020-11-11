@@ -1,52 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import Span from '@atoms/Span';
 import Button from '@atoms/Button';
 import Input from '@atoms/Input';
 import ImgTitleCount from '@molecules/ImgTitleCount';
+import { getDateDiff } from '@utils/DateDiff';
 
 import {
   StyledDetailIssueHeader,
   DetailIssueHeaderTop,
   DetailIssueHeaderBottom,
   DetailIssueTitleWrapper,
+  StyledIssueEditButtonWrapper,
+  StyledIssueEditForm,
+  StyledIssueEditInputWrapper,
 } from './style';
 
-const DetailIssueHeader = () => {
+const DetailIssueHeader = ({DetailIssueHeaderProps,
+  onClickSave, onOpenEdit, onCloseEdit, onChangeTitle}) => {
+
   return (
     <StyledDetailIssueHeader>
       <DetailIssueHeaderTop>
-        {false ? (
-          <>
-            <Input></Input>
-            <Button>Edit</Button>
-            <Span>Cancle</Span>
-          </>
+        {DetailIssueHeaderProps.isEdited ? (
+          <StyledIssueEditForm>
+            <StyledIssueEditInputWrapper>
+            <Input {...DetailIssueHeaderProps.titleInputs} onChange={onChangeTitle}></Input>
+            </StyledIssueEditInputWrapper>
+            <StyledIssueEditButtonWrapper>
+            <Button isActived={DetailIssueHeaderProps.isActived} onClick={onClickSave}>Save</Button>
+            <Span onClick={onCloseEdit}>Cancle</Span>
+            </StyledIssueEditButtonWrapper>
+          </StyledIssueEditForm>
         ) : (
           <>
-            <DetailIssueTitleWrapper>
-              <Span>레이블 목록 보기 구현</Span>
+          <DetailIssueTitleWrapper>
+              <Span>{DetailIssueHeaderProps.issue.title}</Span>
               <Span color="gray" className="title-tag">
-                #1
+                #{DetailIssueHeaderProps.issue.id}
               </Span>
-            </DetailIssueTitleWrapper>
-            <Button>Edit</Button>
-          </>
+          </DetailIssueTitleWrapper>
+            <Button onClick={onOpenEdit}>Edit</Button>
+            </>
         )}
       </DetailIssueHeaderTop>
       <DetailIssueHeaderBottom>
         <ImgTitleCount
-          SVGName={true ? 'OPENED_ISSUE' : 'CLOSED_ISSUE'}
+          SVGName={DetailIssueHeaderProps.state ? 'OPENED_ISSUE' : 'CLOSED_ISSUE'}
           color="white"
-          className={true ? 'open' : 'close'}
+          className={DetailIssueHeaderProps.issue.state ? 'open' : 'close'}
         >
-          Opened
+          {DetailIssueHeaderProps.issue.state ? 'opened' : 'closed'}
         </ImgTitleCount>
-        <Span color="gray">이슈작성자이름</Span>
-        <Span>언제 열렸는지, 닫혔는지 몇개 코멘트 달렸는지</Span>
+        <Span color="gray">{DetailIssueHeaderProps.issue.User?.name}</Span>
+        <Span>
+          {DetailIssueHeaderProps.issue.state ? 'opened' : 'closed'} this issue{' '}
+          {getDateDiff(DetailIssueHeaderProps.issue.updatedAt)} · {DetailIssueHeaderProps.issue.Comment?.length || 0} comments
+        </Span>
       </DetailIssueHeaderBottom>
     </StyledDetailIssueHeader>
   );
+};
+
+DetailIssueHeader.defaultProps = {};
+
+DetailIssueHeader.propTypes = {
+  issue: PropTypes.array,
+  isEdited: PropTypes.bool,
+  onClickSave: PropTypes.func,
+  onCloseEdit: PropTypes.func,
+  onOpenEdit: PropTypes.func,
 };
 
 export default DetailIssueHeader;

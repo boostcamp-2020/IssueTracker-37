@@ -42,3 +42,35 @@ export const DetailIssueTitleWrapper = styled.div`
     margin-left: 10px;
   }
 `;
+
+export const StyledIssueEditForm = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const StyledIssueEditButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex: 2 0 0;
+  margin-right: 10px;
+
+  & > button {
+    margin-right: 10px;
+  }
+`;
+
+export const StyledIssueEditInputWrapper = styled.div`
+  flex: 8 0 0;
+  width: 100%;
+
+  & > input {
+    width: 100%;
+    padding: 5px 12px;
+    background-color: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: rgba(225, 228, 232, 0.2);
+  }
+`;
