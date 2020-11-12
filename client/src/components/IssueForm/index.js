@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Input from '@atoms/Input';
 import Button from '@atoms/Button';
 import Span from '@atoms/Span';
-import Textarea from '@atoms/Textarea';
+import TextArea from '@atoms/TextArea';
 import Img from '@atoms/Img';
 
 import {
@@ -17,7 +17,6 @@ import {
 import ImgTitleCount from '../molecules/ImgTitleCount';
 
 const IssueForm = ({ IssueFormProps, visible, IssueState }) => {
-
   return (
     <StyledIssueForm Layout="commentIssue">
       {IssueFormProps?.user && (
@@ -26,7 +25,7 @@ const IssueForm = ({ IssueFormProps, visible, IssueState }) => {
       <Input {...IssueFormProps?.inputProps} />
       <StyledIssueFormContent>
         <StyledTextAreaWrapper>
-          <Textarea {...IssueFormProps?.textAreaProps}></Textarea>
+          <TextArea {...IssueFormProps?.textAreaProps}></TextArea>
           {visible && (
             <Span spanType="SMALL" color="GRAY">
               {IssueFormProps?.textAreaProps.value.length} Character

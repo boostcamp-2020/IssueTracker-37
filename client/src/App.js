@@ -7,8 +7,8 @@ import Auth from '@hoc/Auth';
 import Signin from '@pages/Signin';
 import SignUpPage from '@pages/SignUpPage';
 import Main from '@pages/Main';
-import LabelPage from '@pages/Label';
-import MilestonePage from '@pages/Milestone';
+import Label from '@pages/Label';
+import Milestone from '@pages/Milestone';
 import GitHubCallbackPage from '@pages/GitHubCallbackPage';
 import CreateIssue from '@pages/CreateIssue';
 import DetailIssue from '@pages/DetailIssue';
@@ -42,11 +42,11 @@ const App = () => {
         {/* <Route path="/" exact component={Auth(Index, false)}></Route> */}
         <Route path="/signin" exact component={Auth(Signin, false)}></Route>
         <Route path="/signup" exact component={Auth(SignUpPage, false)}></Route>
-        <Route path="/label" exact component={Auth(LabelPage, true)}></Route>
+        <Route path="/label" exact component={Auth(Label, true)}></Route>
         <Route
           path="/milestone"
           exact
-          component={Auth(MilestonePage, true)}
+          component={Auth(Milestone, true)}
         ></Route>
         <Route path="/issue/" exact component={Auth(CreateIssue, true)}></Route>
         <Route
