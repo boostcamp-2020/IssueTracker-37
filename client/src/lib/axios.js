@@ -23,7 +23,8 @@ const request = {
     } catch (err) {
       const { data: error } = err.response;
 
-      alert(error.message);
+      // alert(error.message);
+      throw new Error(error.message);
     }
   },
 
@@ -35,7 +36,8 @@ const request = {
     } catch (err) {
       const { data: error } = err.response;
 
-      alert(error.message);
+      // alert(error.message);
+      throw new Error(error.message);
     }
   },
 
@@ -47,7 +49,8 @@ const request = {
     } catch (err) {
       const { data: error } = err.response;
 
-      alert(error.message);
+      // alert(error.message);
+      throw new Error(error.message);
     }
   },
 
@@ -59,7 +62,8 @@ const request = {
     } catch (err) {
       const { data: error } = err.response;
 
-      alert(error.message);
+      // alert(error.message);
+      throw new Error(error.message);
     }
   },
 };

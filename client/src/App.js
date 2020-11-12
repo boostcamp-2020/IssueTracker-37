@@ -12,6 +12,8 @@ import MilestonePage from '@pages/Milestone';
 import GitHubCallbackPage from '@pages/GitHubCallbackPage';
 import CreateIssue from '@pages/CreateIssue';
 import DetailIssue from '@pages/DetailIssue';
+import EditMilestone from '@pages/EditMilestone';
+import CreateMilestone from '@pages/CreateMilestone';
 
 const GolbalStyled = createGlobalStyle`
   * {
@@ -47,7 +49,16 @@ const App = () => {
           component={Auth(MilestonePage, true)}
         ></Route>
         <Route path="/issue/" exact component={Auth(CreateIssue, true)}></Route>
-
+        <Route
+          path="/milestone/edit/:id"
+          component={Auth(EditMilestone, true)}
+        ></Route>
+        <Route
+          path="/milestone/create"
+          exact
+          component={Auth(CreateMilestone, true)}
+        ></Route>
+        <Route path="/issue" exact component={Auth(CreateIssue, true)}></Route>
         <Route
           path="/github_callback"
           exact

@@ -9,6 +9,7 @@ import { StyledHeader } from './style';
 
 const Header = () => {
   const history = useHistory();
+
   const onClickLogout = () => {
     removeToken();
     history.push('/signin');

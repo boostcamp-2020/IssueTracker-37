@@ -2,8 +2,25 @@ const { errorMessage, succeedMessage } = require('@utils/server-message');
 const milestoneService = require('@services/milestone-service');
 
 class MilestoneController {
+  async getMilestoneById(req, res) {
+    try {
+      const milestone = await milestoneService.getMilestoneById(req.params.id);
+
+      res.status(200).send({
+        status: 'success',
+        message: succeedMessage.succeedSelect,
+        data: milestone,
+      });
+    } catch (err) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedSelect });
+    }
+  }
+
   async updateMilestoneById(req, res) {
     try {
+      if (!req.body.due_date) req.body.due_date = null;
       req.body.id = req.params.id;
       await milestoneService.updateMilestoneById(req.body);
 
@@ -20,6 +37,7 @@ class MilestoneController {
 
   async insertMilestone(req, res) {
     try {
+      if (!req.body.due_date) req.body.due_date = null;
       const insertResult = await milestoneService.insertMilestone(req.body);
 
       res.status(200).send({
@@ -30,7 +48,7 @@ class MilestoneController {
     } catch (err) {
       res
         .status(400)
-        .send({ state: 'fail', message: errorMessage.failedSelect });
+        .send({ state: 'fail', message: errorMessage.failedInsert });
     }
   }
 

@@ -7,6 +7,7 @@ class Milestone extends Model {
         title: {
           type: DataTypes.STRING(30),
           allowNull: false,
+          unique: true,
         },
         description: {
           type: DataTypes.TEXT,
@@ -14,7 +15,7 @@ class Milestone extends Model {
         },
         due_date: {
           type: DataTypes.DATE,
-          allowNull: false,
+          allowNull: true,
         },
         state: {
           type: DataTypes.BOOLEAN,

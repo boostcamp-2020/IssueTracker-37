@@ -7,6 +7,9 @@ const textAreaSet = {
   ISSUE: `
     min-height: 200px;
   `,
+  MILESTONE: `
+    min-height: 200px;
+  `,
 };
 
 export const StyledTextArea = styled.textarea`
