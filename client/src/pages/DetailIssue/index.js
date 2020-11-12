@@ -4,6 +4,8 @@ import request from '@lib/axios';
 import Header from '@organisms/Header';
 import useFetch from '@hooks/useFetch';
 import { useUser } from '@hooks/useUser';
+import { useDebounce } from '@hooks/useDebounce';
+
 import DetailIssueHeader from '@organisms/DetailIssueHeader';
 import IssueDetailCommentList from '@organisms/IssueDetailCommentList';
 import Loading from '@molecules/Loading';
@@ -20,11 +22,13 @@ import {
 const DetailIssue = () => {
   const [user] = useUser();
   const [issue, setIssue, loading] = useFetch({ uri: location.pathname });
+
   const [isEdited, setIsEdited] = useState(false);
   const [isActived, setIsActived] = useState(true);
   const [isContentActived, setIsContentActived] = useState(false);
   const [title, onChangeTitle, setTitle] = useInput();
   const [content, onChangeIssueContent, setContent] = useInput();
+  const [visible] = useDebounce({ second: 2000, data: content });
 
   useEffect(() => {
     title?.length === 0 ? setIsActived(false) : setIsActived(true);
@@ -162,7 +166,10 @@ const DetailIssue = () => {
                   {...EventHandler}
                 ></DetailIssueHeader>
                 <IssueDetailCommentList issue={issue} user={user} />
-                <IssueForm IssueFormProps={IssueFormProps}></IssueForm>
+                <IssueForm
+                  IssueFormProps={IssueFormProps}
+                  visible={visible}
+                ></IssueForm>
               </StyledLeftContent>
               <StyledRightContent>
                 <IssueOption
