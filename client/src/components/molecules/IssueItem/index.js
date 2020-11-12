@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import CheckBox from '@atoms/CheckBox';
 import Img from '@atoms/Img';
+import SVG from '@atoms/SVG';
 import Span from '@atoms/Span';
 import ImageTitle from '@atoms/ImgTitle';
 import IssueLabel from '@atoms/IssueLabel';
 import milestoneImg from '@img/MilestoneImg.png';
-import opendIssueImg from '@img/OpenedIssueImg.png';
 import { getDateDiff } from '@utils/DateDiff';
 
 import {
@@ -32,17 +33,26 @@ const getIssueDescription = (issue) => {
 };
 
 const IssueItem = (props) => {
-  const { issue } = props;
+  const { issue, onCheckBoxChange } = props;
+  const history = useHistory();
+  const SVGName = issue.state ? 'OPENED_ISSUE' : 'CLOSED_ISSUE';
+  const color = issue.state ? '#22863a' : '#cb2431';
 
   return (
     <StyledIssueItem>
-      <CheckBox></CheckBox>
-      <Img src={opendIssueImg} />
+      <CheckBox
+        value={issue.id}
+        onChange={onCheckBoxChange}
+        isChecked={issue.checked}
+      ></CheckBox>
+      <SVG SVGName={SVGName} color={color}></SVG>
 
-      <StyledIssueItemContent>
+      <StyledIssueItemContent
+        onClick={() => history.push(`/issue/${issue.id}`)}
+      >
         <StyledIssueTitle>
           <Span className="issue-item-title" spanType="LARGE">
-            {issue.content}
+            {issue.title}
           </Span>
           {issue.Labels.map((label) => (
             <IssueLabel
@@ -82,6 +92,7 @@ IssueItem.defaultProps = {};
 
 IssueItem.propTypes = {
   issue: PropTypes.object,
+  onCheckBoxChange: PropTypes.func,
 };
 
 export default IssueItem;

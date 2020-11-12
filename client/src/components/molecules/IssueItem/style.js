@@ -6,7 +6,6 @@ export const StyledIssueItem = styled.div`
   height: 62px;
   border: 1px solid #f6f8fa;
   padding: 10px;
-
   &:hover {
     background-color: #f6f8fa;
   }
@@ -18,7 +17,7 @@ export const StyledIssueItem = styled.div`
     -webkit-appearance: checkbox;
   }
 
-  & > img {
+  & > SVG {
     display: block;
     margin-top: 4px;
     margin-left: 16px;
@@ -32,6 +31,7 @@ export const StyledIssueItemContent = styled.div`
   justify-content: space-between;
   flex: 20 0 0;
   padding-left: 10px;
+  cursor: pointer;
 `;
 
 export const StyledIssueFooter = styled.div`
