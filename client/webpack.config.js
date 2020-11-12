@@ -22,6 +22,7 @@ module.exports = {
       '@molecules': path.join(__dirname, 'src/components/molecules'),
       '@organisms': path.join(__dirname, 'src/components/organisms'),
       '@hoc': path.join(__dirname, 'src/hoc'),
+      '@hooks': path.join(__dirname, 'src/hooks'),
       '@img': path.join(__dirname, '/public/img'),
       '@components': path.join(__dirname, 'src/components'),
     },
