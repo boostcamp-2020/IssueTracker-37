@@ -33,6 +33,7 @@ router.post(
 router.post('/', issueController.create);
 
 router.put('/:issue_id', issueController.update);
+router.put('/', issueController.bulkUpdate);
 
 router.delete('/:issue_id', issueController.delete);
 

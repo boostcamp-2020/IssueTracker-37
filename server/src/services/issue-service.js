@@ -117,6 +117,14 @@ class IssueService {
 
     return comment;
   }
+
+  async bulkUpdate(payload) {
+    try {
+      await issueModel.bulkUpdate(payload);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 }
 
 const issueService = new IssueService();
