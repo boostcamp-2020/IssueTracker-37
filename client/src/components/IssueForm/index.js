@@ -22,7 +22,9 @@ const IssueForm = ({ IssueFormProps, visible, IssueState }) => {
       {IssueFormProps?.user && (
         <Img imgType="AVARTAR_LARGE" src={IssueFormProps?.user?.profile}></Img>
       )}
-      <Input {...IssueFormProps?.inputProps} />
+      {IssueFormProps.type === 'newIssue' && (
+        <Input {...IssueFormProps?.inputProps} />
+      )}
       <StyledIssueFormContent>
         <StyledTextAreaWrapper>
           <TextArea {...IssueFormProps?.textAreaProps}></TextArea>
@@ -53,18 +55,22 @@ const IssueForm = ({ IssueFormProps, visible, IssueState }) => {
             {IssueFormProps?.buttonProps?.leftButton}
           </Span>
         )}
-        {IssueFormProps?.type === 'commentIssue' && IssueState && (
+        {IssueFormProps?.type === 'commentIssue' && IssueFormProps.IssueState && (
           <ImgTitleCount
             className="commentIssue"
             SVGName="CLOSED_ISSUE"
             color="black"
+            onClick={IssueFormProps?.buttonProps?.onClickCancel}
           >
             Close Issue
           </ImgTitleCount>
         )}
-        {IssueFormProps?.type === 'commentIssue' && !IssueState && (
-          <Button>Reopen Issue</Button>
-        )}
+        {IssueFormProps?.type === 'commentIssue' &&
+          !IssueFormProps.IssueState && (
+            <Button onClick={IssueFormProps?.buttonProps?.onClickCancel}>
+              Reopen Issue
+            </Button>
+          )}
         {IssueFormProps?.type === 'editIssue' && (
           <Button color="red">{IssueFormProps?.buttonProps?.leftButton}</Button>
         )}
