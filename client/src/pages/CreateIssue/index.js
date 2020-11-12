@@ -28,17 +28,18 @@ const CreateIssue = () => {
   const [labelCheckList, setLabelCheckList] = useState([]);
   const [milestoneCheckList, setMilestoneCheckList] = useState([]);
 
-  const [assignees, setAssignees] = useFetch('/user', {
-    name: 'isChecked',
-    value: false,
+  const [assignees, setAssignees] = useFetch({
+    uri: '/user',
+    option: { name: 'isChecked', value: false },
   });
-  const [milestones, setMilestones] = useFetch('/milestone', {
-    name: 'isChecked',
-    value: false,
+
+  const [milestones, setMilestones] = useFetch({
+    uri: '/milestone',
+    option: { name: 'isChecked', value: false },
   });
-  const [labels, setLabels] = useFetch('/label', {
-    name: 'isChecked',
-    value: false,
+  const [labels, setLabels] = useFetch({
+    uri: '/label',
+    option: { name: 'isChecked', value: false },
   });
 
   const { title, content } = IssueContents;

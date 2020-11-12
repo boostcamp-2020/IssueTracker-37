@@ -16,7 +16,7 @@ import {
 } from './style';
 
 const DetailIssue = () => {
-  const [issue, setIssue, loading] = useFetch(location.pathname);
+  const [issue, setIssue, loading] = useFetch({ uri: location.pathname });
   const [isEdited, setIsEdited] = useState(false);
   const [isActived, setIsActived] = useState(true);
   const [title, onChangeTitle, setTitle] = useInput();
@@ -76,7 +76,7 @@ const DetailIssue = () => {
       dropdownHeader: 'Assign up to 10 people to this issue',
       checkList: [],
       items: [{}],
-      onClickSpan: () => {},
+      onClickSpan: () => { },
     },
   };
 
@@ -94,28 +94,28 @@ const DetailIssue = () => {
         {loading ? (
           <Loading />
         ) : (
-          <>
-            <StyledLeftContent>
-              <DetailIssueHeader
-                DetailIssueHeaderProps={DetailIssueHeaderProps}
-                {...EventHandler}
-              ></DetailIssueHeader>
-              <IssueDetailCommentList issue={issue} />
-              <IssueForm IssueFormProps={IssueFormProps}></IssueForm>
-            </StyledLeftContent>
-            <StyledRightContent>
-              <IssueOption
-                IssueOptionProps={IssueOptionProps.assignee}
-              ></IssueOption>
-              <IssueOption
-                IssueOptionProps={IssueOptionProps.assignee}
-              ></IssueOption>
-              <IssueOption
-                IssueOptionProps={IssueOptionProps.assignee}
-              ></IssueOption>
-            </StyledRightContent>
-          </>
-        )}
+            <>
+              <StyledLeftContent>
+                <DetailIssueHeader
+                  DetailIssueHeaderProps={DetailIssueHeaderProps}
+                  {...EventHandler}
+                ></DetailIssueHeader>
+                <IssueDetailCommentList issue={issue} />
+                <IssueForm IssueFormProps={IssueFormProps}></IssueForm>
+              </StyledLeftContent>
+              <StyledRightContent>
+                <IssueOption
+                  IssueOptionProps={IssueOptionProps.assignee}
+                ></IssueOption>
+                <IssueOption
+                  IssueOptionProps={IssueOptionProps.assignee}
+                ></IssueOption>
+                <IssueOption
+                  IssueOptionProps={IssueOptionProps.assignee}
+                ></IssueOption>
+              </StyledRightContent>
+            </>
+          )}
       </StyledDetailIssueWrapper>
     </>
   );
