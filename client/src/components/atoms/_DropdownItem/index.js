@@ -35,10 +35,12 @@ const _DropdownItem = ({
         <StyledDropdownItemTitle>{title}</StyledDropdownItemTitle>
         <StyledDropdownItemDescription>
           <Span spanType="SMALL" color="GRAY">
-            {dropdownType === 'label'
-              ? description || 'no label description'
-              : ''}
-            {dropdownType === 'milestone' ? description || 'no due date' : ''}
+            {`${dropdownType === 'label'
+                ? description || 'no label description'
+                : ''
+              } 
+            ${dropdownType === 'milestone' ? description || 'no due date' : ''
+              }`}
           </Span>
         </StyledDropdownItemDescription>
       </StyledDropdownItemContent>
