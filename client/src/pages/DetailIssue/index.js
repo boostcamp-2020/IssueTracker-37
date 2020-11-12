@@ -1,10 +1,19 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import request from '@lib/axios';
 import Header from '@organisms/Header';
-import useFetch from '@hoc/useFetch';
+import useFetch from '@hooks/useFetch';
 import DetailIssueHeader from '@organisms/DetailIssueHeader';
-import { StyledDetailIssueWrapper } from './style';
+import IssueDetailCommentList from '@organisms/IssueDetailCommentList';
+import Loading from '@molecules/Loading';
+import IssueForm from '@components/IssueForm';
+import IssueOption from '@components/IssueOption';
 import useInput from '../../hooks/useInput';
+
+import {
+  StyledDetailIssueWrapper,
+  StyledLeftContent,
+  StyledRightContent,
+} from './style';
 
 const DetailIssue = () => {
   const [issue, setIssue, loading] = useFetch(location.pathname);
@@ -17,13 +26,14 @@ const DetailIssue = () => {
   }, [title]);
 
   useEffect(() => {
-    if(!loading){
+    if (!loading) {
       setTitle(issue.title);
     }
   }, [issue]);
 
   const EventHandler = {
     onOpenEdit: () => {
+      setTitle(issue.title);
       setIsEdited(true);
     },
     onCloseEdit: () => {
@@ -31,12 +41,15 @@ const DetailIssue = () => {
     },
 
     onClickSave: async () => {
-      const { data } = await request.put({uri : location.pathname, data: {
-        title
-      }});
+      const { data } = await request.put({
+        uri: location.pathname,
+        data: {
+          title,
+        },
+      });
 
-      if (data.state === 'success'){
-        setIssue({...issue, title});
+      if (data.state === 'success') {
+        setIssue({ ...issue, title });
         setIsEdited(false);
       }
       alert(data.message);
@@ -54,17 +67,54 @@ const DetailIssue = () => {
     },
   };
 
+  const IssueOptionProps = {
+    assignee: {
+      SVGName: 'SETTING',
+      color: 'gray',
+      title: 'Assignees',
+      dropdownType: 'assignee',
+      dropdownHeader: 'Assign up to 10 people to this issue',
+      checkList: [],
+      items: [{}],
+      onClickSpan: () => {},
+    },
+  };
+
+  const IssueFormProps = {
+    type: 'commentIssue',
+    buttonProps: {
+      rightButton: 'Comment',
+    },
+  };
+
   return (
     <>
       <Header></Header>
       <StyledDetailIssueWrapper>
         {loading ? (
-          <div>loading...</div>
+          <Loading />
         ) : (
-          <DetailIssueHeader
-            DetailIssueHeaderProps={DetailIssueHeaderProps}
-            {...EventHandler}
-          ></DetailIssueHeader>
+          <>
+            <StyledLeftContent>
+              <DetailIssueHeader
+                DetailIssueHeaderProps={DetailIssueHeaderProps}
+                {...EventHandler}
+              ></DetailIssueHeader>
+              <IssueDetailCommentList issue={issue} />
+              <IssueForm IssueFormProps={IssueFormProps}></IssueForm>
+            </StyledLeftContent>
+            <StyledRightContent>
+              <IssueOption
+                IssueOptionProps={IssueOptionProps.assignee}
+              ></IssueOption>
+              <IssueOption
+                IssueOptionProps={IssueOptionProps.assignee}
+              ></IssueOption>
+              <IssueOption
+                IssueOptionProps={IssueOptionProps.assignee}
+              ></IssueOption>
+            </StyledRightContent>
+          </>
         )}
       </StyledDetailIssueWrapper>
     </>
