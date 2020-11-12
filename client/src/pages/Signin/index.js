@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import GitHubButton from '@img/GitHubButton.png';
 import request from '@lib/axios';
 import { setToken } from '@utils/token';
+import { setToLocalStorage } from '@hooks/useUser';
 import {
   AppTitle,
   Form,
@@ -38,7 +39,7 @@ const SignInPage = () => {
     try {
       const {
         data: {
-          data: { JWT },
+          data: { JWT, user },
         },
       } = await request.post({
         uri: '/user/signin',
@@ -46,8 +47,8 @@ const SignInPage = () => {
       });
 
       setToken(JWT);
+      setToLocalStorage(user);
       history.push('/');
-      // window.location.replace = '/';
     } catch (err) {
       alert(err.response.data);
     }

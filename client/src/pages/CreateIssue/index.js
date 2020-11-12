@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import useFetch from '@hooks/useFetch';
+import { useUser } from '@hooks/useUser';
 import Header from '@organisms/Header';
 import IssueForm from '@components/IssueForm';
 import IssueOption from '@components/IssueOption';
@@ -13,12 +14,7 @@ const initialInputs = {
 };
 
 const CreateIssue = () => {
-  // 유저정보 받아오기. => hook 을 사용하면 좋을듯.
-  const user = {
-    id: 1,
-    name: 'sumniy',
-    profile: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
-  };
+  const [user] = useUser();
   const history = useHistory();
   const [IssueContents, setIssueContents] = useState(initialInputs);
   const [visible, setVisible] = useState(false);
