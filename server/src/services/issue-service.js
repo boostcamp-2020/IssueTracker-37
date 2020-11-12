@@ -23,7 +23,7 @@ class IssueService {
   }
 
   async findOneWithLabel(id) {
-    const issue = await issueModel.selectById(id, labelModel);
+    const issue = await issueModel.selectById(id);
 
     return issue;
   }

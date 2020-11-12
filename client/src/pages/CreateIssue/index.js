@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import useFetch from '@hoc/useFetch';
+import useFetch from '@hooks/useFetch';
 import Header from '@organisms/Header';
 import IssueForm from '@components/IssueForm';
 import IssueOption from '@components/IssueOption';
@@ -72,6 +72,7 @@ const CreateIssue = () => {
   }, [title]);
 
   const IssueFormProps = {
+    type: 'newIssue',
     inputProps: {
       placeholder: 'Title',
       name: 'title',
@@ -108,6 +109,8 @@ const CreateIssue = () => {
 
         console.log(payload);
       },
+      leftButton: 'Cancle',
+      rightButton: 'sumbit',
     },
     user,
   };

@@ -9,6 +9,14 @@ export const StyledHeader = styled.div`
   height: 62px;
   background-color: #24292e;
 
+  & > span {
+    cursor: pointer;
+  }
+
+  & > svg {
+    margin-right: 10px;
+  }
+
   & > button {
     position: absolute;
     right: 30px;

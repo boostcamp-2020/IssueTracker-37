@@ -27,6 +27,7 @@ class IssueController {
         data: issue,
       });
     } catch (error) {
+      console.error(error);
       res
         .status(400)
         .send({ state: 'fail', message: errorMessage.failedSelect });

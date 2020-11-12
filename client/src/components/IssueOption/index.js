@@ -14,59 +14,59 @@ const IssueOption = ({ IssueOptionProps }) => {
   const [renderComponent, setRenderComponent] = useState([]);
 
   useEffect(() => {
-    if (IssueOptionProps.title === 'Assignees') {
+    if (IssueOptionProps?.title === 'Assignees') {
       setDefalutCotent('No one-assign yourself');
       setRenderComponent(
         <AssigneeContent
-          checkList={IssueOptionProps.checkList}
+          checkList={IssueOptionProps?.checkList}
         ></AssigneeContent>,
       );
     }
 
-    if (IssueOptionProps.title === 'label') {
+    if (IssueOptionProps?.title === 'label') {
       setDefalutCotent('None yet');
       setRenderComponent(
-        <LabelContent checkList={IssueOptionProps.checkList}></LabelContent>,
+        <LabelContent checkList={IssueOptionProps?.checkList}></LabelContent>,
       );
     }
 
-    if (IssueOptionProps.title === 'milestone') {
-      if (IssueOptionProps.checkList.length === 0) {
+    if (IssueOptionProps?.title === 'milestone') {
+      if (IssueOptionProps?.checkList.length === 0) {
         setDefalutCotent('No milestone');
         return;
       }
 
-      const InitialIssuesLength = IssueOptionProps.checkList[0].Issues.length;
-      const ClosedIssuesLength = IssueOptionProps.checkList[0].Issues.filter(
+      const InitialIssuesLength = IssueOptionProps?.checkList[0].Issues.length;
+      const ClosedIssuesLength = IssueOptionProps?.checkList[0].Issues.filter(
         (issue) => issue.state === false,
       ).length;
       const percent = Number((ClosedIssuesLength / InitialIssuesLength) * 100);
 
       setRenderComponent(
         <MilestoneContent
-          checkList={IssueOptionProps.checkList}
+          checkList={IssueOptionProps?.checkList}
           percent={percent}
         ></MilestoneContent>,
       );
     }
-  }, [IssueOptionProps.checkList]);
+  }, [IssueOptionProps?.checkList]);
 
   return (
     <>
       <StyledIssueOption>
         <DropdownButton {...IssueOptionProps}></DropdownButton>
         <StyledIssueOptionBottom>
-          {IssueOptionProps.checkList.length === 0 ? (
+          {IssueOptionProps?.checkList.length === 0 ? (
             <Span
               color="GRAY"
               spanType="SMALL"
-              onClick={IssueOptionProps.onClickSpan}
+              onClick={IssueOptionProps?.onClickSpan}
             >
               {defaultContent}
             </Span>
           ) : (
-              renderComponent
-            )}
+            renderComponent
+          )}
         </StyledIssueOptionBottom>
       </StyledIssueOption>
     </>

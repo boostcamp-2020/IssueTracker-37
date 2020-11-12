@@ -73,19 +73,38 @@ class Issue extends Model {
     return issues;
   }
 
-  static async selectById(id, Label) {
+  static async selectById(id) {
     let findIssue = null;
 
-    if (Label) {
-      findIssue = await this.findByPk(id, {
-        include: [
-          {
-            model: Label,
+    findIssue = await this.findByPk(id, {
+      include: [
+        {
+          model: labelModel,
+        },
+        {
+          model: milestoneModel,
+        },
+        {
+          model: userModel,
+          attributes: {
+            exclude: ['password'],
           },
-        ],
-      });
-    }
-    if (!Label) {
+        },
+        {
+          model: commentModel,
+          include: [
+            {
+              model: userModel,
+              attributes: {
+                exclude: ['password'],
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!labelModel) {
       findIssue = await this.findByPk(id);
     }
 
