@@ -21,7 +21,7 @@ import {
 
 const DetailIssue = () => {
   const [user] = useUser();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [isEdited, setIsEdited] = useState(false);
   const [isActived, setIsActived] = useState(true);
@@ -320,7 +320,11 @@ const DetailIssue = () => {
                   DetailIssueHeaderProps={DetailIssueHeaderProps}
                   {...EventHandler}
                 ></DetailIssueHeader>
-                <IssueDetailCommentList issue={issue} user={user} />
+                <IssueDetailCommentList
+                  issue={issue}
+                  user={user}
+                  setIssue={setIssue}
+                />
                 <IssueForm
                   IssueFormProps={IssueFormProps}
                   visible={visible}

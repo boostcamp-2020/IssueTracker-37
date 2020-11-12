@@ -18,13 +18,14 @@ import ImgTitleCount from '../molecules/ImgTitleCount';
 
 const IssueForm = ({ IssueFormProps, visible, IssueState }) => {
   return (
-    <StyledIssueForm Layout="commentIssue">
-      {IssueFormProps?.user && (
+    <StyledIssueForm Layout={IssueFormProps?.type}>
+      {IssueFormProps?.user && IssueFormProps?.type !== 'editIssue' && (
         <Img imgType="AVARTAR_LARGE" src={IssueFormProps?.user?.profile}></Img>
       )}
       {IssueFormProps.type === 'newIssue' && (
         <Input {...IssueFormProps?.inputProps} />
       )}
+
       <StyledIssueFormContent>
         <StyledTextAreaWrapper>
           <TextArea {...IssueFormProps?.textAreaProps}></TextArea>
@@ -72,7 +73,12 @@ const IssueForm = ({ IssueFormProps, visible, IssueState }) => {
             </Button>
           )}
         {IssueFormProps?.type === 'editIssue' && (
-          <Button color="red">{IssueFormProps?.buttonProps?.leftButton}</Button>
+          <Button
+            onClick={IssueFormProps?.buttonProps?.onClickCancel}
+            color="red"
+          >
+            {IssueFormProps?.buttonProps?.leftButton}
+          </Button>
         )}
         <Button
           isActived={IssueFormProps?.buttonProps?.isActived}
