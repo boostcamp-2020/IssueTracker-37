@@ -40,7 +40,7 @@ export const StyledDropdownMenu = styled.div`
   top: 30px;
   right: 0;
   width: 100%;
-  border: 1px solid #fafbfc;
+  border: 1px solid #959da5;
   border-radius: 6px;
   z-index: 1;
 
