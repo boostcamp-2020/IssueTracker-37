@@ -4,7 +4,9 @@ export const StyledIssueForm = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 40px 40px 40px 100px;
+  ${(props) => props.Layout === 'commentIssue' && 'margin-left: 50px'};
+  ${(props) => props.Layout === 'newIssue' && 'margin: 40px 40px 40px 100px;'};
+  ${(props) => props.Layout === 'editIssue' && 'margin: 0'};
   padding: 10px;
   border: 1px solid rgb(204 197 197);
   border-radius: 6px;
@@ -39,9 +41,18 @@ export const StyledIssueFormContent = styled.div`
 
 export const StyledIssueFormFooter = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  justify-content: ${(props) =>
+    props.Layout === 'newIssue' ? 'space-between' : 'flex-end'};
   padding: 10px;
+
+  .commentIssue {
+    border-radius: 6px;
+    background-color: #fafbfc;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+  }
+  & > button {
+    margin-left: 3px;
+  }
 `;
 
 export const StyledTextAreaWrapper = styled.div`
