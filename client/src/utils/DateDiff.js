@@ -13,8 +13,8 @@ export const getDateDiff = (date) => {
 
   if (diff < 60) return `${diff} seconds ago`;
   if (diff < 60 * 60) return `${Math.floor(diff / 60)} minutes`;
-  if (diff < 60 * 60 * 60) return `${Math.floor(diff / (60 * 60))} hours`;
-  if (diff < 60 * 60 * 60 * 24)
+  if (diff < 60 * 60 * 24) return `${Math.floor(diff / (60 * 60))} hours`;
+  if (diff < 60 * 60 * 30 * 24)
     return `${Math.floor(diff / (60 * 60 * 24))} days`;
   if (diff < 60 * 60 * 24 * 30 * 12)
     return `${Math.floor(diff / (60 * 60 * 24 * 30))} months`;
