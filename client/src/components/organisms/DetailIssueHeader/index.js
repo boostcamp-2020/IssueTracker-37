@@ -17,37 +17,51 @@ import {
   StyledIssueEditInputWrapper,
 } from './style';
 
-const DetailIssueHeader = ({DetailIssueHeaderProps,
-  onClickSave, onOpenEdit, onCloseEdit, onChangeTitle}) => {
-
+const DetailIssueHeader = ({
+  DetailIssueHeaderProps,
+  onClickSave,
+  onOpenEdit,
+  onCloseEdit,
+  onChangeTitle,
+}) => {
   return (
     <StyledDetailIssueHeader>
       <DetailIssueHeaderTop>
         {DetailIssueHeaderProps.isEdited ? (
           <StyledIssueEditForm>
             <StyledIssueEditInputWrapper>
-            <Input {...DetailIssueHeaderProps.titleInputs} onChange={onChangeTitle}></Input>
+              <Input
+                {...DetailIssueHeaderProps.titleInputs}
+                onChange={onChangeTitle}
+              ></Input>
             </StyledIssueEditInputWrapper>
             <StyledIssueEditButtonWrapper>
-            <Button isActived={DetailIssueHeaderProps.isActived} onClick={onClickSave}>Save</Button>
-            <Span onClick={onCloseEdit}>Cancle</Span>
+              <Button
+                isActived={DetailIssueHeaderProps.isActived}
+                onClick={onClickSave}
+              >
+                Save
+              </Button>
+              <Span onClick={onCloseEdit}>Cancle</Span>
             </StyledIssueEditButtonWrapper>
           </StyledIssueEditForm>
         ) : (
           <>
-          <DetailIssueTitleWrapper>
+            <DetailIssueTitleWrapper>
               <Span>{DetailIssueHeaderProps.issue.title}</Span>
               <Span color="gray" className="title-tag">
                 #{DetailIssueHeaderProps.issue.id}
               </Span>
-          </DetailIssueTitleWrapper>
+            </DetailIssueTitleWrapper>
             <Button onClick={onOpenEdit}>Edit</Button>
-            </>
+          </>
         )}
       </DetailIssueHeaderTop>
       <DetailIssueHeaderBottom>
         <ImgTitleCount
-          SVGName={DetailIssueHeaderProps.state ? 'OPENED_ISSUE' : 'CLOSED_ISSUE'}
+          SVGName={
+            DetailIssueHeaderProps.state ? 'OPENED_ISSUE' : 'CLOSED_ISSUE'
+          }
           color="white"
           className={DetailIssueHeaderProps.issue.state ? 'open' : 'close'}
         >
@@ -56,7 +70,8 @@ const DetailIssueHeader = ({DetailIssueHeaderProps,
         <Span color="gray">{DetailIssueHeaderProps.issue.User?.name}</Span>
         <Span>
           {DetailIssueHeaderProps.issue.state ? 'opened' : 'closed'} this issue{' '}
-          {getDateDiff(DetailIssueHeaderProps.issue.updatedAt)} · {DetailIssueHeaderProps.issue.Comment?.length || 0} comments
+          {getDateDiff(DetailIssueHeaderProps.issue.updatedAt)} ·{' '}
+          {DetailIssueHeaderProps.issue.Comments?.length || 0} comments
         </Span>
       </DetailIssueHeaderBottom>
     </StyledDetailIssueHeader>
@@ -71,6 +86,8 @@ DetailIssueHeader.propTypes = {
   onClickSave: PropTypes.func,
   onCloseEdit: PropTypes.func,
   onOpenEdit: PropTypes.func,
+  onChangeTitle: PropTypes.func,
+  DetailIssueHeaderProps: PropTypes.object,
 };
 
 export default DetailIssueHeader;

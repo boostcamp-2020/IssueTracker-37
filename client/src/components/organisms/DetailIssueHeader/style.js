@@ -5,6 +5,7 @@ export const StyledDetailIssueHeader = styled.div`
   flex-direction: column;
   border-bottom: 1px solid gray;
   padding-bottom: 25px;
+  margin-bottom: 20px;
 `;
 
 export const DetailIssueHeaderTop = styled.div`
@@ -26,9 +27,11 @@ export const DetailIssueHeaderBottom = styled.div`
 
   .open {
     background-color: green;
+    border-radius: 6px;
   }
   .close {
     background-color: red;
+    border-radius: 6px;
   }
 `;
 
