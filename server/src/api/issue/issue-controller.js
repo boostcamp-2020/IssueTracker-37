@@ -242,7 +242,7 @@ class IssueController {
     try {
       const payload = {
         content: req.body.content,
-        user_id: 1, // 임시 req.body.no 로 받아와야함.
+        user_id: req.body.user_no, // 임시 req.body.no 로 받아와야함.
         issue_id: req.params.issue_id,
       };
       const comment = await issueService.createComment(payload);
