@@ -29,7 +29,7 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  onClick: () => { },
+  onClick: () => {},
   isActived: true,
 };
 

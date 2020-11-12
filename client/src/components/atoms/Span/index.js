@@ -32,7 +32,7 @@ const Span = (props) => {
 };
 
 Span.defaultProps = {
-  onClick: () => { },
+  onClick: () => {},
 };
 
 Span.propTypes = {
