@@ -42,6 +42,17 @@ class MilestoneService {
     }
   }
 
+  async getMilestoneById(id) {
+    try {
+      const milestone = await milestoneModel.selectById(id);
+
+      if (!milestone) throw new Error();
+      return milestone;
+    } catch (err) {
+      throw new Error();
+    }
+  }
+
   async deleteMilestoneById(id) {
     const isDeleted = await milestoneModel.deleteMilestoneById(id);
 

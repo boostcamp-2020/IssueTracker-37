@@ -13,4 +13,8 @@ export const StyledHeader = styled.div`
     position: absolute;
     right: 30px;
   }
+
+  & > div:hover {
+    background-color: #24292e;
+  }
 `;

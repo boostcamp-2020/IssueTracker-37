@@ -11,9 +11,11 @@ const SimpleNavBar = ({ className, onClick, buttonName }) => {
   return (
     <StyledSimpleNavbar className={cn(className)}>
       <NavButton className="navBtn" displayCount="none"></NavButton>
-      <Button buttonType="GREEN" className="newLabelBtn" onClick={onClick}>
-        {buttonName}
-      </Button>
+      {buttonName && (
+        <Button buttonType="GREEN" className="newLabelBtn" onClick={onClick}>
+          {buttonName}
+        </Button>
+      )}
     </StyledSimpleNavbar>
   );
 };

@@ -87,5 +87,5 @@ export const StyledFormContainer = styled.div`
     white-space: nowrap;
     margin-left: 5px;
     height: 35px;
-  }a
+  }
 `;
