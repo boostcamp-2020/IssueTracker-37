@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const StyledDropdownItem = styled.div`
   display: flex;
   padding: 7px 10px;
-  border-top: 1px solid black;
+  border-top: 1px solid #e1e4e8;
   background-color: white;
   z-index: 1;
+  cursor: pointer;
 `;
 
 export const StyledDropdownItemImage = styled.div`
