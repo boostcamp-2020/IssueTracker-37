@@ -31,13 +31,14 @@ const IssueOption = ({ IssueOptionProps }) => {
     }
 
     if (IssueOptionProps?.title === 'milestone') {
-      if (IssueOptionProps?.checkList.length === 0) {
+      if (IssueOptionProps?.checkList?.length === 0) {
         setDefalutCotent('No milestone');
         return;
       }
 
-      const InitialIssuesLength = IssueOptionProps?.checkList[0].Issues.length;
-      const ClosedIssuesLength = IssueOptionProps?.checkList[0].Issues.filter(
+      const InitialIssuesLength =
+        IssueOptionProps?.checkList[0]?.Issues?.length;
+      const ClosedIssuesLength = IssueOptionProps?.checkList[0]?.Issues?.filter(
         (issue) => issue.state === false,
       ).length;
       const percent = Number((ClosedIssuesLength / InitialIssuesLength) * 100);
@@ -56,7 +57,7 @@ const IssueOption = ({ IssueOptionProps }) => {
       <StyledIssueOption>
         <DropdownButton {...IssueOptionProps}></DropdownButton>
         <StyledIssueOptionBottom>
-          {IssueOptionProps?.checkList.length === 0 ? (
+          {IssueOptionProps?.checkList?.length === 0 ? (
             <Span
               color="GRAY"
               spanType="SMALL"
@@ -65,8 +66,8 @@ const IssueOption = ({ IssueOptionProps }) => {
               {defaultContent}
             </Span>
           ) : (
-            renderComponent
-          )}
+              renderComponent
+            )}
         </StyledIssueOptionBottom>
       </StyledIssueOption>
     </>

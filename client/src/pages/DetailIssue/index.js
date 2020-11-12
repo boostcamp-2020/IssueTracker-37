@@ -21,7 +21,7 @@ import {
 
 const DetailIssue = () => {
   const [user] = useUser();
-  const [issue, setIssue, loading] = useFetch({ uri: location.pathname });
+  const [loading, setLoading] = useState(false);
 
   const [isEdited, setIsEdited] = useState(false);
   const [isActived, setIsActived] = useState(true);
@@ -29,6 +29,174 @@ const DetailIssue = () => {
   const [title, onChangeTitle, setTitle] = useInput();
   const [content, onChangeIssueContent, setContent] = useInput();
   const [visible] = useDebounce({ second: 2000, data: content });
+
+  const [issue, setIssue] = useState({});
+  const [assigneeCheckList, setAssigneeCheckList] = useState([]);
+  const [labelCheckList, setLabelCheckList] = useState([]);
+  const [milestoneCheckList, setMilestoneCheckList] = useState([]);
+
+  const [assignees, setAssignees] = useFetch({
+    uri: '/user',
+    option: { name: 'isChecked', value: false },
+  });
+
+  const [milestones, setMilestones] = useFetch({
+    uri: '/milestone',
+    option: { name: 'isChecked', value: false },
+  });
+
+  const [labels, setLabels] = useFetch({
+    uri: '/label',
+    option: { name: 'isChecked', value: false },
+  });
+
+  const IssueOptionProps = {
+    assignee: {
+      SVGName: 'SETTING',
+      color: 'gray',
+      title: 'Assignees',
+      dropdownType: 'assignee',
+      dropdownHeader: 'Assign up to 10 people to this issue',
+      checkList: assigneeCheckList,
+      items: assignees,
+      onClickSpan: () => {
+        setAssigneeCheckList([user]);
+        setAssignees(
+          assignees.map((assignee) =>
+            user.id === assignee.id
+              ? { ...assignee, isChecked: true }
+              : assignee,
+          ),
+        );
+      },
+      onClick: (id) => {
+        const [selectedItem] = assignees.filter((item) => id === item.id);
+
+        if (selectedItem.isChecked) {
+          setAssignees(
+            assignees.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: false }
+                : item,
+            ),
+          );
+
+          setAssigneeCheckList(
+            assigneeCheckList.filter((item) => item.id !== id),
+          );
+        }
+
+        if (!selectedItem.isChecked) {
+          selectedItem.isChecked = true;
+
+          setAssignees(
+            assignees.map((item) =>
+              selectedItem.id === item.id ? { ...item, isChecked: true } : item,
+            ),
+          );
+
+          setAssigneeCheckList([...assigneeCheckList, selectedItem]);
+        }
+      },
+    },
+
+    label: {
+      SVGName: 'SETTING',
+      color: 'gray',
+      title: 'label',
+      dropdownHeader: 'Apply labels to this issue',
+      dropdownType: 'label',
+      checkList: labelCheckList,
+      items: labels,
+      onClick: (id) => {
+        const [selectedItem] = labels.filter((item) => id === item.id);
+
+        if (selectedItem.isChecked) {
+          setLabels(
+            labels.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: false }
+                : item,
+            ),
+          );
+
+          setLabelCheckList(labelCheckList.filter((item) => item.id !== id));
+        }
+
+        if (!selectedItem.isChecked) {
+          selectedItem.isChecked = true;
+
+          setLabels(
+            labels.map((item) =>
+              selectedItem.id === item.id ? { ...item, isChecked: true } : item,
+            ),
+          );
+
+          setLabelCheckList([...labelCheckList, selectedItem]);
+        }
+      },
+    },
+
+    milstone: {
+      SVGName: 'SETTING',
+      color: 'gray',
+      title: 'milestone',
+      dropdownHeader: 'Set milestone',
+      dropdownType: 'milestone',
+      checkList: milestoneCheckList,
+      items: milestones,
+      onClick: (id) => {
+        const [selectedItem] = milestones.filter((item) => id === item.id);
+
+        if (selectedItem.isChecked) {
+          setMilestones(
+            milestones.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: false }
+                : item,
+            ),
+          );
+
+          setMilestoneCheckList([]);
+        }
+
+        if (!selectedItem.isChecked) {
+          selectedItem.isChecked = true;
+
+          setMilestones(
+            milestones.map((item) =>
+              selectedItem.id === item.id
+                ? { ...item, isChecked: true }
+                : { ...item, isChecked: false },
+            ),
+          );
+
+          setMilestoneCheckList([selectedItem]);
+        }
+      },
+    },
+  };
+
+  useEffect(() => {
+    (async () => {
+      const {
+        data: { data },
+      } = await request.get({ uri: location.pathname });
+
+      const labelList = data.Labels;
+      const milestoneList = data.Milestone;
+      const assigneeList = [data.User];
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+
+      setIssue(data);
+      setAssigneeCheckList(assigneeList);
+      setLabelCheckList(labelList);
+      setMilestoneCheckList([milestoneList]);
+    })();
+  }, []);
 
   useEffect(() => {
     title?.length === 0 ? setIsActived(false) : setIsActived(true);
@@ -86,19 +254,6 @@ const DetailIssue = () => {
     titleInputs: {
       name: 'title',
       value: title,
-    },
-  };
-
-  const IssueOptionProps = {
-    assignee: {
-      SVGName: 'SETTING',
-      color: 'gray',
-      title: 'Assignees',
-      dropdownType: 'assignee',
-      dropdownHeader: 'Assign up to 10 people to this issue',
-      checkList: [],
-      items: [{}],
-      onClickSpan: () => { },
     },
   };
 
@@ -176,10 +331,10 @@ const DetailIssue = () => {
                   IssueOptionProps={IssueOptionProps.assignee}
                 ></IssueOption>
                 <IssueOption
-                  IssueOptionProps={IssueOptionProps.assignee}
+                  IssueOptionProps={IssueOptionProps.label}
                 ></IssueOption>
                 <IssueOption
-                  IssueOptionProps={IssueOptionProps.assignee}
+                  IssueOptionProps={IssueOptionProps.milstone}
                 ></IssueOption>
               </StyledRightContent>
             </>
