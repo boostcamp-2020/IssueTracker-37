@@ -28,8 +28,8 @@ const IssueDetailCommentItem = ({ issue, comment, user }) => {
           <Span color="GRAY">Edit</Span>
         </>
       ) : (
-        <SVG SVGName="IMOJI" color="#6a737d"></SVG>
-      );
+          <SVG SVGName="IMOJI" color="#6a737d"></SVG>
+        );
   }
 
   if (issue) {
@@ -41,8 +41,8 @@ const IssueDetailCommentItem = ({ issue, comment, user }) => {
           <Span color="GRAY">Edit</Span>
         </>
       ) : (
-        <SVG SVGName="IMOJI" color="#6a737d"></SVG>
-      );
+          <SVG SVGName="IMOJI" color="#6a737d"></SVG>
+        );
   }
 
   return (
@@ -51,8 +51,8 @@ const IssueDetailCommentItem = ({ issue, comment, user }) => {
         {Object.keys(issue).length ? (
           <Img imgType="AVARTAR_LARGE" src={issue.User?.profile}></Img>
         ) : (
-          <Img imgType="AVARTAR_LARGE" src={comment.User?.profile}></Img>
-        )}
+            <Img imgType="AVARTAR_LARGE" src={comment.User?.profile}></Img>
+          )}
         <StyledItem>
           {Object.keys(issue).length ? (
             <StyledItemHeader type="issue">
@@ -65,22 +65,22 @@ const IssueDetailCommentItem = ({ issue, comment, user }) => {
               <StyledHeaderRight>{renderComponent}</StyledHeaderRight>
             </StyledItemHeader>
           ) : (
-            <StyledItemHeader>
-              <StyledHeaderLeft>
-                <Span fontWeight="600">{comment.User?.name}</Span>
-                <Span color="GRAY">
-                  commented {getDateDiff(comment.updatedAt)} ago
+              <StyledItemHeader>
+                <StyledHeaderLeft>
+                  <Span fontWeight="600">{comment.User?.name}</Span>
+                  <Span color="GRAY">
+                    commented {getDateDiff(comment.updatedAt)} ago
                 </Span>
-              </StyledHeaderLeft>
-              <StyledHeaderRight>{renderComponent}</StyledHeaderRight>
-            </StyledItemHeader>
-          )}
+                </StyledHeaderLeft>
+                <StyledHeaderRight>{renderComponent}</StyledHeaderRight>
+              </StyledItemHeader>
+            )}
 
           {Object.keys(issue).length ? (
             <StyledItemContent type="issue">{issue.content}</StyledItemContent>
           ) : (
-            <StyledItemContent>{comment.content}</StyledItemContent>
-          )}
+              <StyledItemContent>{comment.content}</StyledItemContent>
+            )}
         </StyledItem>
       </StyledItemWrapper>
     </>
@@ -89,7 +89,7 @@ const IssueDetailCommentItem = ({ issue, comment, user }) => {
 
 IssueDetailCommentItem.defaultProps = {
   issue: {},
-  comment: [],
+  comment: {},
 };
 
 IssueDetailCommentItem.propTypes = {

@@ -16,9 +16,6 @@ const getData = async (resourceName, setData) => {
 };
 
 const MainPage = () => {
-  // header
-  // Navbar => users  labels.length, milestone.length;
-  // IssueContent => issues, users, labels, milestones;
   const [issues, setIssues] = useState([]);
   const [users, setUsers] = useState([]);
   const [milestones, setMilestones] = useState([]);
