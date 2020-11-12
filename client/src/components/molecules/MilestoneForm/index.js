@@ -72,7 +72,11 @@ const MilestoneForm = (props) => {
           <Input
             id="date"
             type="date"
-            value={milestone.due_date}
+            value={
+              milestone.due_date
+                ? milestone.due_date.substring(0, 10)
+                : milestone.due_date
+            }
             name="due_date"
             onChange={onChangeHandler}
             className="input-small"

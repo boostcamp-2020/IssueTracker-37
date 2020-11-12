@@ -4,7 +4,6 @@ import request from '@lib/axios';
 import Header from '@organisms/Header';
 import SubHeader from '@molecules/SubHeader';
 import MilestoneForm from '@molecules/MilestoneForm';
-import Span from '@atoms/Span';
 import Template from './Template';
 
 const InitailState = {

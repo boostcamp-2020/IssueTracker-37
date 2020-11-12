@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import request from '@lib/axios';
+import useFetch from '@hooks/useFetch';
 import Header from '@organisms/Header';
 import SimpleNavbar from '@organisms/SimpleNavbar';
 import MilestoneContent from '@organisms/MilestoneContent';
 import Template from './Template';
 
 const MilstonePage = () => {
-  const [milestones, setMilestones] = useState([]);
+  const [milestones, setMilestones] = useFetch({
+    uri: `/milestone`,
+    initialData: [],
+  });
+
   const [isState, setIsState] = useState(true);
   const history = useHistory();
   const onDelete = async (id) => {
@@ -42,18 +47,6 @@ const MilstonePage = () => {
       alert('Milestone 업데이트 실패');
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      const {
-        data: { data },
-      } = await request.get({
-        uri: `/milestone`,
-      });
-
-      setMilestones(data);
-    })();
-  }, []);
 
   return (
     <Template
