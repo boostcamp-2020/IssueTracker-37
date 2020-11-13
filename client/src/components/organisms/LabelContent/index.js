@@ -5,6 +5,7 @@ import cn from 'classnames';
 import Span from '@atoms/Span';
 import LabelItem from '@molecules/LabelItem';
 import LabelForm from '@molecules/LabelForm';
+import NoneDataBox from '@molecules/NoneDataBox';
 import { StyledLabelContent, StyledLabelListHeader } from './style';
 
 const LabelContent = (props) => {
@@ -49,7 +50,13 @@ const LabelContent = (props) => {
         <Span>{labelHeader}</Span>
       </StyledLabelListHeader>
 
-      {labels && labels.map((label) => componentSelector(label))}
+      {labels.length > 0 ? (
+        <>{labels.map((label) => componentSelector(label))}</>
+      ) : (
+          <>
+            <NoneDataBox SVGName="LABEL"></NoneDataBox>
+          </>
+        )}
     </StyledLabelContent>
   );
 };

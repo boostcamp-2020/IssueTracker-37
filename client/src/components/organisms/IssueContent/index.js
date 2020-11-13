@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import IssueListHeader from '@molecules/IssueListHeader';
 import IssueItem from '@molecules/IssueItem';
+import NoneDataBox from '@molecules/NoneDataBox';
 
 import { StyledIssueContent } from './style';
 
@@ -32,13 +33,21 @@ const IssueContent = (props) => {
         totalCheck={totalCheck}
         markAsOptions={markAsOptions}
       ></IssueListHeader>
-      {issues.map((issue) => (
-        <IssueItem
-          key={issue.id}
-          issue={issue}
-          onCheckBoxChange={onCheckBoxChange}
-        ></IssueItem>
-      ))}
+      {issues.length > 0 ? (
+        <>
+          {issues.map((issue) => (
+            <IssueItem
+              key={issue.id}
+              issue={issue}
+              onCheckBoxChange={onCheckBoxChange}
+            ></IssueItem>
+          ))}
+        </>
+      ) : (
+          <>
+            <NoneDataBox SVGName="OPENED_ISSUE"></NoneDataBox>
+          </>
+        )}
     </StyledIssueContent>
   );
 };
@@ -58,7 +67,7 @@ IssueContent.propTypes = {
   milestones: PropTypes.array,
   onClick: PropTypes.func,
   onCheckBoxChange: PropTypes.func,
-  markAsOptions: PropTypes.object,
+  markAsOptions: PropTypes.array,
   totalCheck: PropTypes.object,
 };
 

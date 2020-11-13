@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import ImgTitleCount from '@molecules/ImgTitleCount';
 import MilestoneItem from '@molecules/MilestoneItem';
-
+import NoneDataBox from '@molecules/NoneDataBox';
 import { StyledMilestoneContent, StyledMilestoneHeader } from './style';
 
 const Initailize = (milestones, isState) => {
@@ -49,15 +49,24 @@ const MilestoneContent = (props) => {
           {`${String(currMilestones.closeCount)} Closes`}
         </ImgTitleCount>
       </StyledMilestoneHeader>
-      {currMilestones.data.map((milestone) => (
-        <MilestoneItem
-          key={milestone.id}
-          milestone={milestone}
-          onDelete={onDelete}
-          isState={isState}
-          updateMilestoneState={updateMilestoneState}
-        ></MilestoneItem>
-      ))}
+
+      {currMilestones.data.length > 0 ? (
+        <>
+          {currMilestones.data.map((milestone) => (
+            <MilestoneItem
+              key={milestone.id}
+              milestone={milestone}
+              onDelete={onDelete}
+              isState={isState}
+              updateMilestoneState={updateMilestoneState}
+            ></MilestoneItem>
+          ))}
+        </>
+      ) : (
+          <>
+            <NoneDataBox SVGName="MILESTONE"></NoneDataBox>
+          </>
+        )}
     </StyledMilestoneContent>
   );
 };
