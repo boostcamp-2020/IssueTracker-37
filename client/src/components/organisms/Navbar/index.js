@@ -40,6 +40,7 @@ const NavBar = (props) => {
         labelCount={labelCount}
         milestoneCount={milestoneCount}
         className="navBtn"
+        displayCount="imgTitleCount"
       ></NavButton>
       <Button
         buttonType="GREEN"

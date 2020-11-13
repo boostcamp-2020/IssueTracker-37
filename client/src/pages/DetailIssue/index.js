@@ -192,6 +192,7 @@ const DetailIssue = () => {
       }, 1000);
 
       setIssue(data);
+
       setAssigneeCheckList(assigneeList);
       setLabelCheckList(labelList);
       setMilestoneCheckList([milestoneList]);

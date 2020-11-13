@@ -14,10 +14,10 @@ const MilestoneContent = ({ checkList, percent }) => {
   return (
     <StyledMilestoneContent>
       {checkList?.map((list) => (
-        <StyledContentWrapper key={list.id}>
+        <StyledContentWrapper key={list?.id}>
           <ProgressBar percent={percent}></ProgressBar>
           <StyledContentBottom>
-            <Span spanType="SMALL">{list.title}</Span>
+            <Span spanType="SMALL">{list?.title}</Span>
           </StyledContentBottom>
         </StyledContentWrapper>
       ))}

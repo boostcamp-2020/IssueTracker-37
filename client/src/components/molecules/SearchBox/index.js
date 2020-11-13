@@ -38,7 +38,7 @@ const SearchBox = (props) => {
         color="BLACK"
         items={options}
         afterContent={afterContent}
-        onClick={onClick}
+        onFilterHandler={onClick}
         dropdownType="searchBox"
       ></DropdownButton>
 

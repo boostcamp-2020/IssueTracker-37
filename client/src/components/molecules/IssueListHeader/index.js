@@ -45,7 +45,7 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="author"
                 className="dropDownBtn"
-                onClick={onClick}
+                onFilterHandler={onClick}
                 title="Author"
                 dropdownHeader="Filter by author"
                 items={users}
@@ -56,7 +56,7 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="label"
                 className="dropDownBtn"
-                onClick={onClick}
+                onFilterHandler={onClick}
                 title="Label"
                 dropdownHeader="Filter by label"
                 items={labels}
@@ -67,7 +67,7 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="milestone"
                 className="dropDownBtn"
-                onClick={onClick}
+                onFilterHandler={onClick}
                 title="Milestone"
                 dropdownHeader="Filter by milestone"
                 items={milestones}
@@ -78,7 +78,7 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="assignee"
                 className="dropDownBtn"
-                onClick={onClick}
+                onFilterHandler={onClick}
                 title="Assignee"
                 dropdownHeader="Filter by who’s assigned"
                 items={users}
@@ -89,7 +89,7 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="sort"
                 className="dropDownBtn"
-                onClick={onClick}
+                onFilterHandler={onClick}
                 title="Sort"
                 dropdownHeader="Sort by"
                 items={sortOptions}
@@ -101,9 +101,9 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="markAs"
                 className="mark-as-button"
-                onClick={onClick}
+                onFilterHand={onClick}
                 title="Mark as"
-                dropdownHeader="Actions"
+                onFilterHandler="Actions"
                 items={markAsOptions}
                 afterContent="▼"
                 spanType="SMALL"

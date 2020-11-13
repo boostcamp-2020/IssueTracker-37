@@ -35,11 +35,17 @@ const DropdownButton = ({
   onClick,
   items,
   afterContent,
+  onFilterHandler,
   className,
 }) => {
   const [isOpened, setOpened] = useState(false);
   const openDropdown = () => {
     setOpened((pre) => !pre);
+  };
+
+  const onClickFilter = (_dropdownType, _dropdownItemTitle) => {
+    openDropdown();
+    onFilterHandler(_dropdownType, _dropdownItemTitle);
   };
 
   return (
@@ -55,7 +61,7 @@ const DropdownButton = ({
         <SVG SVGName={SVGName} color={color}></SVG>
       </StyledDropdownHeader>
       {isOpened && (
-        <StyledDropdownMenu className="main-drowdown-menu">
+        <StyledDropdownMenu className="main-drowdown-menu" type="test">
           <Span
             spanType="SMALL"
             fontWeight="bold"
@@ -78,8 +84,9 @@ const DropdownButton = ({
                   description={dropdownItemDescription}
                   color={item.color}
                   onClick={() => {
-                    openDropdown();
-                    onClick(dropdownType, dropdownItemTitle);
+                    onFilterHandler
+                      ? onClickFilter(dropdownType, dropdownItemTitle)
+                      : onClick(item.id);
                   }}
                   dropdownType={dropdownType}
                   isChecked={item.isChecked}
@@ -110,6 +117,8 @@ DropdownButton.propTypes = {
   spanType: PropTypes.string,
   afterContent: PropTypes.string,
   className: PropTypes.string,
+  type: PropTypes.string,
+  onFilterHandler: PropTypes.func,
 };
 
 export default DropdownButton;

@@ -49,6 +49,7 @@ export const StyledIssueListHeader = styled.form`
   }
 
   & .main-drowdown-menu {
+    top: -5px;
     width: 250px;
   }
 
@@ -59,5 +60,9 @@ export const StyledIssueListHeader = styled.form`
     margin: auto;
     justify-content: flex-end;
     padding-right: 40px;
+  }
+
+  svg {
+    display: none;
   }
 `;

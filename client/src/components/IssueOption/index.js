@@ -55,7 +55,10 @@ const IssueOption = ({ IssueOptionProps }) => {
   return (
     <>
       <StyledIssueOption>
-        <DropdownButton {...IssueOptionProps}></DropdownButton>
+        <DropdownButton
+          {...IssueOptionProps}
+          className="issue-option"
+        ></DropdownButton>
         <StyledIssueOptionBottom>
           {IssueOptionProps?.checkList?.length === 0 ? (
             <Span

@@ -26,11 +26,11 @@ export const DetailIssueHeaderBottom = styled.div`
   }
 
   .open {
-    background-color: green;
+    background-color: #22863a;
     border-radius: 6px;
   }
   .close {
-    background-color: red;
+    background-color: #cb2431;
     border-radius: 6px;
   }
 `;

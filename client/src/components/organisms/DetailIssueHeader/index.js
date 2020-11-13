@@ -46,16 +46,16 @@ const DetailIssueHeader = ({
             </StyledIssueEditButtonWrapper>
           </StyledIssueEditForm>
         ) : (
-          <>
-            <DetailIssueTitleWrapper>
-              <Span>{DetailIssueHeaderProps.issue.title}</Span>
-              <Span color="gray" className="title-tag">
-                #{DetailIssueHeaderProps.issue.id}
-              </Span>
-            </DetailIssueTitleWrapper>
-            <Button onClick={onOpenEdit}>Edit</Button>
-          </>
-        )}
+            <>
+              <DetailIssueTitleWrapper>
+                <Span>{DetailIssueHeaderProps.issue.title}</Span>
+                <Span color="gray" className="title-tag">
+                  #{DetailIssueHeaderProps.issue.id}
+                </Span>
+              </DetailIssueTitleWrapper>
+              <Button onClick={onOpenEdit}>Edit</Button>
+            </>
+          )}
       </DetailIssueHeaderTop>
       <DetailIssueHeaderBottom>
         <ImgTitleCount

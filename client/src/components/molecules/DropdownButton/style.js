@@ -3,8 +3,15 @@ import styled from 'styled-components';
 export const StyledDropdownButton = styled.div`
   
   position: relative;
-  justify-content: center;
-  align-items: center;
+
+  &.issue-option {
+    justify-content: space-between;
+  }
+
+  &.dropDownBtn {
+    justify-content: center;
+    align-items: center;
+  }
 
   & > .dropdown {
     position: absolute;
@@ -24,7 +31,6 @@ export const StyledDropdownButton = styled.div`
 `;
 
 export const StyledDropdownHeader = styled.div`
-  width: fit-content;
   outline: none;
   display: flex;
   justify-content: space-between;
@@ -38,17 +44,14 @@ export const StyledDropdownHeader = styled.div`
       fill: #0366d6;
     }
   }
-
-  & svg {
-    display: none;
-  }
 `;
 
 export const StyledDropdownMenu = styled.div`
   position: absolute;
-  top: -5px;
+  top: 40px;
   right: 0;
-  width: 200px;
+  width: 100%;
+  min-width: 200px;
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   z-index: 1;

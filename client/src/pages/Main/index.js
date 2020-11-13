@@ -5,6 +5,8 @@ import Header from '@organisms/Header';
 import Navbar from '@organisms/Navbar';
 import IssueContent from '@organisms/IssueContent';
 import useFetch from '@hooks/useFetch';
+import { useUser } from '@hooks/useUser';
+
 import Template from './Template';
 
 const HEADER_CHECK = 0;
@@ -15,13 +17,6 @@ const sortOptionsConverter = {
   'Least commented': 'comments-asc',
   'Recently updated': 'updated-desc',
   'Least recently updated': 'updated-asc',
-};
-
-const searchBoxOptionsConverter = {
-  'Open issues': { type: 'is', value: 'open' },
-  'Closed issues': { type: 'is', value: 'closed' },
-  'Your issues': { type: 'author', value: '내이름' },
-  'Everything assigned to you': { type: 'assignee', value: '내이름' },
 };
 
 const initialFilterOptions = {
@@ -40,6 +35,18 @@ const filterOptionsToString = (filterOptions) => {
 };
 
 const MainPage = () => {
+  const [user, useUserFn] = useUser();
+
+  const searchBoxOptionsConverter = {
+    'Open issues': { type: 'is', value: 'open' },
+    'Closed issues': { type: 'is', value: 'closed' },
+    'Your issues': { type: 'author', value: `${user.name}` },
+    'Everything assigned to you': {
+      type: 'assignee',
+      value: `${user.name}`,
+    },
+  };
+
   const [filterOptions, setFilterOptions] = useState(initialFilterOptions);
   const [issues, setIssues] = useFetch({
     uri: '/issue',
