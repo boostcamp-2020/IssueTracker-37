@@ -75,7 +75,10 @@ class UserController {
       return res.status(200).send({
         state: 'success',
         message: succeedMessage.succedLogin,
-        token: generateJWTToken,
+        data: {
+          token: generateJWTToken,
+          user,
+        },
       });
     } catch (error) {
       res

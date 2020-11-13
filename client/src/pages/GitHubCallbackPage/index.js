@@ -15,7 +15,9 @@ const GitHubCallbackPage = () => {
   useEffect(() => {
     (async () => {
       const {
-        data: { token },
+        data: {
+          data: { token, user },
+        },
       } = await request.get({
         uri: `${serverGitHubCallbackUrl}?code=${authorizationCode}`,
       });
