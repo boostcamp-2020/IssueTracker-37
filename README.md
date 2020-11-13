@@ -18,6 +18,8 @@
 
 ![tech](https://user-images.githubusercontent.com/52775389/97805691-12738000-1c9b-11eb-8fde-29e5d41abb92.png)
 
+<br>
+
 ## 💁🏻 팀원소개
 |캠퍼번호|이름|GitHub|
 |------|---|---|
@@ -25,6 +27,13 @@
 |J098|송원석|[@Songwonseok](https://github.com/Songwonseok)|
 |J118|오지훈|[@hoo00nn](https://github.com/hoo00nn)|
 |J149|이수민|[@sumniy](https://github.com/sumniy)|
+
+<br>
+
+## :rocket:배포 Link
+- [IssueTracker-37](http://118.67.132.242/)
+
+<br>
 
 ## :heavy_plus_sign: Wiki
 저희 팀의 규칙, 컨벤션, 회고록, 개발 과정이 궁금하시다면 [wiki](https://github.com/boostcamp-2020/IssueTracker-37/wiki)를 방문해 주세요!
