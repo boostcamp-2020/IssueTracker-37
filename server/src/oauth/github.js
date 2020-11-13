@@ -44,9 +44,7 @@ const getGitHubProfile = async (accessToken) => {
   try {
     const { data } = await axios.get(getUserUrl, config);
 
-    console.log(data);
-
-    return data.login;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -74,11 +72,11 @@ const getGitHubEmail = async (accessToken) => {
   }
 };
 
-const findOrCreateGitHubUser = async (name, email) => {
+const findOrCreateGitHubUser = async (profile, email) => {
   const user = await models.User.findOrCreate({
-    where: { email, name },
+    where: { email, name: profile.login },
 
-    defaults: { provider: 'github' },
+    defaults: { provider: 'github', profile: profile.avatar_url },
   });
 
   return user[0];
