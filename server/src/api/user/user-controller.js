@@ -65,9 +65,9 @@ class UserController {
       const { code } = req.query;
 
       const accessToken = await getGitHubAccessToken(code);
-      const name = await getGitHubProfile(accessToken);
+      const profile = await getGitHubProfile(accessToken);
       const email = await getGitHubEmail(accessToken);
-      const user = await findOrCreateGitHubUser(name, email);
+      const user = await findOrCreateGitHubUser(profile, email);
 
       const payload = { no: user.id, email: user.email };
       const generateJWTToken = jwt.sign(payload, JWT_SECRET_KEY);
