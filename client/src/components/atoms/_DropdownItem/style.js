@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledDropdownItem = styled.div`
   display: flex;
   padding: 7px 10px;
-  border-top: 1px solid black;
+  border-top: 1px solid rgb(204 197 197);
   background-color: white;
   z-index: 1;
 `;

@@ -1,4 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
+const userModel = require('@models/user-model');
 
 class Comment extends Model {
   static initialize(sequelize) {
@@ -44,8 +45,12 @@ class Comment extends Model {
       issue_id: payload.issue_id,
       user_id: payload.user_id,
     });
+    const commentWithUser = await this.findOne({
+      where: { id: comment.id },
+      include: [{ model: userModel }],
+    });
 
-    return comment;
+    return commentWithUser;
   }
 }
 

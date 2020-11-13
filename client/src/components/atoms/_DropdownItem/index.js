@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Span from '@atoms/Span';
+import SVG from '@atoms/SVG';
 import Img from '@atoms/Img';
 
 import {
@@ -25,7 +26,7 @@ const _DropdownItem = ({
   return (
     <StyledDropdownItem onClick={onClick}>
       <StyledCheckMarkWrapper>
-        {isChecked && <Span>✔</Span>}
+        {isChecked && <SVG SVGName="CLOSED_MILESTON" color="black"></SVG>}
       </StyledCheckMarkWrapper>
       <StyledDropdownItemImage color={color}>
         {dropdownType === 'assignee' ? <Img src={src}></Img> : ''}

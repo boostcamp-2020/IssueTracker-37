@@ -13,7 +13,7 @@ import {
 const MilestoneContent = ({ checkList, percent }) => {
   return (
     <StyledMilestoneContent>
-      {checkList.map((list) => (
+      {checkList?.map((list) => (
         <StyledContentWrapper key={list.id}>
           <ProgressBar percent={percent}></ProgressBar>
           <StyledContentBottom>
