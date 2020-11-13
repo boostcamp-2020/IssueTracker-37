@@ -3,6 +3,10 @@ import { useHistory } from 'react-router-dom';
 import GitHubButton from '@img/GitHubButton.png';
 import request from '@lib/axios';
 import { setToken } from '@utils/token';
+import { setToLocalStorage } from '@hooks/useUser';
+import SVG from '@atoms/SVG';
+import Span from '@atoms/Span';
+
 import {
   AppTitle,
   Form,
@@ -38,7 +42,7 @@ const SignInPage = () => {
     try {
       const {
         data: {
-          data: { JWT },
+          data: { JWT, user },
         },
       } = await request.post({
         uri: '/user/signin',
@@ -46,20 +50,24 @@ const SignInPage = () => {
       });
 
       setToken(JWT);
+      setToLocalStorage(user);
       history.push('/');
-      // window.location.replace = '/';
     } catch (err) {
-      alert(err.response.data);
+      alert(err);
     }
   };
 
   return (
     <SignInWrapper>
-      <AppTitle>이슈 트래커</AppTitle>
+      <AppTitle>
+        <SVG SVGName="GITHUB_MARK" color="black"></SVG>
+        <Span spanType="LARGE">Issue Tracker 37</Span>
+      </AppTitle>
       <Form onSubmit={onSummitSignIn}>
         <Label htmlFor="email">아이디</Label>
         <StyledInput
           name="email"
+          id="email"
           type="text"
           value={email}
           required
@@ -68,6 +76,7 @@ const SignInPage = () => {
         <Label htmlFor="password">비밀번호</Label>
         <StyledInput
           name="password"
+          id="password"
           type="password"
           value={password}
           required

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import request from '@lib/axios';
 import useFetch from '@hooks/useFetch';
+import { useUser } from '@hooks/useUser';
 import Header from '@organisms/Header';
 import IssueForm from '@components/IssueForm';
 import IssueOption from '@components/IssueOption';
@@ -13,12 +15,7 @@ const initialInputs = {
 };
 
 const CreateIssue = () => {
-  // 유저정보 받아오기. => hook 을 사용하면 좋을듯.
-  const user = {
-    id: 1,
-    name: 'sumniy',
-    profile: 'https://avatars3.githubusercontent.com/u/52775389?s=60&v=4',
-  };
+  const [user] = useUser();
   const history = useHistory();
   const [IssueContents, setIssueContents] = useState(initialInputs);
   const [visible, setVisible] = useState(false);
@@ -28,17 +25,18 @@ const CreateIssue = () => {
   const [labelCheckList, setLabelCheckList] = useState([]);
   const [milestoneCheckList, setMilestoneCheckList] = useState([]);
 
-  const [assignees, setAssignees] = useFetch('/user', {
-    name: 'isChecked',
-    value: false,
+  const [assignees, setAssignees] = useFetch({
+    uri: '/user',
+    option: { name: 'isChecked', value: false },
   });
-  const [milestones, setMilestones] = useFetch('/milestone', {
-    name: 'isChecked',
-    value: false,
+
+  const [milestones, setMilestones] = useFetch({
+    uri: '/milestone',
+    option: { name: 'isChecked', value: false },
   });
-  const [labels, setLabels] = useFetch('/label', {
-    name: 'isChecked',
-    value: false,
+  const [labels, setLabels] = useFetch({
+    uri: '/label',
+    option: { name: 'isChecked', value: false },
   });
 
   const { title, content } = IssueContents;
@@ -97,17 +95,35 @@ const CreateIssue = () => {
       onClickCancel: () => {
         history.push('/');
       },
-      onClickSubmit: () => {
+      onClickSubmit: async () => {
         if (title.legth === 0) return;
         const payload = {
-          title,
-          content,
-          assignees: assigneeCheckList.map((assignee) => assignee.id),
-          labels: labelCheckList.map((label) => label.id),
-          milestones: milestoneCheckList.map((milestone) => milestone.id),
+          issue: {
+            title,
+            content,
+            state: true,
+            user_id: user.id,
+            milestone_id:
+              milestoneCheckList.length === 0 ? null : milestoneCheckList[0].id,
+          },
+          assignees: assigneeCheckList.map((assignee) => ({
+            assignee_id: assignee.id,
+          })),
+          labels: labelCheckList.map((label) => ({ label_id: label.id })),
         };
 
-        console.log(payload);
+        try {
+          const { data } = await request.post({
+            uri: location.pathname,
+            data: payload,
+          });
+
+          alert(data.message);
+          history.push('/');
+        } catch (error) {
+          console.error(error);
+          alert(error);
+        }
       },
       leftButton: 'Cancle',
       rightButton: 'sumbit',

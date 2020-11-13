@@ -1,8 +1,14 @@
 const jwt = require('jsonwebtoken');
-const userService = require('@services/user-service');
-const { errorMessage, succeedMessage } = require('@utils/server-message');
 
-const CLIENT_OAUTH_CALLBACK_URL = 'http://localhost:8080/github_callback';
+const {
+  getGitHubAccessToken,
+  getGitHubProfile,
+  getGitHubEmail,
+  findOrCreateGitHubUser,
+} = require('@oauth/github');
+const userService = require('@services/user-service');
+
+const { errorMessage, succeedMessage } = require('@utils/server-message');
 
 const { JWT_SECRET_KEY } = process.env;
 
@@ -39,14 +45,41 @@ class UserController {
     }
   }
 
-  gitHubCallback(req, res) {
+  gitHubOAuthRedirect(req, res) {
+    const GitHubOAuthUrl = 'https://github.com/login/oauth/authorize';
+    const clientId = process.env.GITHUB_CLIENT_ID;
+
+    const url = `${GitHubOAuthUrl}?client_id=${clientId}&scope=user`;
+
     try {
-      const { user } = req;
+      res.redirect(url);
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedIssueToken });
+    }
+  }
+
+  async gitHubCallback(req, res) {
+    try {
+      const { code } = req.query;
+
+      const accessToken = await getGitHubAccessToken(code);
+      const name = await getGitHubProfile(accessToken);
+      const email = await getGitHubEmail(accessToken);
+      const user = await findOrCreateGitHubUser(name, email);
 
       const payload = { no: user.id, email: user.email };
       const generateJWTToken = jwt.sign(payload, JWT_SECRET_KEY);
 
-      res.cookie('token', generateJWTToken).redirect(CLIENT_OAUTH_CALLBACK_URL);
+      return res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succedLogin,
+        data: {
+          token: generateJWTToken,
+          user,
+        },
+      });
     } catch (error) {
       res
         .status(500)

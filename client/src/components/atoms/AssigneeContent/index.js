@@ -8,7 +8,7 @@ import { StyledAssigneeContent, StyledContentWrapper } from './style';
 const AssigneeContent = ({ checkList }) => {
   return (
     <StyledAssigneeContent>
-      {checkList.map((list) => (
+      {checkList?.map((list) => (
         <StyledContentWrapper key={list.id}>
           <Img src={list.profile}></Img>
           <Span>{list.name}</Span>

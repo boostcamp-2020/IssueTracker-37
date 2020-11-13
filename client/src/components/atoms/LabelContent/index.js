@@ -7,7 +7,7 @@ import { StyledLabelContent, StyledContentWrapper } from './style';
 const LabelContent = ({ checkList }) => {
   return (
     <StyledLabelContent>
-      {checkList.map((list) => (
+      {checkList?.map((list) => (
         <StyledContentWrapper key={list.id}>
           <IssueLabel labelColor={list.color}>{list.title}</IssueLabel>
         </StyledContentWrapper>

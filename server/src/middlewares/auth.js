@@ -1,4 +1,4 @@
-const passport = require('passport');
+const passport = require('@passport');
 const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET_KEY } = process.env;
@@ -12,7 +12,10 @@ const loginAuth = async (req, res, next) => {
       const payload = { no: user.id, email: user.email };
       const generateJWTToken = jwt.sign(payload, JWT_SECRET_KEY);
 
-      return res.json({ state: 'success', data: { JWT: generateJWTToken } });
+      return res.json({
+        state: 'success',
+        data: { JWT: generateJWTToken, user },
+      });
     })(req, res, next);
   } catch (err) {
     next(err);

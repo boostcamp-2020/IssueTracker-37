@@ -12,6 +12,7 @@ const Header = () => {
 
   const onClickLogout = () => {
     removeToken();
+    localStorage.removeItem('user');
     history.push('/signin');
   };
 

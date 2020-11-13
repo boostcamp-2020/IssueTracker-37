@@ -1,8 +1,8 @@
 const applyExtraSetup = (sequelize) => {
   const { Issue, User, Milestone, Label, Comment, Assignee } = sequelize.models;
 
-  User.hasMany(Issue);
-  Issue.belongsTo(User);
+  User.hasMany(Issue, { foreignKey: 'user_id', sourceKey: 'id' });
+  Issue.belongsTo(User, { foreignKey: 'user_id', sourceKey: 'id' });
 
   User.hasMany(Comment, { foreignKey: 'user_id', sourceKey: 'id' });
   Comment.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' });
