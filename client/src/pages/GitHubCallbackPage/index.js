@@ -1,21 +1,30 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { setToken } from '@utils/token';
+import { useHistory, useLocation } from 'react-router-dom';
+import request from '@lib/axios';
 
-const deleteCookie = (name) => {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1999 00:00:10 GMT;`;
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
 };
 
 const GitHubCallbackPage = () => {
   const history = useHistory();
+  const query = useQuery();
+  const authorizationCode = query.get('code');
+  const serverGitHubCallbackUrl = '/user/github/callback';
 
   useEffect(() => {
-    const token = document.cookie.match(/(?<=([^(csrtf)]token=))().*/)[0];
+    (async () => {
+      const {
+        data: {
+          data: { token, user },
+        },
+      } = await request.get({
+        uri: `${serverGitHubCallbackUrl}?code=${authorizationCode}`,
+      });
 
-    setToken(token);
-    deleteCookie('token');
-
-    history.push('/');
+      localStorage.setItem('authorization', token);
+      history.push('/');
+    })();
   }, []);
 
   return <></>;
