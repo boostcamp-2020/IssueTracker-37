@@ -4,7 +4,17 @@ import cn from 'classnames';
 import { StyledInput } from './style';
 
 const Input = (props) => {
-  const { type, value, name, placeholder, id, onChange, className } = props;
+  const {
+    type,
+    value,
+    name,
+    placeholder,
+    id,
+    onChange,
+    className,
+    onKeyPress,
+    refInput,
+  } = props;
 
   return (
     <StyledInput
@@ -13,7 +23,9 @@ const Input = (props) => {
       name={name}
       placeholder={placeholder}
       id={id}
+      ref={refInput}
       onChange={onChange}
+      onKeyPress={onKeyPress}
       className={cn(className)}
     />
   );
@@ -33,6 +45,8 @@ Input.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   className: PropTypes.string,
+  onKeyPress: PropTypes.func,
+  refInput: PropTypes.any,
 };
 
 export default Input;

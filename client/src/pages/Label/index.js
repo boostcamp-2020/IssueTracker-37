@@ -21,12 +21,11 @@ const LabelPage = () => {
 
   const onToggle = (e) => {
     e.preventDefault();
-    if (isForm !== -1) {
-      setIsForm(-1);
-    } else {
+    if (isForm !== 0) {
       setIsForm(0);
-    }
+    } else setIsForm(-1);
   };
+
   const onDelete = async (id) => {
     if (confirm('정말 삭제하시겠습니까?')) {
       await request.delete({ uri: `/label/${id}` });
@@ -96,7 +95,6 @@ const LabelPage = () => {
       Navbar={
         <SimpleNavbar onClick={onToggle} buttonName="New label"></SimpleNavbar>
       }
-      // onSubmit, onCloseForm, submitName, formType
       LabelForm={
         isForm === 0 && (
           <LabelForm

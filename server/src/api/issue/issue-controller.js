@@ -260,6 +260,21 @@ class IssueController {
         .send({ state: 'fail', message: errorMessage.failedInsert });
     }
   }
+
+  async bulkUpdate(req, res) {
+    try {
+      await issueService.bulkUpdate(req.body);
+
+      res.status(200).send({
+        state: 'success',
+        message: succeedMessage.succeedUpdate,
+      });
+    } catch (error) {
+      res
+        .status(400)
+        .send({ state: 'fail', message: errorMessage.failedUpdate });
+    }
+  }
 }
 
 const issueController = new IssueController();

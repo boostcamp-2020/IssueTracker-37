@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import request from '@lib/axios';
+import useFetch from '@hooks/useFetch';
 import Header from '@organisms/Header';
 import SimpleNavbar from '@organisms/SimpleNavbar';
 import MilestoneForm from '@molecules/MilestoneForm';
 import Template from './Template';
 
-const InitailState = {
+const initialData = {
   title: '',
   description: '',
   due_date: '',
@@ -17,19 +18,10 @@ const EditMilestonePage = () => {
   const { id } = useParams();
 
   const history = useHistory();
-  const [milestone, setMilestone] = useState(InitailState);
-
-  useEffect(() => {
-    (async () => {
-      const {
-        data: { data },
-      } = await request.get({ uri: `/milestone/${id}` });
-
-      if (data.due_date) data.due_date = data.due_date.substring(0, 10);
-      else data.due_date = '';
-      setMilestone(data);
-    })();
-  }, []);
+  const [milestone, setMilestone] = useFetch({
+    uri: `/milestone/${id}`,
+    initialData,
+  });
 
   const onSubmit = async () => {
     try {

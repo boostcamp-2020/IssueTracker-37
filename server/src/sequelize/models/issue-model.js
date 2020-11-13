@@ -68,6 +68,7 @@ class Issue extends Model {
           model: milestoneModel,
         },
       ],
+      order: [['created_at', 'desc']],
     });
 
     return issues;
@@ -189,6 +190,17 @@ class Issue extends Model {
     const result = await this.update(payload, {
       where: { id: payload.id },
     });
+
+    return result;
+  }
+
+  static async bulkUpdate(payload) {
+    const result = await this.update(
+      { state: payload.state },
+      {
+        where: { id: payload.issues },
+      },
+    );
 
     return result;
   }

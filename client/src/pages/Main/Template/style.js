@@ -11,4 +11,10 @@ export const StyledMainTemplate = styled.div`
   & > main > section {
     margin-top: 20px;
   }
+
+  & .main-drowdown-menu {
+    width: 300px;
+    right: -10px;
+    margin-top: 30px;
+  }
 `;

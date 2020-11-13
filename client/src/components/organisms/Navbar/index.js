@@ -9,16 +9,30 @@ import Button from '@atoms/Button';
 
 import { StyledNavbar } from './style';
 
-const NavBar = ({ className, labelCount, milestoneCount, options }) => {
+const NavBar = (props) => {
+  const {
+    className,
+    labelCount,
+    milestoneCount,
+    options,
+    onFilter,
+    inputValue,
+    onChange,
+    onClick,
+  } = props;
   const history = useHistory();
 
   return (
     <StyledNavbar className={cn(className)}>
       <SearchBox
         afterContent="▼"
-        placeholder="is:issue is:open"
+        placeholder="Search all issues"
         className="searchBox"
+        onFilter={onFilter}
         options={options}
+        inputValue={inputValue}
+        onChange={onChange}
+        onClick={onClick}
       >
         Filter
       </SearchBox>
@@ -42,11 +56,10 @@ NavBar.defaultProps = {
   milestoneCount: 0,
   labelCount: 0,
   options: [
-    'Open issues',
-    'Your issues',
-    'Everything assigned to you',
-    'Everything mentioning you',
-    'Closed issues',
+    { id: 1, title: 'Open issues' },
+    { id: 2, title: 'Your issues' },
+    { id: 3, title: 'Everything assigned to you' },
+    { id: 4, title: 'Closed issues' },
   ],
 };
 NavBar.propTypes = {
@@ -54,6 +67,10 @@ NavBar.propTypes = {
   milestoneCount: PropTypes.number,
   labelCount: PropTypes.number,
   options: PropTypes.array,
+  onFilter: PropTypes.func,
+  inputValue: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default NavBar;

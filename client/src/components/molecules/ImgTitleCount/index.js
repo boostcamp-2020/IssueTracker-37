@@ -35,7 +35,7 @@ const ImgTitleCount = (props) => {
 
 ImgTitleCount.defaultProps = {
   onClick: () => { },
-  type: 'imgTitleCount',
+  displayCount: 'imgTitleCount',
   spanType: 'LARGE',
   count: 0,
   color: 'gray',
