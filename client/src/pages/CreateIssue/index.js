@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import request from '@lib/axios';
 import useFetch from '@hooks/useFetch';
 import { useUser } from '@hooks/useUser';
 import Header from '@organisms/Header';
@@ -94,17 +95,35 @@ const CreateIssue = () => {
       onClickCancel: () => {
         history.push('/');
       },
-      onClickSubmit: () => {
+      onClickSubmit: async () => {
         if (title.legth === 0) return;
         const payload = {
-          title,
-          content,
-          assignees: assigneeCheckList.map((assignee) => assignee.id),
-          labels: labelCheckList.map((label) => label.id),
-          milestones: milestoneCheckList.map((milestone) => milestone.id),
+          issue: {
+            title,
+            content,
+            state: true,
+            user_id: user.id,
+            milestone_id:
+              milestoneCheckList.length === 0 ? null : milestoneCheckList[0].id,
+          },
+          assignees: assigneeCheckList.map((assignee) => ({
+            assignee_id: assignee.id,
+          })),
+          labels: labelCheckList.map((label) => ({ label_id: label.id })),
         };
 
-        console.log(payload);
+        try {
+          const { data } = await request.post({
+            uri: location.pathname,
+            data: payload,
+          });
+
+          alert(data.message);
+          history.push('/');
+        } catch (error) {
+          console.error(error);
+          alert(error);
+        }
       },
       leftButton: 'Cancle',
       rightButton: 'sumbit',
