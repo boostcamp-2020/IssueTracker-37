@@ -101,9 +101,9 @@ const IssueListHeader = (props) => {
               <DropDownButton
                 dropdownType="markAs"
                 className="mark-as-button"
-                onFilterHand={onClick}
                 title="Mark as"
-                onFilterHandler="Actions"
+                onFilterHandler={onClick}
+                dropdownHeader="Actions"
                 items={markAsOptions}
                 afterContent="▼"
                 spanType="SMALL"
