@@ -22,6 +22,7 @@ const IssueListHeader = (props) => {
     onClick,
     onCheckBoxChange,
     markAsOptions,
+    totalCheck,
   } = props;
 
   const checkedCount = () => {
@@ -30,7 +31,11 @@ const IssueListHeader = (props) => {
 
   return (
     <StyledIssueListHeader className={cn(className)}>
-      <CheckBox onChange={onCheckBoxChange} value={0}></CheckBox>
+      <CheckBox
+        onChange={onCheckBoxChange}
+        value={totalCheck.id}
+        isChecked={totalCheck.value}
+      ></CheckBox>
       <Img src={openedIssue} alt="이슈 아이콘"></Img>
       <div className="container">
         <div className="empty"></div>
@@ -131,6 +136,7 @@ IssueListHeader.propTypes = {
   onClick: PropTypes.func,
   onCheckBoxChange: PropTypes.func,
   markAsOptions: PropTypes.array,
+  totalCheck: PropTypes.object,
 };
 
 export default IssueListHeader;

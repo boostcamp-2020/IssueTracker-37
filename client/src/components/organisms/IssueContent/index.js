@@ -17,6 +17,7 @@ const IssueContent = (props) => {
     onClick,
     onCheckBoxChange,
     markAsOptions,
+    totalCheck,
   } = props;
 
   return (
@@ -28,6 +29,7 @@ const IssueContent = (props) => {
         milestones={milestones}
         onClick={onClick}
         onCheckBoxChange={onCheckBoxChange}
+        totalCheck={totalCheck}
         markAsOptions={markAsOptions}
       ></IssueListHeader>
       {issues.map((issue) => (
@@ -57,6 +59,7 @@ IssueContent.propTypes = {
   onClick: PropTypes.func,
   onCheckBoxChange: PropTypes.func,
   markAsOptions: PropTypes.object,
+  totalCheck: PropTypes.object,
 };
 
 export default IssueContent;

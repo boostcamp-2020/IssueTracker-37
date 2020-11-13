@@ -7,6 +7,7 @@ import IssueContent from '@organisms/IssueContent';
 import useFetch from '@hooks/useFetch';
 import Template from './Template';
 
+const HEADER_CHECK = 0;
 const sortOptionsConverter = {
   Newest: 'created-desc',
   Oldest: 'created-asc',
@@ -53,6 +54,10 @@ const MainPage = () => {
   const [labels] = useFetch({ uri: '/label', initialData: [] });
   const [filteredIssues, setFilteredIssues] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [totalCheck, setTotalCheck] = useState({
+    id: HEADER_CHECK,
+    value: false,
+  });
 
   useEffect(() => {
     setInputValue(filterOptionsToString(filterOptions));
@@ -88,6 +93,7 @@ const MainPage = () => {
         data: { data },
       } = await request.get({ uri: 'issue' });
 
+      setTotalCheck({ ...totalCheck, value: false });
       setIssues(data.map((v) => ({ ...v, checked: false })));
     } catch (err) {
       alert('업데이트를 실패했습니다.');
@@ -125,23 +131,30 @@ const MainPage = () => {
 
   const onCheckBoxChange = (e) => {
     const id = Number(e.target.value);
-
     const isChecked = e.target.checked;
+
     let temp = [];
 
-    if (id === 0) {
+    if (id === HEADER_CHECK) {
       temp = filteredIssues.map((issue) => {
         const newIssue = { ...issue };
 
         newIssue.checked = isChecked;
+
         return newIssue;
       });
+      setTotalCheck({ ...totalCheck, value: !totalCheck.value });
     } else {
       const index = filteredIssues.findIndex((issue) => issue.id === id);
 
       temp = [...filteredIssues];
       temp[index].checked = isChecked;
+
+      if (filteredIssues.every((issue) => issue.checked))
+        setTotalCheck({ ...totalCheck, value: true });
+      else setTotalCheck({ ...totalCheck, value: false });
     }
+
     setFilteredIssues(temp);
   };
 
@@ -166,6 +179,7 @@ const MainPage = () => {
           users={users}
           onClick={dropdownEventHandler}
           onCheckBoxChange={onCheckBoxChange}
+          totalCheck={totalCheck}
         ></IssueContent>
       }
     ></Template>
