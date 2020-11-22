@@ -7,16 +7,15 @@
 ![Babel](https://img.shields.io/badge/@babel/core-7.12.3-yellow?logo=babel) 
 ![Webpack](https://img.shields.io/badge/Webpack-5.2.0-blue?logo=Webpack) 
 ![mysql](https://img.shields.io/badge/mysql-8.0.21-skyblue?logo=mysql)
-![typescript](https://img.shields.io/badge/typescript-4.0.5-blue?logo=typescript)
 
 </div>
 
 ## 👨🏻‍💻 기술스택
 > **프론트엔드** : React, Javascript, Webpack, Babel  
-> **백엔드** : Node.js, Express, TypeScript, Sequelize, Mysql  
+> **백엔드** : Node.js, Express, Sequelize, Mysql  
 > **인프라** : Nginx, NCloud
 
-![tech](https://user-images.githubusercontent.com/52775389/97805691-12738000-1c9b-11eb-8fde-29e5d41abb92.png)
+![tech](https://user-images.githubusercontent.com/52775389/99902532-d2d00f00-2d01-11eb-8c88-3c75e6ba4c7a.png)
 
 <br>
 
